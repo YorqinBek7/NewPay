@@ -13,7 +13,7 @@ class NewPayRoutes {
   Route? generateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case NewPayConstants.homeTab:
-        return navigateToScreen(screen: const HomeTab());
+        return navigateToScreen(screen: const BottomNavBlocProvider());
       case NewPayConstants.splashScreen:
         return navigateToScreen(screen: const SplashScreen());
       case NewPayConstants.onboardingScreen:

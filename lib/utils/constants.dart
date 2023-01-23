@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_pay/models/bottom_nav_models.dart';
 import 'package:new_pay/models/onboarding_model.dart';
 import 'package:new_pay/models/option_buttons_model.dart';
 import 'package:new_pay/utils/icons.dart';
@@ -11,6 +12,7 @@ class NewPayConstants {
   static const String signUpScreen = '/sign_up_screen';
   static const String verifiedScreen = '/verified_screen';
   static const String forgotPassScreen = '/forgot_pass_screen';
+  static const String home = '/home_tab';
   static final List<OnBoardingModel> onBoardingModels = [
     OnBoardingModel(
         image: NewPayIcons.onBoardingScreen_1,
@@ -40,5 +42,23 @@ class NewPayConstants {
       name: 'More',
       icon: Icons.more_horiz_outlined,
     ),
+  ];
+  static final List<BottomNavModels> bottomNavModels = [
+    BottomNavModels(
+      icon: Icons.home_filled,
+      label: 'Home',
+    ),
+    BottomNavModels(
+      icon: Icons.credit_card,
+      label: 'Card',
+    ),
+    BottomNavModels(
+      icon: Icons.query_stats_outlined,
+      label: 'Stats',
+    ),
+    BottomNavModels(
+      icon: Icons.attach_money,
+      label: 'Cash Back',
+    )
   ];
 }

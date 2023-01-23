@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/styles.dart';
-import 'package:stacked_card_carousel/stacked_card_carousel.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

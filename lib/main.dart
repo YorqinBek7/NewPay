@@ -54,6 +54,10 @@ class NewPay extends StatelessWidget {
             toolbarHeight: 0.0,
             centerTitle: true,
           ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            selectedItemColor: NewPayColors.C_7000FF,
+            unselectedItemColor: NewPayColors.C_828282,
+          ),
         ),
         initialRoute: NewPayConstants.splashScreen,
         onGenerateRoute: NewPayRoutes().generateRoutes,
