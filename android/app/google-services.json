@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8249650510",
+    "project_id": "new-pay-c9bc9",
+    "storage_bucket": "new-pay-c9bc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8249650510:android:daac7f950515030698821f",
+        "android_client_info": {
+          "package_name": "com.example.new_pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8249650510-uejto0sg2qnp3uhoadepqt3mj6unnifc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSgbOps8BjJZG2ljqoRwsp3-wop-V8FHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8249650510-uejto0sg2qnp3uhoadepqt3mj6unnifc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
