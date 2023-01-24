@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-
 class BottomNavModels {
   final String label;
-  final IconData icon;
+  final String icon;
   BottomNavModels({
     required this.icon,
     required this.label,

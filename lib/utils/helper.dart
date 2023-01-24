@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/styles.dart';
 
@@ -93,4 +94,7 @@ class Helper {
       ),
     );
   }
+
+  static String currenyFormat(String sum) =>
+      NumberFormat.simpleCurrency(locale: 'uz').format(double.parse(sum));
 }

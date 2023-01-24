@@ -1,10 +1,12 @@
-import 'dart:math';
-
 import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/charts.dart';
+import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
 import 'package:new_pay/utils/colors.dart';
+import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/styles.dart';
 
 class CardsScreen extends StatelessWidget {
@@ -14,104 +16,141 @@ class CardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 50.0,
-            ),
-            SizedBox(
-              height: 200.0,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: LineChart(
-                      mainData(),
-                    ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 50.0,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15.0),
+            height: 200.0,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      LineChart(
+                        mainData(),
+                      ),
+                      Positioned(
+                        left: 5.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Income',
+                                style: NewPayStyles.w500.copyWith(
+                                    color:
+                                        NewPayColors.C_367B72.withOpacity(.5))),
+                            Text("2300.32 so'm",
+                                style: NewPayStyles.w500.copyWith(
+                                    fontSize: 16.0,
+                                    color: NewPayColors.C_367B72)),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_upward,
+                                  color: NewPayColors.C_4EFF8A,
+                                  size: 15.0,
+                                ),
+                                Text("+1300 so'm",
+                                    style: NewPayStyles.w400.copyWith(
+                                        fontSize: 14.0,
+                                        color: NewPayColors.C_367B72)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    width: 10.0,
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      LineChart(
+                        mainData(),
+                      ),
+                      Positioned(
+                        left: 5.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Income',
+                                style: NewPayStyles.w500.copyWith(
+                                    color:
+                                        NewPayColors.C_360C4A.withOpacity(.5))),
+                            Text("2300.32 so'm",
+                                style: NewPayStyles.w500.copyWith(
+                                    fontSize: 16.0,
+                                    color: NewPayColors.C_360C4A)),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_downward,
+                                  color: NewPayColors.C_FF6770,
+                                  size: 15.0,
+                                ),
+                                Text("+1300 so'm",
+                                    style: NewPayStyles.w400.copyWith(
+                                        fontSize: 14.0,
+                                        color: NewPayColors.C_360C4A)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  Expanded(
-                    child: LineChart(
-                      mainData(),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 15.0,
-            ),
-            Text(
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 15.0),
+            child: Text(
               'My Cards',
               style: NewPayStyles.w400.copyWith(
                 fontSize: 14.0,
                 color: NewPayColors.C_828282,
               ),
             ),
-            Expanded(
-              child: CardStackWidget.builder(
-                  count: 3, builder: (index) => _plasticCards(context)),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  CardModel _plasticCards(BuildContext context) {
-    var color =
-        Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(1.0);
-    return CardModel(
-      radius: Radius.circular(10.0),
-      backgroundColor: color,
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.symmetric(horizontal: 10.0),
-      child: SizedBox(
-        height: 200.0,
-        width: MediaQuery.of(context).size.width - 80.0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hamkor bank',
-                  style: NewPayStyles.w700
-                      .copyWith(fontSize: 12.0, color: NewPayColors.white),
+          ),
+          BlocBuilder<CardsBloc, CardsState>(builder: (context, state) {
+            if (state is CardsSuccessState) {
+              return Expanded(
+                child: CardStackWidget.builder(
+                  swipeOrientation: CardOrientation.down,
+                  count: state.cards.length,
+                  builder: (index) => plasticCards(
+                    context,
+                    cardName: state.cards[index].cardName,
+                    cardNumber: state.cards[index].cardNumber,
+                    cardPeriod: state.cards[index].cardPeriod,
+                    cardStatus: state.cards[index].cardStatus,
+                    cardType: state.cards[index].typeCard,
+                    cardsGradient: NewPayConstants.cardsGradient[index],
+                    sum: state.cards[index].sum,
+                  ),
                 ),
-                Icon(Icons.card_giftcard_outlined)
-              ],
-            ),
-            Spacer(),
-            Text(
-              '93 254 000.25 uzs',
-              style: NewPayStyles.w500
-                  .copyWith(fontSize: 24.0, color: NewPayColors.white),
-            ),
-            Spacer(),
-            Text(
-              'Expires',
-              style: NewPayStyles.w400
-                  .copyWith(fontSize: 12.0, color: NewPayColors.white),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hamkor bank',
-                  style: NewPayStyles.w700
-                      .copyWith(fontSize: 12.0, color: NewPayColors.white),
-                ),
-                Icon(Icons.card_giftcard_outlined)
-              ],
-            ),
-          ],
-        ),
+              );
+            } else if (state is CardsErrorState) {
+              return Center(
+                child: Text(state.error),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          })
+        ],
       ),
     );
   }

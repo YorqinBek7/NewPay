@@ -12,4 +12,11 @@ class NewPayColors {
   static const Color C_ff3333 = Color(0xffff3333);
   static const Color C_4BB543 = Color(0xff4BB543);
   static const Color C_171D33 = Color(0xff171D33);
+  static const Color C_4EFF8A = Color(0xff4EFF8A);
+  static const Color C_367B72 = Color(0xff367B72);
+  static const Color C_360C4A = Color(0xff360C4A);
+  static const Color C_FF6770 = Color(0xffFF6770);
+  static const Color C_F90000 = Color(0xffF90000);
+  static const Color C_F1F2F6 = Color(0xffF1F2F6);
+  static const Color C_00F0FF = Color(0xff00F0FF);
 }

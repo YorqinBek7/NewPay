@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_pay/models/bottom_nav_models.dart';
+import 'package:new_pay/models/cards_gradient.dart';
 import 'package:new_pay/models/onboarding_model.dart';
 import 'package:new_pay/models/option_buttons_model.dart';
 import 'package:new_pay/utils/icons.dart';
@@ -13,6 +14,11 @@ class NewPayConstants {
   static const String verifiedScreen = '/verified_screen';
   static const String forgotPassScreen = '/forgot_pass_screen';
   static const String home = '/home_tab';
+  static const String profileScreen = '/profile_screen';
+  static const String appSettings = '/app_settings';
+  static const String scannerScreen = '/scanner_screen';
+
+  /// CUSTOM MODELS LIST
   static final List<OnBoardingModel> onBoardingModels = [
     OnBoardingModel(
         image: NewPayIcons.onBoardingScreen_1,
@@ -25,40 +31,36 @@ class NewPayConstants {
         text: 'Простой и безопасный способ управлять своими деньгами.'),
   ];
 
-  static final List<OptionButtonsModel> optionsButtonsModels = [
-    OptionButtonsModel(
-      name: 'Send',
-      icon: Icons.send,
-    ),
-    OptionButtonsModel(
-      name: 'QR Code',
-      icon: Icons.qr_code_outlined,
-    ),
-    OptionButtonsModel(
-      name: 'Pay',
-      icon: Icons.payment_outlined,
-    ),
-    OptionButtonsModel(
-      name: 'More',
-      icon: Icons.more_horiz_outlined,
-    ),
-  ];
   static final List<BottomNavModels> bottomNavModels = [
     BottomNavModels(
-      icon: Icons.home_filled,
+      icon: NewPayIcons.home,
       label: 'Home',
     ),
     BottomNavModels(
-      icon: Icons.credit_card,
+      icon: NewPayIcons.card,
       label: 'Card',
     ),
     BottomNavModels(
-      icon: Icons.query_stats_outlined,
+      icon: NewPayIcons.activity,
       label: 'Stats',
     ),
     BottomNavModels(
-      icon: Icons.attach_money,
+      icon: NewPayIcons.cashback,
       label: 'Cash Back',
     )
+  ];
+  static final List<CardsGradient> cardsGradient = [
+    CardsGradient(
+      firstColor: Color(0xff8676FB),
+      secondColor: Color(0xffAB7BFF),
+    ),
+    CardsGradient(
+      firstColor: Color(0xffF673FF),
+      secondColor: Color(0xffd91e63),
+    ),
+    CardsGradient(
+      firstColor: Color(0xff00F0F0),
+      secondColor: Color(0xff5895e0),
+    ),
   ];
 }

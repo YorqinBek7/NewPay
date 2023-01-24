@@ -30,11 +30,11 @@ LineChartData mainData() {
     lineBarsData: [
       LineChartBarData(
         spots: const [
-          FlSpot(0, 3),
+          FlSpot(0, 2.5),
           FlSpot(2.6, 2),
-          FlSpot(4.9, 5),
+          FlSpot(4.9, 3),
           FlSpot(6.8, 3.1),
-          FlSpot(8, 4),
+          FlSpot(8, 3.5),
           FlSpot(9.5, 3),
           FlSpot(11, 4),
         ],

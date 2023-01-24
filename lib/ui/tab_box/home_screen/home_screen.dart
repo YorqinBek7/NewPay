@@ -1,20 +1,35 @@
-import 'dart:math';
-
 import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:new_pay/blocs/cards/cards_bloc.dart';
+import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
+import 'package:new_pay/utils/helper.dart';
+import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+  HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60.0,
-        leading: Icon(Icons.person),
+        leading: GestureDetector(
+          onTap: () => Navigator.pushNamed(
+            context,
+            NewPayConstants.profileScreen,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              NewPayIcons.profilePhoto,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,104 +44,105 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         actions: [
-          Icon(Icons.notifications_outlined),
+          SvgPicture.asset(NewPayIcons.notification),
           SizedBox(
-            width: 10.0,
+            width: 13.0,
           )
         ],
         centerTitle: false,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Your balance',
-              style: NewPayStyles.w500,
-            ),
-            Text(
-              '\$926.21',
-              style: NewPayStyles.w700.copyWith(
-                fontSize: 32.0,
-                color: NewPayColors.C_171D33,
-              ),
-            ),
-            SizedBox(
-              height: 26.0,
-            ),
-            SizedBox(
-              height: 90.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: NewPayConstants.optionsButtonsModels.length,
-                itemBuilder: (context, index) => _optionButtons(
-                  icon: NewPayConstants.optionsButtonsModels[index].icon,
-                  onTap: () {},
-                  text: NewPayConstants.optionsButtonsModels[index].name,
-                  index: index,
-                ),
-              ),
-            ),
-            Expanded(
-              child: CardStackWidget.builder(
-                  count: 3, builder: (index) => _plasticCards(context)),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  CardModel _plasticCards(BuildContext context) {
-    var color =
-        Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(1.0);
-    return CardModel(
-      radius: Radius.circular(10.0),
-      backgroundColor: color,
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.symmetric(horizontal: 10.0),
-      child: SizedBox(
-        height: 200.0,
-        width: MediaQuery.of(context).size.width - 80.0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hamkor bank',
-                  style: NewPayStyles.w700
-                      .copyWith(fontSize: 12.0, color: NewPayColors.white),
-                ),
-                Icon(Icons.card_giftcard_outlined)
-              ],
-            ),
-            Spacer(),
-            Text(
-              '93 254 000.25 uzs',
-              style: NewPayStyles.w500
-                  .copyWith(fontSize: 24.0, color: NewPayColors.white),
-            ),
-            Spacer(),
-            Text(
-              'Expires',
-              style: NewPayStyles.w400
-                  .copyWith(fontSize: 12.0, color: NewPayColors.white),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hamkor bank',
-                  style: NewPayStyles.w700
-                      .copyWith(fontSize: 12.0, color: NewPayColors.white),
-                ),
-                Icon(Icons.card_giftcard_outlined)
-              ],
-            ),
-          ],
+        child: BlocBuilder<CardsBloc, CardsState>(
+          builder: (context, state) {
+            if (state is CardsSuccessState) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Your balance',
+                    style: NewPayStyles.w500
+                        .copyWith(color: NewPayColors.C_828282),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      Helper.currenyFormat(state.sumAllCards),
+                      style: NewPayStyles.w700.copyWith(
+                        fontSize: 32.0,
+                        color: NewPayColors.C_171D33,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 26.0,
+                  ),
+                  Row(
+                    children: [
+                      _optionButtons(
+                        icon: NewPayIcons.send,
+                        onTap: () {},
+                        text: 'Send',
+                      ),
+                      SizedBox(
+                        width: 47.0,
+                      ),
+                      _optionButtons(
+                        icon: NewPayIcons.scan,
+                        onTap: () => Navigator.pushNamed(
+                            context, NewPayConstants.scannerScreen),
+                        text: 'QR Code',
+                      ),
+                      SizedBox(
+                        width: 47.0,
+                      ),
+                      _optionButtons(
+                        icon: NewPayIcons.pay,
+                        onTap: () {},
+                        text: 'Pay',
+                      ),
+                      SizedBox(
+                        width: 47.0,
+                      ),
+                      _optionButtons(
+                        icon: NewPayIcons.more,
+                        onTap: () {},
+                        text: 'More',
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Expanded(
+                    child: CardStackWidget.builder(
+                      swipeOrientation: CardOrientation.down,
+                      count: state.cards.length,
+                      builder: (index) => plasticCards(
+                        context,
+                        cardName: state.cards[index].cardName,
+                        cardNumber: state.cards[index].cardNumber,
+                        cardPeriod: state.cards[index].cardPeriod,
+                        cardStatus: state.cards[index].cardStatus,
+                        cardType: state.cards[index].typeCard,
+                        cardsGradient: NewPayConstants.cardsGradient[index],
+                        sum: state.cards[index].sum,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            } else if (state is CardsErrorState) {
+              return Center(
+                child: Text(state.error),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
       ),
     );
@@ -134,47 +150,48 @@ class HomeScreen extends StatelessWidget {
 
   GestureDetector _optionButtons({
     required VoidCallback onTap,
-    required IconData icon,
+    required String icon,
     required String text,
-    required int index,
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.only(right: index != 3 ? 45.0 : 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(15.0),
-              decoration: BoxDecoration(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.all(15.0),
+            decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
+                color: NewPayColors.white,
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: 1.0,
-                    color: NewPayColors.C_828282.withOpacity(.4),
-                  ),
-                ],
-                color: NewPayColors.white,
-              ),
-              child: Icon(
-                icon,
-                color: NewPayColors.C_7000FF,
-              ),
+                    blurRadius: 20.0,
+                    color: NewPayColors.black.withOpacity(.1),
+                  )
+                ]),
+            child: SvgPicture.asset(icon),
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Text(
+            text,
+            style: NewPayStyles.w700.copyWith(
+              fontSize: 14.0,
+              color: NewPayColors.C_7000FF,
             ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              text,
-              style: NewPayStyles.w700.copyWith(
-                fontSize: 14.0,
-                color: NewPayColors.C_7000FF,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
+
+  final List<Color> colors = [
+    Color(0xff8676FB),
+    Color(0xffAB7BFF),
+    Color(0xffF673FF),
+    Color(0xffd91e63),
+    Color(0xff00F0F0),
+    Color(0xff5895e0),
+  ];
 }

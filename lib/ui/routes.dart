@@ -6,6 +6,9 @@ import 'package:new_pay/ui/auth/verified_screen.dart';
 import 'package:new_pay/ui/no_route_screen.dart';
 import 'package:new_pay/ui/onboarding/on_boarding_screen.dart';
 import 'package:new_pay/ui/onboarding/splash_screen.dart';
+import 'package:new_pay/ui/tab_box/home_screen/profile_screen/app_settings/app_settings.dart';
+import 'package:new_pay/ui/tab_box/home_screen/profile_screen/profile_screen.dart';
+import 'package:new_pay/ui/tab_box/home_screen/qr_code_screen/qr_code_screen.dart';
 import 'package:new_pay/ui/tab_box/home_tab.dart';
 import 'package:new_pay/utils/constants.dart';
 
@@ -26,6 +29,12 @@ class NewPayRoutes {
         return navigateToScreen(screen: const VerifiedScreen());
       case NewPayConstants.forgotPassScreen:
         return navigateToScreen(screen: ForgotPasswordScreen());
+      case NewPayConstants.profileScreen:
+        return navigateToScreen(screen: const ProfileScreen());
+      case NewPayConstants.appSettings:
+        return navigateToScreen(screen: const AppSettings());
+      case NewPayConstants.scannerScreen:
+        return navigateToScreen(screen: const QrCodeScreen());
       default:
         return navigateToScreen(screen: const NoRouteScreen());
     }

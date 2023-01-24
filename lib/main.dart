@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_pay/blocs/bloc_observer.dart';
+import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/blocs/login/login_bloc.dart';
 import 'package:new_pay/blocs/sign_up/sign_up_bloc.dart';
 import 'package:new_pay/data/storage.dart';
@@ -33,6 +34,9 @@ class NewPay extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginBloc(),
         ),
+        BlocProvider(
+          create: (context) => CardsBloc()..add(CardsGetEvent()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,13 +44,14 @@ class NewPay extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.purple,
           useMaterial3: true,
-          scaffoldBackgroundColor: NewPayColors.white,
+          scaffoldBackgroundColor: NewPayColors.C_F1F2F6,
+          fontFamily: 'Manrope',
           appBarTheme: AppBarTheme(
             scrolledUnderElevation: 0.0,
-            backgroundColor: NewPayColors.white,
+            backgroundColor: NewPayColors.C_F1F2F6,
             systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarBrightness: Brightness.light,
-              statusBarColor: NewPayColors.white,
+              statusBarColor: NewPayColors.C_F1F2F6,
               statusBarIconBrightness: Brightness.dark,
             ),
             titleTextStyle: NewPayStyles.w600.copyWith(fontSize: 18.0),

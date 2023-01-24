@@ -1,12 +1,15 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/cards_screen.dart';
 import 'package:new_pay/ui/tab_box/home_screen/home_screen.dart';
+import 'package:new_pay/ui/tab_box/stats_screen/stats_screen.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
+import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
 
 class BottomNavBlocProvider extends StatelessWidget {
@@ -16,7 +19,7 @@ class BottomNavBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BottomNavBloc(),
-      child: HomeTab(),
+      child: const HomeTab(),
     );
   }
 }
@@ -35,7 +38,8 @@ class HomeTab extends StatelessWidget {
               index: state,
               children: [
                 HomeScreen(),
-                CardsScreen(),
+                const CardsScreen(),
+                const StatsScreen(),
               ],
             ),
             bottomNavigationBar: AnimatedBottomNavigationBar.builder(
@@ -48,19 +52,23 @@ class HomeTab extends StatelessWidget {
               itemCount: NewPayConstants.bottomNavModels.length,
               tabBuilder: (int index, bool isActive) {
                 return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    SvgPicture.asset(
                       NewPayConstants.bottomNavModels[index].icon,
                       color: isActive
                           ? NewPayColors.C_7000FF
                           : NewPayColors.C_828282,
+                      height: 24.0,
+                      width: 24.0,
                     ),
                     Text(
                       NewPayConstants.bottomNavModels[index].label,
-                      style: NewPayStyles.w500.copyWith(
+                      style: NewPayStyles.w400.copyWith(
                         color: isActive
                             ? NewPayColors.C_7000FF
                             : NewPayColors.C_828282,
+                        fontSize: 12.0,
                       ),
                     ),
                   ],
@@ -73,7 +81,9 @@ class HomeTab extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
               onPressed: () => {},
-              child: Icon(state == 1 ? Icons.add : Icons.send),
+              child: SvgPicture.asset(
+                state == 1 ? NewPayIcons.add : NewPayIcons.sendWhite,
+              ),
             ),
           );
         },
