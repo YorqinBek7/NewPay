@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_pay/blocs/cards/cards_bloc.dart';
-import 'package:new_pay/data/service.dart';
+import 'package:new_pay/blocs/theme/theme_bloc.dart';
 import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
@@ -17,18 +16,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     _init();
-
     super.initState();
   }
 
-  void _init() async => await Future.delayed(const Duration(seconds: 2), () {
-        if (NewPayStorage.instance.getBool('isLogged') == true) {
-          Navigator.pushReplacementNamed(context, NewPayConstants.homeTab);
-        } else {
-          Navigator.pushReplacementNamed(
-              context, NewPayConstants.onboardingScreen);
-        }
-      });
+  void _init() async => await Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          if (NewPayStorage.instance.getBool('isLogged') == true) {
+            Navigator.pushReplacementNamed(context, NewPayConstants.homeTab);
+          } else {
+            Navigator.pushReplacementNamed(
+                context, NewPayConstants.onboardingScreen);
+          }
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
