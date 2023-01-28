@@ -1,4 +1,5 @@
 import 'package:card_stack_widget/card_stack_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi Man',
+              'Hi ${FirebaseAuth.instance.currentUser?.displayName ?? ''}',
               style: NewPayStyles.w500.copyWith(fontSize: 14.0),
             ),
             Text(
@@ -82,7 +83,8 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       _optionButtons(
                         icon: NewPayIcons.send,
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(
+                            context, NewPayConstants.sendMoneyScreen),
                         text: 'Send',
                       ),
                       SizedBox(
@@ -115,22 +117,24 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Expanded(
-                    child: CardStackWidget.builder(
-                      swipeOrientation: CardOrientation.down,
-                      count: state.cards.length,
-                      builder: (index) => plasticCards(
-                        context,
-                        cardName: state.cards[index].cardName,
-                        cardNumber: state.cards[index].cardNumber,
-                        cardPeriod: state.cards[index].cardPeriod,
-                        cardStatus: state.cards[index].cardStatus,
-                        cardType: state.cards[index].typeCard,
-                        cardsGradient: NewPayConstants.cardsGradient[index],
-                        sum: state.cards[index].sum,
-                      ),
-                    ),
-                  ),
+                  state.cards.isNotEmpty
+                      ? Expanded(
+                          child: CardStackWidget.builder(
+                            swipeOrientation: CardOrientation.down,
+                            count: state.cards.length,
+                            builder: (index) => plasticCards(
+                              context,
+                              cardName: state.cards[index].cardName,
+                              cardNumber: state.cards[index].cardNumber,
+                              cardPeriod: state.cards[index].cardPeriod,
+                              cardStatus: state.cards[index].cardStatus,
+                              cardType: state.cards[index].typeCard,
+                              cardsGradient: state.cards[index].gradientColor,
+                              sum: state.cards[index].sum,
+                            ),
+                          ),
+                        )
+                      : _noCardsView(context),
                 ],
               );
             } else if (state is CardsErrorState) {
@@ -143,6 +147,49 @@ class HomeScreen extends StatelessWidget {
               );
             }
           },
+        ),
+      ),
+    );
+  }
+
+  GestureDetector _noCardsView(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, NewPayConstants.addCardScreen),
+      child: Container(
+        height: 188.0,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: NewPayColors.white,
+          boxShadow: [
+            BoxShadow(
+                color: NewPayColors.C_828282.withOpacity(.15), blurRadius: 10.0)
+          ],
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                  NewPayColors.C_7000FF,
+                )),
+                onPressed: () =>
+                    Navigator.pushNamed(context, NewPayConstants.addCardScreen),
+                icon: Icon(
+                  Icons.add,
+                  color: NewPayColors.white,
+                ),
+              ),
+              Text(
+                'Add bank card',
+                style: NewPayStyles.w400.copyWith(
+                  fontSize: 12.0,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

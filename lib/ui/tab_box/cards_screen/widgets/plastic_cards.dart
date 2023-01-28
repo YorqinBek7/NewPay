@@ -1,13 +1,12 @@
 import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:new_pay/models/cards_gradient.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/styles.dart';
 
 CardModel plasticCards(
   BuildContext context, {
-  required CardsGradient cardsGradient,
+  required Map<String, dynamic> cardsGradient,
   required String cardName,
   required String cardNumber,
   required String sum,
@@ -19,8 +18,8 @@ CardModel plasticCards(
     radius: const Radius.circular(10.0),
     gradient: LinearGradient(
       colors: [
-        cardsGradient.firstColor,
-        cardsGradient.secondColor,
+        Helper.hexToColor(cardsGradient['first_color']),
+        Helper.hexToColor(cardsGradient['second_color'])
       ],
     ),
     padding: const EdgeInsets.all(10.0),

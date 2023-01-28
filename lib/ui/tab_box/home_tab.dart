@@ -80,7 +80,9 @@ class HomeTab extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
-              onPressed: () => {},
+              onPressed: () => state == 1
+                  ? Navigator.pushNamed(context, NewPayConstants.addCardScreen)
+                  : null,
               child: SvgPicture.asset(
                 state == 1 ? NewPayIcons.add : NewPayIcons.sendWhite,
               ),

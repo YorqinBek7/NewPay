@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:new_pay/models/bottom_nav_models.dart';
 import 'package:new_pay/models/cards_gradient.dart';
 import 'package:new_pay/models/onboarding_model.dart';
-import 'package:new_pay/models/option_buttons_model.dart';
 import 'package:new_pay/utils/icons.dart';
 
 class NewPayConstants {
+  // SCREENS
   static const String splashScreen = '/';
   static const String homeTab = '/home_tab';
   static const String onboardingScreen = '/on_boarding_screen';
@@ -17,6 +16,8 @@ class NewPayConstants {
   static const String profileScreen = '/profile_screen';
   static const String appSettings = '/app_settings';
   static const String scannerScreen = '/scanner_screen';
+  static const String addCardScreen = '/add_card_screen';
+  static const String sendMoneyScreen = '/send_money_screen';
 
   /// CUSTOM MODELS LIST
   static final List<OnBoardingModel> onBoardingModels = [
@@ -51,16 +52,25 @@ class NewPayConstants {
   ];
   static final List<CardsGradient> cardsGradient = [
     CardsGradient(
-      firstColor: Color(0xff8676FB),
-      secondColor: Color(0xffAB7BFF),
+      firstColor: '0xff03CAFF',
+      secondColor: '0xff5D00FF',
     ),
     CardsGradient(
-      firstColor: Color(0xffF673FF),
-      secondColor: Color(0xffd91e63),
+      firstColor: '0xff000000',
+      secondColor: '0xff5D00FF',
     ),
     CardsGradient(
-      firstColor: Color(0xff00F0F0),
-      secondColor: Color(0xff5895e0),
+      firstColor: '0xffFF9393',
+      secondColor: '0xff7774FF',
     ),
+    CardsGradient(
+      firstColor: '0xffA4ECFF',
+      secondColor: '0xffD2B8FF',
+    ),
+  ];
+
+  static final List<String> selectedCardsGradient = [
+    NewPayConstants.cardsGradient[0].firstColor,
+    NewPayConstants.cardsGradient[1].secondColor,
   ];
 }

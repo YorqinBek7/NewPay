@@ -4,5 +4,6 @@ part of 'cards_bloc.dart';
 abstract class CardsEvent {}
 
 class CardsGetEvent extends CardsEvent {
-  CardsGetEvent();
+  CardsGetEvent({required this.userId});
+  final String userId;
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/styles.dart';
@@ -97,4 +98,91 @@ class Helper {
 
   static String currenyFormat(String sum) =>
       NumberFormat.simpleCurrency(locale: 'uz').format(double.parse(sum));
+
+  static Color hexToColor(String code) {
+    return Color(int.parse(code.substring(4, 10), radix: 16) + 0xFF000000);
+  }
+
+  static bool emailChecker(String v) {
+    return !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v);
+  }
+}
+
+class CardNumberInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    var text = newValue.text;
+    if (text.length > 19) return oldValue;
+    var buffer = StringBuffer();
+    if (oldValue.text.length < newValue.text.length) {
+      if ((text.length + 1) % 5 == 0 && text.length + 1 < 19) {
+        for (var i = 0; i < text.length; i++) {
+          buffer.write(text[i]);
+        }
+        buffer.write(' ');
+      } else if (text.length % 5 != 0) {
+        for (var i = 0; i < text.length; i++) {
+          buffer.write(text[i]);
+        }
+      }
+    } else {
+      for (var i = 0; i < text.length; i++) {
+        buffer.write(text[i]);
+      }
+    }
+    var string = buffer.toString();
+    return newValue.copyWith(
+        text: string,
+        selection: TextSelection.collapsed(offset: string.length));
+  }
+}
+
+class PeriodCardInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    var text = newValue.text;
+    if (text.length > 5) return oldValue;
+    var buffer = StringBuffer();
+    if (oldValue.text.length < newValue.text.length) {
+      if (text.length == 2) {
+        for (var i = 0; i < text.length; i++) {
+          buffer.write(text[i]);
+        }
+        buffer.write('/');
+      } else {
+        for (var i = 0; i < text.length; i++) {
+          buffer.write(text[i]);
+        }
+      }
+    } else {
+      for (var i = 0; i < text.length; i++) {
+        buffer.write(text[i]);
+      }
+    }
+    var string = buffer.toString();
+    return newValue.copyWith(
+        text: string,
+        selection: TextSelection.collapsed(offset: string.length));
+  }
+}
+
+class NameCardInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    var text = newValue.text;
+    if (text.length > 20) return oldValue;
+    var buffer = StringBuffer();
+
+    for (var i = 0; i < text.length; i++) {
+      buffer.write(text[i]);
+    }
+
+    var string = buffer.toString();
+    return newValue.copyWith(
+        text: string,
+        selection: TextSelection.collapsed(offset: string.length));
+  }
 }

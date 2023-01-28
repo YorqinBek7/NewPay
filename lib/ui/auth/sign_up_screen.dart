@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/blocs/sign_up/sign_up_bloc.dart';
 import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
@@ -18,146 +19,188 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool obscure = true;
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60.0,
-        title: const Text('Sign up'),
-      ),
-      body: BlocListener<SignUpBloc, SignUpState>(
-        listener: (context, state) {
-          if (state is SignUpLoadingState) {
-            Helper.showWaitDialog(context);
-          } else if (state is SignUpSuccessState) {
-            NewPayStorage.instance.setBool('isLogged', true);
-            Navigator.pushReplacementNamed(
-                context, NewPayConstants.verifiedScreen);
-          } else if (state is SignUpErrorState) {
-            Navigator.pop(context);
-            Helper.showCustomErrorSnackbar(context, state.error);
-          }
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Email',
-                        style: NewPayStyles.w500
-                            .copyWith(color: NewPayColors.C_C1C1C1),
-                      ),
-                      AuthFields(
-                        hintText: 'Enter your email',
-                        isPassword: false,
-                        obscure: false,
-                        controller: emailController,
-                      ),
-                      Text(
-                        'Password',
-                        style: NewPayStyles.w500
-                            .copyWith(color: NewPayColors.C_C1C1C1),
-                      ),
-                      AuthFields(
-                        hintText: 'Enter your password',
-                        isPassword: true,
-                        obscure: obscure,
-                        controller: passwordController,
-                        iconOnTap: () => setState(() => obscure = !obscure),
-                      ),
-                      SizedBox(
-                        height: 13.0,
-                      ),
-                      Text(
-                        'At least 8 characters with uppercase letters and numbers',
-                        style: NewPayStyles.w400.copyWith(
-                          fontSize: 14.0,
-                          color: NewPayColors.C_787A8D,
+    return KeyboardDismisser(
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 60.0,
+          title: const Text('Sign up'),
+        ),
+        body: BlocListener<SignUpBloc, SignUpState>(
+          listener: (context, state) {
+            if (state is SignUpLoadingState) {
+              Helper.showWaitDialog(context);
+            } else if (state is SignUpSuccessState) {
+              NewPayStorage.instance.setBool('isLogged', true);
+              Navigator.pushReplacementNamed(
+                  context, NewPayConstants.verifiedScreen);
+            } else if (state is SignUpErrorState) {
+              Navigator.pop(context);
+              Helper.showCustomErrorSnackbar(context, state.error);
+            }
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name',
+                          style: NewPayStyles.w500
+                              .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Row(
-                        children: [
-                          GestureDetector(
-                              onTap: () =>
-                                  setState(() => isChecked = !isChecked),
-                              child: isChecked
-                                  ? Icon(Icons.check_box)
-                                  : Icon(Icons.check_box_outline_blank)),
-                          Text(
-                            'Accept Terms of Use & Privacy Policy',
-                            style: NewPayStyles.w400.copyWith(
-                              fontSize: 14.0,
-                              color: NewPayColors.C_787A8D,
-                            ),
-                          )
-                        ],
-                      ),
+                        AuthFields(
+                          hintText: 'Enter your name',
+                          isPassword: false,
+                          obscure: false,
+                          controller: nameController,
+                          validator: (String? v) {
+                            if (v!.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                            if (v.length < 3) {
+                              return 'Length of name must be at least 3 characters';
+                            }
+                            return '';
+                          },
+                        ),
+                        Text(
+                          'Email',
+                          style: NewPayStyles.w500
+                              .copyWith(color: NewPayColors.C_C1C1C1),
+                        ),
+                        AuthFields(
+                          hintText: 'Enter your email',
+                          isPassword: false,
+                          obscure: false,
+                          controller: emailController,
+                          validator: (String? v) {
+                            if (v!.isEmpty) {
+                              return 'Please enter your email address';
+                            }
+                            if (Helper.emailChecker(v)) {
+                              return 'Please enter correct email address';
+                            }
+                            return '';
+                          },
+                        ),
+                        Text(
+                          'Password',
+                          style: NewPayStyles.w500
+                              .copyWith(color: NewPayColors.C_C1C1C1),
+                        ),
+                        AuthFields(
+                          hintText: 'Enter your password',
+                          isPassword: true,
+                          obscure: obscure,
+                          controller: passwordController,
+                          iconOnTap: () => setState(() => obscure = !obscure),
+                          validator: (String? v) {
+                            if (v!.isEmpty) return 'Please enter your password';
+                            if (v.length < 6) {
+                              return 'Password should be at least 6 characters long';
+                            }
+                            return '';
+                          },
+                        ),
+                        SizedBox(
+                          height: 13.0,
+                        ),
+                        Text(
+                          'At least 8 characters with uppercase letters and numbers',
+                          style: NewPayStyles.w400.copyWith(
+                            fontSize: 14.0,
+                            color: NewPayColors.C_787A8D,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16.0,
+                        ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                                onTap: () =>
+                                    setState(() => isChecked = !isChecked),
+                                child: isChecked
+                                    ? Icon(Icons.check_box)
+                                    : Icon(Icons.check_box_outline_blank)),
+                            Text(
+                              'Accept Terms of Use & Privacy Policy',
+                              style: NewPayStyles.w400.copyWith(
+                                fontSize: 14.0,
+                                color: NewPayColors.C_787A8D,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              GlobalButton(
+                buttonText: 'Sign up',
+                backgroundColor: NewPayColors.black,
+                onTap: () async {
+                  if (emailController.text.isEmpty ||
+                      passwordController.text.isEmpty ||
+                      nameController.text.isEmpty) {
+                    Helper.showCustomErrorSnackbar(
+                        context, 'Please fill all fields.');
+                    return;
+                  }
+                  if (!isChecked) {
+                    Helper.showCustomErrorSnackbar(context,
+                        'You did not accept the terms of use and privacy policy.');
+                    return;
+                  }
+                  BlocProvider.of<SignUpBloc>(context).add(
+                    SignUpManagerEvent(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      name: nameController.text,
+                    ),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Center(
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an account?',
+                    style: NewPayStyles.w400.copyWith(fontSize: 16.0),
+                    children: [
+                      TextSpan(
+                        text: ' Log in!',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Navigator.pushNamed(
+                                context,
+                                NewPayConstants.loginScreen,
+                              ),
+                        style: NewPayStyles.w500.copyWith(
+                            color: NewPayColors.C_0057FF, fontSize: 16.0),
+                      )
                     ],
                   ),
                 ),
               ),
-            ),
-            GlobalButton(
-              buttonText: 'Sign up',
-              backgroundColor: NewPayColors.black,
-              onTap: () async {
-                if (emailController.text.isEmpty ||
-                    passwordController.text.isEmpty) {
-                  Helper.showCustomErrorSnackbar(
-                      context, 'Please fill all fields.');
-                  return;
-                } else if (!isChecked) {
-                  Helper.showCustomErrorSnackbar(context,
-                      'You did not accept the terms of use and privacy policy.');
-                  return;
-                }
-                BlocProvider.of<SignUpBloc>(context).add(
-                  SignUpManagerEvent(
-                    email: emailController.text,
-                    password: passwordController.text,
-                  ),
-                );
-              },
-            ),
-            SizedBox(
-              height: 16.0,
-            ),
-            Center(
-              child: RichText(
-                text: TextSpan(
-                  text: 'Already have an account?',
-                  style: NewPayStyles.w400.copyWith(fontSize: 16.0),
-                  children: [
-                    TextSpan(
-                      text: ' Log in!',
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.pushNamed(
-                              context,
-                              NewPayConstants.loginScreen,
-                            ),
-                      style: NewPayStyles.w500.copyWith(
-                          color: NewPayColors.C_0057FF, fontSize: 16.0),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16.0,
-            )
-          ],
+              SizedBox(
+                height: 16.0,
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -14,10 +14,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     if (event is SignUpManagerEvent) {
       try {
         emit(SignUpLoadingState());
-        await service.signUp(
-          email: event.email,
-          password: event.password,
-        );
+        await service
+            .signUp(
+              email: event.email,
+              password: event.password,
+            )
+            .then(
+              (value) => value.user!.updateDisplayName(event.name),
+            );
         emit(SignUpSuccessState(email: event.email, password: event.password));
       } on FirebaseAuthException catch (e) {
         emit(SignUpErrorState(error: e.message ?? 'Unknown error'));

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,8 @@ void main() async {
         create: (context) => LoginBloc(),
       ),
       BlocProvider(
-        create: (context) => CardsBloc()..add(CardsGetEvent()),
+        create: (context) => CardsBloc()
+          ..add(CardsGetEvent(userId: FirebaseAuth.instance.currentUser!.uid)),
       ),
       BlocProvider(
         create: (context) => ThemeBloc(),

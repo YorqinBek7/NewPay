@@ -10,9 +10,13 @@ class CardsLoadingState extends CardsState {}
 class CardsSuccessState extends CardsState {
   List<CardsModel> cards;
   String sumAllCards;
+  String incomes;
+  String expenses;
   CardsSuccessState({
     required this.cards,
     required this.sumAllCards,
+    required this.incomes,
+    required this.expenses,
   });
 }
 
