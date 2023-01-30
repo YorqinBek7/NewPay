@@ -32,7 +32,7 @@ class NewPayRoutes {
       case NewPayConstants.forgotPassScreen:
         return navigateToScreen(screen: ForgotPasswordScreen());
       case NewPayConstants.profileScreen:
-        return navigateToScreen(screen: const ProfileScreen());
+        return navigateToScreen(screen: const UpdateImage());
       case NewPayConstants.appSettings:
         return navigateToScreen(screen: const AppSettings());
       case NewPayConstants.scannerScreen:

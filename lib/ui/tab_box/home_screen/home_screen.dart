@@ -12,17 +12,15 @@ import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60.0,
         leading: GestureDetector(
-          onTap: () => Navigator.pushNamed(
-            context,
-            NewPayConstants.profileScreen,
-          ),
+          onTap: () =>
+              Navigator.pushNamed(context, NewPayConstants.profileScreen),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
@@ -68,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
-                      Helper.currenyFormat(state.sumAllCards),
+                      Helper.currenyFormat(state.allSum),
                       style: NewPayStyles.w700.copyWith(
                         fontSize: 32.0,
                         color: NewPayColors.C_171D33,
@@ -232,13 +230,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  final List<Color> colors = [
-    Color(0xff8676FB),
-    Color(0xffAB7BFF),
-    Color(0xffF673FF),
-    Color(0xffd91e63),
-    Color(0xff00F0F0),
-    Color(0xff5895e0),
-  ];
 }

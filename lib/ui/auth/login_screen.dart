@@ -1,8 +1,8 @@
+import 'package:authentication/auth/login/login_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:new_pay/blocs/login/login_bloc.dart';
 import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
 import 'package:new_pay/utils/colors.dart';

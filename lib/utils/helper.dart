@@ -1,13 +1,19 @@
 import 'dart:io';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/styles.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class Helper {
-  static showCustomErrorSnackbar(BuildContext context, String error) =>
+  ImagePicker imagePicker = ImagePicker();
+  final _storage = FirebaseStorage.instance.ref('profile_storage/');
+  static void showCustomErrorSnackbar(BuildContext context, String error) =>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -18,7 +24,42 @@ class Helper {
           backgroundColor: NewPayColors.C_ff3333,
         ),
       );
-  static showCustomSuccessSnackbar(BuildContext context, String message) =>
+
+  static void showTopErrorSnackbar(
+          {required BuildContext context, required String error}) =>
+      showTopSnackBar(
+        Overlay.of(context)!,
+        CustomSnackBar.error(message: error),
+      );
+
+  static void showTopSuccessSnackbar(
+          {required BuildContext context, required String success}) =>
+      showTopSnackBar(
+        Overlay.of(context)!,
+        CustomSnackBar.success(message: success),
+      );
+
+  Future<String> tryGetPickedImagePath(bool fromCamera) async {
+    XFile? file = await imagePicker.pickImage(
+        source: fromCamera ? ImageSource.camera : ImageSource.gallery);
+    return file!.path;
+  }
+
+  Future<void> updateProfileImage(User user, String imageUrl) async {
+    await user.updatePhotoURL(imageUrl);
+  }
+
+  Future<void> saveToServer(String imageName, String imagePath) async {
+    var fireStorage = _storage.child('$imageName.png');
+    await fireStorage.putFile(File(imagePath));
+  }
+
+  Future<String> getImageUrl(String image) async {
+    var imageUrl = await _storage.child('$image.png').getDownloadURL();
+    return imageUrl;
+  }
+
+  static void showCustomSuccessSnackbar(BuildContext context, String message) =>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -30,7 +71,7 @@ class Helper {
         ),
       );
 
-  static showWaitDialog(BuildContext context) {
+  static Future<void> showWaitDialog(BuildContext context) {
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -106,83 +147,19 @@ class Helper {
   static bool emailChecker(String v) {
     return !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v);
   }
-}
 
-class CardNumberInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    var text = newValue.text;
-    if (text.length > 19) return oldValue;
-    var buffer = StringBuffer();
-    if (oldValue.text.length < newValue.text.length) {
-      if ((text.length + 1) % 5 == 0 && text.length + 1 < 19) {
-        for (var i = 0; i < text.length; i++) {
-          buffer.write(text[i]);
-        }
-        buffer.write(' ');
-      } else if (text.length % 5 != 0) {
-        for (var i = 0; i < text.length; i++) {
-          buffer.write(text[i]);
-        }
-      }
-    } else {
-      for (var i = 0; i < text.length; i++) {
-        buffer.write(text[i]);
-      }
+  static Future<bool> requestPermission({
+    required Permission setting,
+  }) async {
+    final _result = await setting.request();
+    switch (_result) {
+      case PermissionStatus.granted:
+      case PermissionStatus.limited:
+        return true;
+      case PermissionStatus.denied:
+      case PermissionStatus.restricted:
+      case PermissionStatus.permanentlyDenied:
+        return false;
     }
-    var string = buffer.toString();
-    return newValue.copyWith(
-        text: string,
-        selection: TextSelection.collapsed(offset: string.length));
-  }
-}
-
-class PeriodCardInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    var text = newValue.text;
-    if (text.length > 5) return oldValue;
-    var buffer = StringBuffer();
-    if (oldValue.text.length < newValue.text.length) {
-      if (text.length == 2) {
-        for (var i = 0; i < text.length; i++) {
-          buffer.write(text[i]);
-        }
-        buffer.write('/');
-      } else {
-        for (var i = 0; i < text.length; i++) {
-          buffer.write(text[i]);
-        }
-      }
-    } else {
-      for (var i = 0; i < text.length; i++) {
-        buffer.write(text[i]);
-      }
-    }
-    var string = buffer.toString();
-    return newValue.copyWith(
-        text: string,
-        selection: TextSelection.collapsed(offset: string.length));
-  }
-}
-
-class NameCardInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    var text = newValue.text;
-    if (text.length > 20) return oldValue;
-    var buffer = StringBuffer();
-
-    for (var i = 0; i < text.length; i++) {
-      buffer.write(text[i]);
-    }
-
-    var string = buffer.toString();
-    return newValue.copyWith(
-        text: string,
-        selection: TextSelection.collapsed(offset: string.length));
   }
 }

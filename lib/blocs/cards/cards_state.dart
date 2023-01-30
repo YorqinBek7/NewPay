@@ -8,15 +8,15 @@ class CardsInitialState extends CardsState {}
 class CardsLoadingState extends CardsState {}
 
 class CardsSuccessState extends CardsState {
-  List<CardsModel> cards;
-  String sumAllCards;
-  String incomes;
-  String expenses;
+  final List<CardsModel> cards;
+  final String allSum;
+  final String incomes;
+  final String expenses;
   CardsSuccessState({
     required this.cards,
-    required this.sumAllCards,
-    required this.incomes,
+    required this.allSum,
     required this.expenses,
+    required this.incomes,
   });
 }
 

@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:authentication/auth/service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:new_pay/data/service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
