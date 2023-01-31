@@ -21,11 +21,13 @@ class CardsBloc extends Bloc<CardsEvent, CardsState> {
           double sum = await cardsService.getAllSumFromCards(event.userId);
           double incomes = await cardsService.getIncomes(event.userId);
           double expenses = await cardsService.getExpenses(event.userId);
-          emit(CardsSuccessState(
-              cards: data,
-              allSum: sum.toString(),
-              expenses: expenses.toString(),
-              incomes: incomes.toString()));
+          emit(
+            CardsSuccessState(
+                cards: data,
+                allSum: sum.toString(),
+                expenses: expenses.toString(),
+                incomes: incomes.toString()),
+          );
         }
       } catch (e) {
         emit(CardsErrorState(error: e.toString()));

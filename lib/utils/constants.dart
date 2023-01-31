@@ -22,6 +22,8 @@ class NewPayConstants {
   static const String scannerScreen = '/scanner_screen';
   static const String addCardScreen = '/add_card_screen';
   static const String sendMoneyScreen = '/send_money_screen';
+  static const String sendToCardScreen = '/send_to_card_screen';
+  static const String sendToPhoneScreen = '/send_to_phone_screen';
 
   /// CUSTOM MODELS LIST
   static final List<OnBoardingModel> onBoardingModels = [
@@ -50,8 +52,8 @@ class NewPayConstants {
       label: 'Stats',
     ),
     BottomNavModels(
-      icon: NewPayIcons.cashback,
-      label: 'Cash Back',
+      icon: NewPayIcons.more,
+      label: 'More',
     )
   ];
   static final List<CardsGradient> cardsGradient = [

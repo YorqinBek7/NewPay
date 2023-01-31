@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/data/service.dart';
 import 'package:new_pay/models/cards_model.dart';
+import 'package:new_pay/models/transfers.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
@@ -212,6 +213,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                           },
                           expenses: '0.0',
                           income: '0.0',
+                          transfers: [],
+                          userName: NewPayConstants.user.displayName!,
                         ),
                         cardNumberController.text,
                         NewPayConstants.user.uid,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
+import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:new_pay/blocs/bloc_observer.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
@@ -40,6 +41,9 @@ void main() async {
         create: (context) => MonitoringBloc()
           ..add(MonitoringManagerEvent(userId: NewPayConstants.user.uid)),
       ),
+      BlocProvider<UpdateImageBloc>(
+        create: (context) => UpdateImageBloc(),
+      )
     ],
     child: const NewPay(),
   ));
@@ -82,6 +86,7 @@ class NewPay extends StatelessWidget {
           statusBarBrightness: Brightness.light,
           statusBarColor: NewPayColors.C_203354,
           statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: NewPayColors.C_203354,
         ),
         titleTextStyle: NewPayStyles.w600.copyWith(fontSize: 18.0),
         elevation: 0.0,
@@ -108,6 +113,7 @@ class NewPay extends StatelessWidget {
           statusBarBrightness: Brightness.light,
           statusBarColor: NewPayColors.C_F1F2F6,
           statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: NewPayColors.white,
         ),
         titleTextStyle: NewPayStyles.w600.copyWith(fontSize: 18.0),
         elevation: 0.0,

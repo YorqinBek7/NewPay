@@ -48,7 +48,11 @@ class CardsService {
     required String card,
     required String senderId,
     required String senderCard,
+    required String senderName,
+    required String time,
+    required bool toCard,
   }) async {
+    String receiverName = '';
     try {
       var allCards = FirebaseFirestore.instance.collectionGroup('cards').get();
       await allCards.then(
@@ -57,15 +61,26 @@ class CardsService {
             if (element.get('card_number') == card) {
               double initialSum = double.parse(element.get('sum'));
               double initialIncome = double.parse(element.get('incomes'));
+              receiverName = element.get('user_name');
+              List<dynamic> transfers = element.get('transfers');
+              transfers.add(
+                Transfers(
+                  name: '$senderName & $receiverName',
+                  desc: toCard ? 'to Friend' : 'to Services',
+                  sum: sum,
+                  time: time,
+                ).toJson(),
+              );
               await element.reference.update({
                 'sum': (initialSum + double.parse(sum)).toString(),
                 'incomes': (initialIncome + double.parse(sum)).toString(),
+                'transfers': transfers
               });
             }
           },
         ),
       );
-      //
+
       var balance = await FirebaseFirestore.instance
           .collection('users')
           .doc(senderId)
@@ -75,6 +90,10 @@ class CardsService {
           .then(
             (value) => value.get('sum'),
           );
+
+      var balanceCard = double.parse(balance);
+      balanceCard -= double.parse(sum);
+
       var expenses = await FirebaseFirestore.instance
           .collection('users')
           .doc(senderId)
@@ -84,11 +103,28 @@ class CardsService {
           .then(
             (value) => value.get('expenses'),
           );
-      var balanceCard = double.parse(balance);
-      balanceCard -= double.parse(sum);
 
       var expensesCard = double.parse(expenses);
       expensesCard -= double.parse(sum);
+
+      List transfers = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(senderId)
+          .collection('cards')
+          .doc(senderCard)
+          .get()
+          .then(
+            (value) => value.get('transfers'),
+          );
+
+      transfers.add(
+        Transfers(
+          name: '$senderName & $receiverName',
+          desc: toCard ? 'to Friend' : 'to Services',
+          sum: sum,
+          time: time,
+        ).toJson(),
+      );
 
       await FirebaseFirestore.instance
           .collection('users')
@@ -101,11 +137,12 @@ class CardsService {
               {
                 'sum': balanceCard.toString(),
                 'expenses': expensesCard.toString(),
+                'transfers': transfers,
               },
             ),
           );
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -132,7 +169,7 @@ class CardsService {
 
     var incomesSum = await getUserCardsCollection(userId)
         .get()
-        .then((value) => value.docs.map((e) => e.get('incomes')));
+        .then((value) => value.docs.map((e) => e.get('expenses')));
 
     for (var element in incomesSum) {
       incomes += double.parse(element);

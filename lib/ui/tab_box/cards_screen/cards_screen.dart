@@ -49,7 +49,7 @@ class CardsScreen extends StatelessWidget {
                                     Helper.currenyFormat(state.incomes),
                                     style: NewPayStyles.w500.copyWith(
                                       fontSize: 16.0,
-                                      color: NewPayColors.C_360C4A,
+                                      color: NewPayColors.C_00F0FF,
                                     ),
                                   );
                                 } else if (state is CardsLoadingState) {
@@ -60,19 +60,6 @@ class CardsScreen extends StatelessWidget {
                                   return SizedBox();
                                 }
                               },
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_upward,
-                                  color: NewPayColors.C_4EFF8A,
-                                  size: 15.0,
-                                ),
-                                Text("+1300 so'm",
-                                    style: NewPayStyles.w400.copyWith(
-                                        fontSize: 14.0,
-                                        color: NewPayColors.C_367B72)),
-                              ],
                             ),
                           ],
                         ),
@@ -105,7 +92,7 @@ class CardsScreen extends StatelessWidget {
                                       Helper.currenyFormat(state.expenses),
                                       style: NewPayStyles.w500.copyWith(
                                           fontSize: 16.0,
-                                          color: NewPayColors.C_360C4A));
+                                          color: NewPayColors.C_FF6770));
                                 } else if (state is CardsLoadingState) {
                                   return CircularProgressIndicator();
                                 } else if (state is CardsErrorState) {
@@ -114,19 +101,6 @@ class CardsScreen extends StatelessWidget {
                                   return SizedBox();
                                 }
                               },
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_downward,
-                                  color: NewPayColors.C_FF6770,
-                                  size: 15.0,
-                                ),
-                                Text("-1300 so'm",
-                                    style: NewPayStyles.w400.copyWith(
-                                        fontSize: 14.0,
-                                        color: NewPayColors.C_360C4A)),
-                              ],
                             ),
                           ],
                         ),

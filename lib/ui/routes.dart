@@ -11,6 +11,8 @@ import 'package:new_pay/ui/tab_box/home_screen/profile_screen/app_settings/app_s
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/profile_screen.dart';
 import 'package:new_pay/ui/tab_box/home_screen/qr_code_screen/qr_code_screen.dart';
 import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_money_screen.dart';
+import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_to_card_screen/send_to_card_screen.dart';
+import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_to_phone_screen/send_to_phone_screen.dart';
 import 'package:new_pay/ui/tab_box/home_tab.dart';
 import 'package:new_pay/utils/constants.dart';
 
@@ -41,6 +43,11 @@ class NewPayRoutes {
         return navigateToScreen(screen: const AddCardScreen());
       case NewPayConstants.sendMoneyScreen:
         return navigateToScreen(screen: SendMoneyScreen());
+
+      case NewPayConstants.sendToCardScreen:
+        return navigateToScreen(screen: const SendToCardScreen());
+      case NewPayConstants.sendToPhoneScreen:
+        return navigateToScreen(screen: const SendToPhoneScreen());
       default:
         return navigateToScreen(screen: const NoRouteScreen());
     }

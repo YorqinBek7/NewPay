@@ -31,5 +31,8 @@ class NewPayIcons {
   static const String more = 'assets/svg/more.svg';
   static const String pay = 'assets/svg/pay.svg';
   static const String add = 'assets/svg/add.svg';
+  static const String refresh = 'assets/svg/refresh.svg';
+  static const String cards = 'assets/svg/cards.svg';
+  static const String personalCard = 'assets/svg/personalcard.svg';
   static const String notification = 'assets/svg/notification.svg';
 }

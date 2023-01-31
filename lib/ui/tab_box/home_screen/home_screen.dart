@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_stack_widget/card_stack_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
+import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
@@ -22,17 +22,28 @@ class HomeScreen extends StatelessWidget {
         leading: GestureDetector(
           onTap: () =>
               Navigator.pushNamed(context, NewPayConstants.profileScreen),
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: NewPayConstants.user.photoURL == null
-                  ? Image.asset(
-                      NewPayIcons.profilePhoto,
-                      fit: BoxFit.cover,
-                    )
-                  : CachedNetworkImage(
-                      imageUrl: NewPayConstants.user.photoURL!,
-                      fit: BoxFit.cover,
-                    )),
+          child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
+            builder: (context, state) {
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5.0),
+                child: NewPayConstants.user.photoURL == null
+                    ? Image.asset(
+                        NewPayIcons.profilePhoto,
+                        fit: BoxFit.cover,
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(30.0),
+                        child: CachedNetworkImage(
+                          imageUrl: NewPayConstants.user.photoURL!,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                        ),
+                      ),
+              );
+            },
+          ),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

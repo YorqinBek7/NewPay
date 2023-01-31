@@ -1,3 +1,5 @@
+import 'package:new_pay/models/transfers.dart';
+
 class CardsModel {
   final String cardName;
   final String cardNumber;
@@ -8,6 +10,8 @@ class CardsModel {
   final Map<String, dynamic> gradientColor;
   final String income;
   final String expenses;
+  final List<dynamic> transfers;
+  final String userName;
   CardsModel({
     required this.cardName,
     required this.cardNumber,
@@ -18,6 +22,8 @@ class CardsModel {
     required this.gradientColor,
     required this.income,
     required this.expenses,
+    required this.transfers,
+    required this.userName,
   });
 
   factory CardsModel.fromJson(Map<String, dynamic> json) => CardsModel(
@@ -30,6 +36,8 @@ class CardsModel {
         gradientColor: json['gradient_color'] as Map<String, dynamic>,
         expenses: json['expenses'] as String,
         income: json['incomes'] as String,
+        transfers: json['transfers'] as List<dynamic>,
+        userName: json['user_name'] as String,
       );
   Map<String, dynamic> toJson() => {
         'card_name': cardName,
@@ -41,5 +49,7 @@ class CardsModel {
         'gradient_color': gradientColor,
         'expenses': expenses,
         'incomes': income,
+        'transfers': transfers,
+        'user_name': userName,
       };
 }

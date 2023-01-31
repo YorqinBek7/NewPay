@@ -24,9 +24,14 @@ class BottomNavBlocProvider extends StatelessWidget {
   }
 }
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
 
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -36,10 +41,10 @@ class HomeTab extends StatelessWidget {
           return Scaffold(
             body: IndexedStack(
               index: state,
-              children: [
+              children: const [
                 HomeScreen(),
-                const CardsScreen(),
-                const StatsScreen(),
+                CardsScreen(),
+                StatsScreen(),
               ],
             ),
             bottomNavigationBar: AnimatedBottomNavigationBar.builder(
@@ -80,16 +85,34 @@ class HomeTab extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
-              onPressed: () => state == 1
-                  ? Navigator.pushNamed(context, NewPayConstants.addCardScreen)
-                  : null,
-              child: SvgPicture.asset(
-                state == 1 ? NewPayIcons.add : NewPayIcons.sendWhite,
-              ),
+              onPressed: () => _callback(state),
+              child: SvgPicture.asset(_iconChanger(state)),
             ),
           );
         },
       ),
     );
+  }
+
+  String _iconChanger(int state) {
+    switch (state) {
+      case 1:
+        return NewPayIcons.add;
+      case 2:
+        return NewPayIcons.refresh;
+      default:
+        return NewPayIcons.sendWhite;
+    }
+  }
+
+  Future _callback(int state) async {
+    switch (state) {
+      case 1:
+        return Navigator.pushNamed(context, NewPayConstants.addCardScreen);
+      case 2:
+        return setState(() => print(state));
+      default:
+        return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);
+    }
   }
 }
