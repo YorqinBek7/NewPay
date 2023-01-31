@@ -1,7 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:new_pay/models/cards_model.dart';
+import 'package:new_pay/models/transfers.dart';
 
 class CardsService {
+  CollectionReference<Map<String, dynamic>> getUserCardsCollection(
+          String userId) =>
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('cards');
+
   /// It returns a stream of a list of cards, which is a list of documents from the cards collection of
   /// the user document
   ///
@@ -11,13 +19,9 @@ class CardsService {
   /// Returns:
   ///   A Stream of a List of CardsModel.
   Stream<List<CardsModel>> getCards(String userId) {
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('cards')
+    return getUserCardsCollection(userId)
         .snapshots()
         .map((event) => (event.docs).map((e) {
-              print(e.data());
               return CardsModel.fromJson(e.data());
             }).toList());
   }
@@ -31,12 +35,7 @@ class CardsService {
   ///   userId (String): The user's id
   Future<void> addCardToServer(
           CardsModel cards, String cardnumber, String userId) =>
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(userId)
-          .collection('cards')
-          .doc(cardnumber)
-          .set(cards.toJson());
+      getUserCardsCollection(userId).doc(cardnumber).set(cards.toJson());
 
   /// It takes two strings as arguments, one is the sum of money to be sent, the other is the card
   /// number of the recipient
@@ -119,10 +118,7 @@ class CardsService {
   ///   A Future of a double.
   Future<double> getAllSumFromCards(String userId) async {
     double initialSum = 0;
-    var allSums = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('cards')
+    var allSums = await getUserCardsCollection(userId)
         .get()
         .then((value) => value.docs.map((e) => e.get('sum')));
     for (var element in allSums) {
@@ -134,10 +130,7 @@ class CardsService {
   Future<double> getExpenses(String userId) async {
     double incomes = 0.0;
 
-    var incomesSum = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('cards')
+    var incomesSum = await getUserCardsCollection(userId)
         .get()
         .then((value) => value.docs.map((e) => e.get('incomes')));
 
@@ -150,10 +143,7 @@ class CardsService {
   Future<double> getIncomes(String userId) async {
     double expenses = 0.0;
 
-    var expensesSum = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('cards')
+    var expensesSum = await getUserCardsCollection(userId)
         .get()
         .then((value) => value.docs.map((e) => e.get('incomes')));
 
@@ -161,5 +151,15 @@ class CardsService {
       expenses += double.parse(element);
     }
     return expenses;
+  }
+
+  Future getTransfers(String userId) async {
+    var userTransfers = await getUserCardsCollection(userId)
+        .get()
+        .then((value) => value.docs.map((e) => e.get('transfers')));
+
+    return userTransfers
+        .map((json) => (json as List).map((e) => Transfers.fromJson(e)))
+        .toList();
   }
 }

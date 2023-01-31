@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_pay/models/bottom_nav_models.dart';
 import 'package:new_pay/models/cards_gradient.dart';
 import 'package:new_pay/models/onboarding_model.dart';
 import 'package:new_pay/utils/icons.dart';
 
 class NewPayConstants {
+  //CONSTANTS
+  static User user = FirebaseAuth.instance.currentUser!;
+
   // SCREENS
   static const String splashScreen = '/';
   static const String homeTab = '/home_tab';

@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                   builder: (context, state) {
                     return Stack(
                       children: [
-                        FirebaseAuth.instance.currentUser?.photoURL == null
+                        NewPayConstants.user.photoURL == null
                             ? Image.asset(
                                 NewPayIcons.profilePhoto,
                                 width: 80.0,

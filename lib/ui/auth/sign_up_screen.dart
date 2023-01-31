@@ -166,9 +166,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   BlocProvider.of<SignUpBloc>(context).add(
                     SignUpManagerEvent(
-                      email: emailController.text,
-                      password: passwordController.text,
-                      name: nameController.text,
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                      name: nameController.text.trim(),
                     ),
                   );
                 },
@@ -204,5 +204,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

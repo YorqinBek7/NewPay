@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:new_pay/blocs/bloc_observer.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
@@ -29,11 +30,15 @@ void main() async {
         create: (context) => LoginBloc(),
       ),
       BlocProvider(
-        create: (context) => CardsBloc()
-          ..add(CardsGetEvent(userId: FirebaseAuth.instance.currentUser!.uid)),
+        create: (context) =>
+            CardsBloc()..add(CardsGetEvent(userId: NewPayConstants.user.uid)),
       ),
       BlocProvider(
         create: (context) => ThemeBloc(),
+      ),
+      BlocProvider(
+        create: (context) => MonitoringBloc()
+          ..add(MonitoringManagerEvent(userId: NewPayConstants.user.uid)),
       ),
     ],
     child: const NewPay(),

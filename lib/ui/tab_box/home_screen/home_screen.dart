@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,18 +23,22 @@ class HomeScreen extends StatelessWidget {
           onTap: () =>
               Navigator.pushNamed(context, NewPayConstants.profileScreen),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              NewPayIcons.profilePhoto,
-              fit: BoxFit.cover,
-            ),
-          ),
+              padding: const EdgeInsets.all(8.0),
+              child: NewPayConstants.user.photoURL == null
+                  ? Image.asset(
+                      NewPayIcons.profilePhoto,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: NewPayConstants.user.photoURL!,
+                      fit: BoxFit.cover,
+                    )),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi ${FirebaseAuth.instance.currentUser?.displayName ?? ''}',
+              'Hi ${NewPayConstants.user.displayName ?? ''}',
               style: NewPayStyles.w500.copyWith(fontSize: 14.0),
             ),
             Text(

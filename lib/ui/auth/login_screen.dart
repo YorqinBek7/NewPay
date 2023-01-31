@@ -122,8 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       return;
                     }
                     BlocProvider.of<LoginBloc>(context).add(LoginManagerEvent(
-                        email: emailController.text,
-                        password: passwordController.text));
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim()));
                   },
                 ),
                 SizedBox(
@@ -158,5 +158,12 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

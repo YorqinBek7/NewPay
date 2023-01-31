@@ -214,7 +214,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                           income: '0.0',
                         ),
                         cardNumberController.text,
-                        FirebaseAuth.instance.currentUser!.uid,
+                        NewPayConstants.user.uid,
                       )
                       .then(
                         (value) => Navigator.pop(context),

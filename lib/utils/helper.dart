@@ -12,6 +12,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class Helper {
   ImagePicker imagePicker = ImagePicker();
+
   final _storage = FirebaseStorage.instance.ref('profile_storage/');
   static void showCustomErrorSnackbar(BuildContext context, String error) =>
       ScaffoldMessenger.of(context).showSnackBar(
