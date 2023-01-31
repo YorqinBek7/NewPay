@@ -1,5 +1,8 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:new_pay/data/storage.dart';
+import 'package:new_pay/ui/no_route_screen.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
 
@@ -32,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Image.asset(
           NewPayIcons.logo,

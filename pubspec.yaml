@@ -37,14 +37,16 @@ dependencies:
   firebase_core: ^2.4.1
   cloud_firestore: ^4.3.1
 
-  #DATA
+  #OTHER
   shared_preferences: ^2.0.17
   permission_handler: ^10.2.0
   firebase_storage: ^11.0.10
   cached_network_image: ^3.2.3
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
-  animations: ^2.0.7
+  internet_connection_checker: ^1.0.0+1
+  connectivity_plus: ^3.0.2
+  app_settings: ^4.2.0
 
 
   

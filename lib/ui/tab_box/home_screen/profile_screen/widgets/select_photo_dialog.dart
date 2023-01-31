@@ -40,7 +40,10 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                         context: context,
                         error: 'Permission is denied, allow from settings');
                     await Future.delayed(const Duration(milliseconds: 1500));
-                    await openAppSettings();
+                    if (await Helper.requestPermission(
+                        setting: Permission.location)) {
+                      await openAppSettings();
+                    }
                   }
                 },
                 leading: Icon(Icons.camera_alt_outlined),
@@ -57,7 +60,10 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                         context: context,
                         error: 'Permission is denied, allow from settings');
                     await Future.delayed(const Duration(seconds: 2));
-                    await openAppSettings();
+                    if (await Helper.requestPermission(
+                        setting: Permission.location)) {
+                      await openAppSettings();
+                    }
                   }
                 },
                 leading: Icon(Icons.image_outlined),

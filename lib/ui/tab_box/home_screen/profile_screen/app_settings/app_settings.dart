@@ -6,8 +6,8 @@ import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/option_ite
 import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
 
-class AppSettings extends StatelessWidget {
-  const AppSettings({super.key});
+class AppSettingsScreen extends StatelessWidget {
+  const AppSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

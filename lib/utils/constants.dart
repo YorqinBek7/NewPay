@@ -24,6 +24,7 @@ class NewPayConstants {
   static const String sendMoneyScreen = '/send_money_screen';
   static const String sendToCardScreen = '/send_to_card_screen';
   static const String sendToPhoneScreen = '/send_to_phone_screen';
+  static const String noInternetScreen = '/no_internet_screen';
 
   /// CUSTOM MODELS LIST
   static final List<OnBoardingModel> onBoardingModels = [

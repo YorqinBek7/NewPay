@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
 import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +44,10 @@ void main() async {
       ),
       BlocProvider<UpdateImageBloc>(
         create: (context) => UpdateImageBloc(),
+      ),
+      BlocProvider(
+        create: (context) =>
+            InternetCheckerBloc()..add(InternetCheckerManagerEvent()),
       )
     ],
     child: const NewPay(),

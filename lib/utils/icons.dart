@@ -7,6 +7,7 @@ class NewPayIcons {
   static const String paymentService = 'assets/images/payment_service.png';
   static const String profilePhoto = 'assets/images/profile_photo.png';
   static const String scanner = 'assets/images/scanner.png';
+  static const String noInternet = 'assets/images/no_internet.png';
 
   // SVG ICONS
   static const String language = 'assets/svg/language.svg';
