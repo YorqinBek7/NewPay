@@ -2,6 +2,7 @@ import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/charts.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
@@ -15,16 +16,18 @@ class CardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        toolbarHeight: 0.0,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 50.0,
+            height: 50.0.h,
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 15.0),
-            height: 200.0,
+            margin: EdgeInsets.symmetric(horizontal: 15.0.w),
+            height: 200.0.h,
             child: Row(
               children: [
                 Expanded(
@@ -34,7 +37,7 @@ class CardsScreen extends StatelessWidget {
                         mainData(true),
                       ),
                       Positioned(
-                        left: 5.0,
+                        left: 5.0.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -48,16 +51,16 @@ class CardsScreen extends StatelessWidget {
                                   return Text(
                                     Helper.currenyFormat(state.incomes),
                                     style: NewPayStyles.w500.copyWith(
-                                      fontSize: 16.0,
+                                      fontSize: 16.0.sp,
                                       color: NewPayColors.C_00F0FF,
                                     ),
                                   );
                                 } else if (state is CardsLoadingState) {
-                                  return CircularProgressIndicator();
+                                  return const CircularProgressIndicator();
                                 } else if (state is CardsErrorState) {
                                   return Text(state.error);
                                 } else {
-                                  return SizedBox();
+                                  return const SizedBox();
                                 }
                               },
                             ),
@@ -68,7 +71,7 @@ class CardsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 10.0,
+                  width: 10.0.w,
                 ),
                 Expanded(
                   child: Stack(
@@ -77,7 +80,7 @@ class CardsScreen extends StatelessWidget {
                         mainData(false),
                       ),
                       Positioned(
-                        left: 5.0,
+                        left: 5.0.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -91,14 +94,14 @@ class CardsScreen extends StatelessWidget {
                                   return Text(
                                       Helper.currenyFormat(state.expenses),
                                       style: NewPayStyles.w500.copyWith(
-                                          fontSize: 16.0,
+                                          fontSize: 16.0.sp,
                                           color: NewPayColors.C_FF6770));
                                 } else if (state is CardsLoadingState) {
-                                  return CircularProgressIndicator();
+                                  return const CircularProgressIndicator();
                                 } else if (state is CardsErrorState) {
                                   return Text(state.error);
                                 } else {
-                                  return SizedBox();
+                                  return const SizedBox();
                                 }
                               },
                             ),
@@ -112,14 +115,14 @@ class CardsScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 15.0,
+            height: 15.0.h,
           ),
           Container(
-            margin: EdgeInsets.only(left: 15.0),
+            margin: EdgeInsets.only(left: 15.0.w),
             child: Text(
               'My Cards',
               style: NewPayStyles.w400.copyWith(
-                fontSize: 14.0,
+                fontSize: 14.0.sp,
                 color: NewPayColors.C_828282,
               ),
             ),
@@ -147,7 +150,7 @@ class CardsScreen extends StatelessWidget {
                 child: Text(state.error),
               );
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

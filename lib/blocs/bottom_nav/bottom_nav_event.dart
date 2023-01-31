@@ -4,8 +4,6 @@ part of 'bottom_nav_bloc.dart';
 abstract class BottomNavEvent {}
 
 class BottomNavManagerEvent extends BottomNavEvent {
-  int index;
-  BottomNavManagerEvent({
-    required this.index,
-  });
+  final int index;
+  BottomNavManagerEvent({required this.index});
 }

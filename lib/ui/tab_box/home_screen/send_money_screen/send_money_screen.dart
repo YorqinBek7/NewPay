@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
-import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
-import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:new_pay/data/service.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
@@ -12,13 +9,12 @@ import 'package:new_pay/utils/styles.dart';
 
 class SendMoneyScreen extends StatelessWidget {
   SendMoneyScreen({super.key});
-  CardsService service = CardsService();
+  final CardsService service = CardsService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 60.0,
         title: const Text('Transfers'),
       ),
       body: Center(
@@ -26,7 +22,7 @@ class SendMoneyScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 15.0,
+              height: 15.0.h,
             ),
             _optionTransfer(
                 name: 'Send to Card',
@@ -68,17 +64,17 @@ class SendMoneyScreen extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
-        margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 25.0.w, vertical: 20.0.h),
+        margin: EdgeInsets.symmetric(horizontal: 15.0.w, vertical: 10.0.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(8.0.r),
           color: NewPayColors.white,
         ),
         child: Row(
           children: [
             SvgPicture.asset(icon),
             SizedBox(
-              width: 25.0,
+              width: 25.0.w,
             ),
             Text(
               name,

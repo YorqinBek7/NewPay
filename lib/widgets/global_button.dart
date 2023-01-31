@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/styles.dart';
 
@@ -19,10 +20,10 @@ class GlobalButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 43.0),
-        margin: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.symmetric(vertical: 13.0.h, horizontal: 43.0.w),
+        margin: EdgeInsets.symmetric(horizontal: 10.0.w),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(8.0.r),
           color: backgroundColor,
           border: backgroundColor == null
               ? Border.all(color: NewPayColors.black)
@@ -32,7 +33,7 @@ class GlobalButton extends StatelessWidget {
           child: Text(
             buttonText,
             style: NewPayStyles.w500.copyWith(
-              fontSize: 20.0,
+              fontSize: 20.0.sp,
               color: backgroundColor != null
                   ? NewPayColors.white
                   : NewPayColors.black,

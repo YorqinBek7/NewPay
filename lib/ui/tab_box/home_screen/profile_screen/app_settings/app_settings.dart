@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:new_pay/blocs/theme/theme_bloc.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/option_items.dart';
@@ -12,9 +13,7 @@ class AppSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60.0,
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(children: [
           optionItems(
@@ -28,12 +27,12 @@ class AppSettingsScreen extends StatelessWidget {
             onTap: () => showMaterialModalBottomSheet(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0),
+                  topLeft: Radius.circular(10.0.r),
+                  topRight: Radius.circular(10.0.r),
                 ),
               ),
               context: context,
-              builder: (context) => Container(
+              builder: (context) => SizedBox(
                 height: MediaQuery.of(context).size.height * .3,
                 child: BlocBuilder<ThemeBloc, ThemeState>(
                   builder: (context, state) {
@@ -43,7 +42,7 @@ class AppSettingsScreen extends StatelessWidget {
                         ListTile(
                           onTap: () => BlocProvider.of<ThemeBloc>(context)
                               .add(ThemeManagerEvent(themeState: 0)),
-                          leading: Icon(Icons.edit_note_sharp),
+                          leading: const Icon(Icons.edit_note_sharp),
                           title: Text(
                             'Auto mode',
                             style: NewPayStyles.w600,
@@ -57,7 +56,7 @@ class AppSettingsScreen extends StatelessWidget {
                         ListTile(
                           onTap: () => BlocProvider.of<ThemeBloc>(context)
                               .add(ThemeManagerEvent(themeState: 1)),
-                          leading: Icon(Icons.dark_mode),
+                          leading: const Icon(Icons.dark_mode),
                           title: Text(
                             'Dark',
                             style: NewPayStyles.w600,
@@ -71,7 +70,7 @@ class AppSettingsScreen extends StatelessWidget {
                         ListTile(
                           onTap: () => BlocProvider.of<ThemeBloc>(context)
                               .add(ThemeManagerEvent(themeState: 2)),
-                          leading: Icon(Icons.light_mode),
+                          leading: const Icon(Icons.light_mode),
                           title: Text(
                             'Light mode',
                             style: NewPayStyles.w600,

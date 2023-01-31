@@ -12,12 +12,7 @@ class CardsService {
 
   /// It returns a stream of a list of cards, which is a list of documents from the cards collection of
   /// the user document
-  ///
-  /// Args:
-  ///   userId (String): The user's id
-  ///
-  /// Returns:
-  ///   A Stream of a List of CardsModel.
+
   Stream<List<CardsModel>> getCards(String userId) {
     return getUserCardsCollection(userId)
         .snapshots()
@@ -28,21 +23,14 @@ class CardsService {
 
   /// It takes in a CardsModel object, a cardnumber string, and a userId string, and then it adds the
   /// CardsModel object to the user's cards collection in the database
-  ///
-  /// Args:
-  ///   cards (CardsModel): is the object of the CardsModel class
-  ///   cardnumber (String): is the card number
-  ///   userId (String): The user's id
+
   Future<void> addCardToServer(
           CardsModel cards, String cardnumber, String userId) =>
       getUserCardsCollection(userId).doc(cardnumber).set(cards.toJson());
 
   /// It takes two strings as arguments, one is the sum of money to be sent, the other is the card
   /// number of the recipient
-  ///
-  /// Args:
-  ///   sum (String): the sum of money that is being sent
-  ///   card (String): the card number of the receiver
+
   Future<void> sendMoney({
     required String sum,
     required String card,
@@ -147,12 +135,7 @@ class CardsService {
   }
 
   /// It gets all the sums from the cards collection and returns the sum of all the sums
-  ///
-  /// Args:
-  ///   userId (String): the user's id
-  ///
-  /// Returns:
-  ///   A Future of a double.
+
   Future<double> getAllSumFromCards(String userId) async {
     double initialSum = 0;
     var allSums = await getUserCardsCollection(userId)

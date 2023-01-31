@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
 
 LineChartData mainData(
@@ -54,7 +55,7 @@ LineChartData mainData(
         gradient: LinearGradient(
           colors: incomeGradientColors,
         ),
-        barWidth: 1,
+        barWidth: 1.0.w,
         isStrokeCapRound: true,
         dotData: FlDotData(
           show: false,

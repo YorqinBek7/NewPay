@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:new_pay/utils/helper.dart';
@@ -10,8 +11,8 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
       context: _,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10.0),
+          topLeft: Radius.circular(10.0.r),
+          topRight: Radius.circular(10.0.r),
         ),
       ),
       builder: (context) {
@@ -20,14 +21,14 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
           child: Column(
             children: [
               SizedBox(
-                height: 10.0,
+                height: 10.0.h,
               ),
               Text(
                 'Select a photo to profile',
-                style: NewPayStyles.w800.copyWith(fontSize: 17.0),
+                style: NewPayStyles.w800.copyWith(fontSize: 17.0.sp),
               ),
               SizedBox(
-                height: 10.0,
+                height: 10.0.h,
               ),
               ListTile(
                 onTap: () async {
@@ -46,8 +47,8 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                     }
                   }
                 },
-                leading: Icon(Icons.camera_alt_outlined),
-                title: Text('Take from camera'),
+                leading: const Icon(Icons.camera_alt_outlined),
+                title: const Text('Take from camera'),
               ),
               ListTile(
                 onTap: () async {
@@ -66,8 +67,8 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                     }
                   }
                 },
-                leading: Icon(Icons.image_outlined),
-                title: Text('Choose from gallery'),
+                leading: const Icon(Icons.image_outlined),
+                title: const Text('Choose from gallery'),
               ),
             ],
           ),

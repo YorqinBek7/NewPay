@@ -1,5 +1,3 @@
-import 'package:new_pay/models/transfers.dart';
-
 class CardsModel {
   final String cardName;
   final String cardNumber;

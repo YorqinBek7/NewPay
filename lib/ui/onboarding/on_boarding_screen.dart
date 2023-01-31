@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/ui/onboarding/onboarding_screens.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
@@ -68,9 +69,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   Container onboardingCircles(int index, int currentIndex) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.0),
-      width: 10.0,
-      height: 10.0,
+      margin: EdgeInsets.symmetric(horizontal: 2.0.w),
+      width: 10.0.w,
+      height: 10.0.h,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color:

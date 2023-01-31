@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
 
 class CustomFields extends StatelessWidget {
@@ -20,10 +21,10 @@ class CustomFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      margin: EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+      margin: EdgeInsets.symmetric(vertical: 10.0.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(8.0.r),
         color: NewPayColors.white,
       ),
       child: TextField(

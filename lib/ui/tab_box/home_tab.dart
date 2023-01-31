@@ -1,9 +1,8 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:new_pay/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/cards_screen.dart';
@@ -73,8 +72,8 @@ class _HomeTabState extends State<HomeTab> {
                         color: isActive
                             ? NewPayColors.C_7000FF
                             : NewPayColors.C_828282,
-                        height: 24.0,
-                        width: 24.0,
+                        height: 24.0.h,
+                        width: 24.0.w,
                       ),
                       Text(
                         NewPayConstants.bottomNavModels[index].label,
@@ -82,7 +81,7 @@ class _HomeTabState extends State<HomeTab> {
                           color: isActive
                               ? NewPayColors.C_7000FF
                               : NewPayColors.C_828282,
-                          fontSize: 12.0,
+                          fontSize: 12.0.sp,
                         ),
                       ),
                     ],
@@ -93,9 +92,13 @@ class _HomeTabState extends State<HomeTab> {
                   FloatingActionButtonLocation.centerDocked,
               floatingActionButton: FloatingActionButton(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.0)),
+                    borderRadius: BorderRadius.circular(100.0.r)),
                 onPressed: () => _callback(state),
-                child: SvgPicture.asset(_iconChanger(state)),
+                child: SvgPicture.asset(
+                  _iconChanger(state),
+                  width: 20.0.w,
+                  height: 20.0.h,
+                ),
               ),
             );
           },
@@ -105,24 +108,14 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   String _iconChanger(int state) {
-    switch (state) {
-      case 1:
-        return NewPayIcons.add;
-      case 2:
-        return NewPayIcons.refresh;
-      default:
-        return NewPayIcons.sendWhite;
-    }
+    if (state == 1) return NewPayIcons.add;
+    return NewPayIcons.sendWhite;
   }
 
   Future _callback(int state) async {
-    switch (state) {
-      case 1:
-        return Navigator.pushNamed(context, NewPayConstants.addCardScreen);
-      case 2:
-        return setState(() => print(state));
-      default:
-        return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);
+    if (state == 1) {
+      return Navigator.pushNamed(context, NewPayConstants.addCardScreen);
     }
+    return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);
   }
 }

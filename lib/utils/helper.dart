@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:new_pay/utils/colors.dart';
@@ -83,7 +84,7 @@ class Helper {
           content: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(),
             ),
           ),
@@ -96,17 +97,18 @@ class Helper {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Exit App'),
-        content: Text('Are you sure?'),
+        title: const Text('Exit App'),
+        content: const Text('Are you sure?'),
         actions: <Widget>[
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 10.0.h),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10.0.r),
                 border: Border.all(color: NewPayColors.black),
                 color: NewPayColors.white,
               ),
@@ -122,9 +124,10 @@ class Helper {
               exit(0);
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 10.0.h),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(9.0),
+                borderRadius: BorderRadius.circular(9.0.r),
                 color: NewPayColors.black,
               ),
               child: Text(
@@ -152,8 +155,8 @@ class Helper {
   static Future<bool> requestPermission({
     required Permission setting,
   }) async {
-    final _result = await setting.request();
-    switch (_result) {
+    final result = await setting.request();
+    switch (result) {
       case PermissionStatus.granted:
       case PermissionStatus.limited:
         return true;

@@ -1,8 +1,6 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/data/storage.dart';
-import 'package:new_pay/ui/no_route_screen.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
 
@@ -39,8 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Image.asset(
           NewPayIcons.logo,
-          width: 150.0,
-          height: 150.0,
+          width: 150.0.w,
+          height: 150.0.h,
         ),
       ),
     );

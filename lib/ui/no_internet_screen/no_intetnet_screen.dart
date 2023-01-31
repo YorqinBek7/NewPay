@@ -1,9 +1,7 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
-import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
 
@@ -30,7 +28,6 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 60.0,
           automaticallyImplyLeading: false,
         ),
         body: WillPopScope(
@@ -39,17 +36,17 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 50.0,
+                  height: 50.0.h,
                 ),
                 Image.asset(
                   NewPayIcons.noInternet,
-                  height: 288.0,
-                  width: 256.0,
+                  height: 288.0.h,
+                  width: 256.0.w,
                   fit: BoxFit.cover,
                 ),
                 Text(
                   'No connect Internet',
-                  style: NewPayStyles.w800.copyWith(fontSize: 24.0),
+                  style: NewPayStyles.w800.copyWith(fontSize: 24.0.sp),
                   textAlign: TextAlign.center,
                 ),
               ],

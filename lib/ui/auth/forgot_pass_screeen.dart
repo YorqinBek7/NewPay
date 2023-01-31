@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
 import 'package:new_pay/utils/colors.dart';
@@ -14,9 +15,9 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return KeyboardDismisser(
       child: Scaffold(
-        appBar: AppBar(toolbarHeight: 60),
+        appBar: AppBar(),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
           child: SingleChildScrollView(
             reverse: true,
             child: Column(
@@ -24,7 +25,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               children: [
                 Text(
                   'Reset your password',
-                  style: NewPayStyles.w600.copyWith(fontSize: 20.0),
+                  style: NewPayStyles.w600.copyWith(fontSize: 20.0.sp),
                   textAlign: TextAlign.center,
                 ),
                 Text(
@@ -34,7 +35,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 SizedBox(
-                  height: 35.0,
+                  height: 35.0.h,
                 ),
                 AuthFields(
                   hintText: 'Enter your email',
@@ -46,7 +47,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(
-                  height: 42.0,
+                  height: 42.0.h,
                 ),
                 GlobalButton(
                   buttonText: 'Next',

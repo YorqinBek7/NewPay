@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/data/service.dart';
 import 'package:new_pay/models/cards_model.dart';
-import 'package:new_pay/models/transfers.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
@@ -37,9 +36,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
   Widget build(BuildContext context) {
     return KeyboardDismisser(
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 60.0,
-        ),
+        appBar: AppBar(),
         body: Column(
           children: [
             Expanded(
@@ -49,7 +46,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(10.0.r),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: List.from(
@@ -61,9 +58,9 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             ],
                           ),
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(10.0.r),
                       ),
-                      height: 200.0,
+                      height: 200.0.h,
                       width: MediaQuery.of(context).size.width - 55.0,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,12 +71,14 @@ class _AddCardScreenState extends State<AddCardScreen> {
                               Text(
                                 nameOfCardController.text,
                                 style: NewPayStyles.w700.copyWith(
-                                    fontSize: 12.0, color: NewPayColors.white),
+                                    fontSize: 12.0.sp,
+                                    color: NewPayColors.white),
                               ),
                               Text(
                                 'VISA',
                                 style: NewPayStyles.w800.copyWith(
-                                    fontSize: 18.0, color: NewPayColors.white),
+                                    fontSize: 18.0.sp,
+                                    color: NewPayColors.white),
                               )
                             ],
                           ),
@@ -89,13 +88,13 @@ class _AddCardScreenState extends State<AddCardScreen> {
                                 ? '#### #### #### ####'
                                 : cardNumberController.text,
                             style: NewPayStyles.w500.copyWith(
-                                fontSize: 24.0, color: NewPayColors.white),
+                                fontSize: 24.0.sp, color: NewPayColors.white),
                           ),
                           const Spacer(),
                           Text(
                             'Expires',
                             style: NewPayStyles.w400.copyWith(
-                                fontSize: 12.0, color: NewPayColors.white),
+                                fontSize: 12.0.sp, color: NewPayColors.white),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +104,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                                     ? '##/##'
                                     : periodController.text,
                                 style: NewPayStyles.w700.copyWith(
-                                    fontSize: 12.0, color: NewPayColors.white),
+                                    fontSize: 12.0.sp,
+                                    color: NewPayColors.white),
                               ),
                             ],
                           ),
@@ -113,10 +113,10 @@ class _AddCardScreenState extends State<AddCardScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 10.0,
+                      height: 10.0.h,
                     ),
                     SizedBox(
-                      height: 50.0,
+                      height: 50.0.h,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -134,11 +134,12 @@ class _AddCardScreenState extends State<AddCardScreen> {
                                 });
                               },
                               child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                                height: 42.0,
-                                width: 71.0,
+                                margin:
+                                    EdgeInsets.symmetric(horizontal: 10.0.w),
+                                height: 42.0.h,
+                                width: 71.0.w,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(10.0.r),
                                   gradient: LinearGradient(
                                     colors: List.from([
                                       Helper.hexToColor(NewPayConstants
@@ -155,7 +156,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: EdgeInsets.symmetric(horizontal: 15.0.w),
                       child: Column(
                         children: [
                           CustomFields(
@@ -186,7 +187,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             GlobalButton(
                 buttonText: 'Save',
                 backgroundColor: NewPayColors.black,
@@ -224,7 +225,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                       );
                 }),
             SizedBox(
-              height: 5.0,
+              height: 5.0.h,
             )
           ],
         ),

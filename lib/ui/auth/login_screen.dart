@@ -2,6 +2,7 @@ import 'package:authentication/auth/login/login_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
@@ -28,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return KeyboardDismisser(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 60,
           title: const Text('Log in'),
         ),
         body: BlocListener<LoginBloc, LoginState>(
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
             child: Column(
               children: [
                 Expanded(
@@ -57,8 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Center(
                           child: Image.asset(
                             NewPayIcons.onBoardingScreen_3,
-                            width: 200.0,
-                            height: 200.0,
+                            width: 200.0.w,
+                            height: 200.0.h,
                           ),
                         ),
                         Text(
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextButton(
                             onPressed: () => Navigator.pushNamed(
                                 context, NewPayConstants.forgotPassScreen),
-                            child: Text('Forgot password?')),
+                            child: const Text('Forgot password?')),
                       ],
                     ),
                   ),
@@ -127,13 +127,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 SizedBox(
-                  height: 16.0,
+                  height: 16.0.h,
                 ),
                 Center(
                   child: RichText(
                     text: TextSpan(
                       text: 'New to Newpay?',
-                      style: NewPayStyles.w400.copyWith(fontSize: 16.0),
+                      style: NewPayStyles.w400.copyWith(fontSize: 16.0.sp),
                       children: [
                         TextSpan(
                           text: ' Create an account',
@@ -143,14 +143,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   NewPayConstants.signUpScreen,
                                 ),
                           style: NewPayStyles.w500.copyWith(
-                              color: NewPayColors.C_0057FF, fontSize: 16.0),
+                              color: NewPayColors.C_0057FF, fontSize: 16.0.sp),
                         )
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 16.0,
+                  height: 16.0.h,
                 )
               ],
             ),

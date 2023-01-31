@@ -6,9 +6,7 @@ class SendToCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60.0,
-      ),
+      appBar: AppBar(),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/option_items.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/select_photo_dialog.dart';
@@ -28,9 +29,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50.0,
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,8 +37,8 @@ class ProfileScreen extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: SizedBox(
-                width: 90.0,
-                height: 90.0,
+                width: 90.0.w,
+                height: 90.0.h,
                 child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
                   builder: (context, state) {
                     return Stack(
@@ -47,17 +46,17 @@ class ProfileScreen extends StatelessWidget {
                         NewPayConstants.user.photoURL == null
                             ? Image.asset(
                                 NewPayIcons.profilePhoto,
-                                width: 80.0,
-                                height: 80.0,
+                                width: 80.0.w,
+                                height: 80.0.h,
                                 fit: BoxFit.cover,
                               )
                             : ClipRRect(
-                                borderRadius: BorderRadius.circular(100.0),
+                                borderRadius: BorderRadius.circular(100.0.r),
                                 child: CachedNetworkImage(
                                   imageUrl: FirebaseAuth
                                       .instance.currentUser!.photoURL!,
-                                  width: 80.0,
-                                  height: 80.0,
+                                  width: 80.0.w,
+                                  height: 80.0.h,
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(),
@@ -70,19 +69,19 @@ class ProfileScreen extends StatelessWidget {
                                 value: UpdateImageBloc(),
                                 child: await selectPhotoDialog(context)),
                             child: Container(
-                              padding: EdgeInsets.all(10.0),
+                              padding: EdgeInsets.all(10.0.r),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: NewPayColors.C_7000FF,
                                 border: Border.all(
                                   color: NewPayColors.white,
-                                  width: 2.0,
+                                  width: 2.0.w,
                                 ),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.camera_alt,
                                 color: NewPayColors.white,
-                                size: 12.0,
+                                size: 12.0.w,
                               ),
                             ),
                           ),
@@ -94,17 +93,17 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10.0,
+              height: 10.0.h,
             ),
             Align(
               alignment: Alignment.center,
               child: Text(
                 'YorqinBek Yuldashev',
-                style: NewPayStyles.w600.copyWith(fontSize: 24.0),
+                style: NewPayStyles.w600.copyWith(fontSize: 24.0.sp),
               ),
             ),
             SizedBox(
-              height: 40.0,
+              height: 40.0.h,
             ),
             optionItems(
               icon: NewPayIcons.verify,
@@ -116,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {},
               title: 'Verify NewPay pay',
             ),
-            Divider(),
+            const Divider(),
             optionItems(
               icon: NewPayIcons.bank,
               onTap: () {},
@@ -130,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             Divider(),
             Container(
-              margin: EdgeInsets.only(left: 16.0),
+              margin: EdgeInsets.only(left: 16.0.w),
               child: Text(
                 'SECURITY',
                 style: NewPayStyles.w500.copyWith(color: NewPayColors.C_828282),
@@ -156,23 +155,23 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {},
             ),
             SizedBox(
-              height: 5.0,
+              height: 5.0.h,
             ),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 15.0),
-              margin: EdgeInsets.symmetric(horizontal: 15.0),
+              padding: EdgeInsets.symmetric(vertical: 15.0.h),
+              margin: EdgeInsets.symmetric(horizontal: 15.0.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(5.0.r),
                 border: Border.all(
                   color: NewPayColors.white,
-                  width: 2.0,
+                  width: 2.0.w,
                 ),
               ),
               child: Center(
                 child: Text(
                   'Log Out',
-                  style: NewPayStyles.w600
-                      .copyWith(fontSize: 16.0, color: NewPayColors.C_F90000),
+                  style: NewPayStyles.w600.copyWith(
+                      fontSize: 16.0.sp, color: NewPayColors.C_F90000),
                 ),
               ),
             )

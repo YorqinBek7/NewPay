@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';

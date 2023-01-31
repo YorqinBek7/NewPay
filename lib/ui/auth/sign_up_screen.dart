@@ -2,6 +2,7 @@ import 'package:authentication/auth/sign_up/sign_up_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
@@ -29,7 +30,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return KeyboardDismisser(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 60.0,
           title: const Text('Sign up'),
         ),
         body: BlocListener<SignUpBloc, SignUpState>(
@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -114,17 +114,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         SizedBox(
-                          height: 13.0,
+                          height: 13.0.h,
                         ),
                         Text(
                           'At least 8 characters with uppercase letters and numbers',
                           style: NewPayStyles.w400.copyWith(
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             color: NewPayColors.C_787A8D,
                           ),
                         ),
                         SizedBox(
-                          height: 16.0,
+                          height: 16.0.h,
                         ),
                         Row(
                           children: [
@@ -132,12 +132,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onTap: () =>
                                     setState(() => isChecked = !isChecked),
                                 child: isChecked
-                                    ? Icon(Icons.check_box)
-                                    : Icon(Icons.check_box_outline_blank)),
+                                    ? const Icon(Icons.check_box)
+                                    : const Icon(
+                                        Icons.check_box_outline_blank)),
                             Text(
                               'Accept Terms of Use & Privacy Policy',
                               style: NewPayStyles.w400.copyWith(
-                                fontSize: 14.0,
+                                fontSize: 14.0.sp,
                                 color: NewPayColors.C_787A8D,
                               ),
                             )
@@ -174,13 +175,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
               ),
               SizedBox(
-                height: 16.0,
+                height: 16.0.h,
               ),
               Center(
                 child: RichText(
                   text: TextSpan(
                     text: 'Already have an account?',
-                    style: NewPayStyles.w400.copyWith(fontSize: 16.0),
+                    style: NewPayStyles.w400.copyWith(fontSize: 16.0.sp),
                     children: [
                       TextSpan(
                         text: ' Log in!',
@@ -190,14 +191,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 NewPayConstants.loginScreen,
                               ),
                         style: NewPayStyles.w500.copyWith(
-                            color: NewPayColors.C_0057FF, fontSize: 16.0),
+                            color: NewPayColors.C_0057FF, fontSize: 16.0.sp),
                       )
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                height: 16.0,
+                height: 16.0.h,
               )
             ],
           ),

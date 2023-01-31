@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/styles.dart';
@@ -12,8 +13,8 @@ ListTile optionItems({
   return ListTile(
     onTap: onTap,
     leading: Container(
-        padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
+        padding: EdgeInsets.all(10.0.r),
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: NewPayColors.C_EEEEEE,
         ),
@@ -25,7 +26,7 @@ ListTile optionItems({
     trailing: GestureDetector(
       onTap: onTap,
       child: trailingIcon ??
-          Icon(
+          const Icon(
             Icons.keyboard_arrow_right_outlined,
           ),
     ),
