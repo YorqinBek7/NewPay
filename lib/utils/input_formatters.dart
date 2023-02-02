@@ -84,8 +84,38 @@ class EnterAmountFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     var text = newValue.text;
+    if (text.length > 15) return oldValue;
     if (RegExp(r'^[- ,.]').hasMatch(text)) return oldValue;
-
     return newValue;
+  }
+}
+
+class EnterPhoneNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String newV = newValue.text;
+    String oldV = oldValue.text;
+    StringBuffer buffer = StringBuffer();
+    if (newV.length > 9) return oldValue;
+    if (oldV.length < newV.length) {
+      if (newV.length == 3 || newV.length == 6) {
+        for (int i = 0; i < newV.length; i++) {
+          buffer.write(newV[i]);
+        }
+        buffer.write(' ');
+      } else {
+        for (int i = 0; i < newV.length; i++) {
+          buffer.write(newV[i]);
+        }
+      }
+    } else {
+      for (int i = 0; i < newV.length; i++) {
+        buffer.write(newV[i]);
+      }
+    }
+    return newValue.copyWith(
+        text: buffer.toString(),
+        selection: TextSelection.collapsed(offset: buffer.toString().length));
   }
 }

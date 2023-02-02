@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:new_pay/models/cards_model.dart';
 import 'package:new_pay/models/transfers.dart';
+import 'package:new_pay/utils/constants.dart';
 
 class CardsService {
   CollectionReference<Map<String, dynamic>> getUserCardsCollection(
@@ -24,14 +27,111 @@ class CardsService {
   /// It takes in a CardsModel object, a cardnumber string, and a userId string, and then it adds the
   /// CardsModel object to the user's cards collection in the database
 
-  Future<void> addCardToServer(
-          CardsModel cards, String cardnumber, String userId) =>
-      getUserCardsCollection(userId).doc(cardnumber).set(cards.toJson());
+  Future<void> addCardToServer({
+    required String cardNumber,
+    required String userId,
+    required String nameOfCard,
+    required String periodCard,
+  }) =>
+      getUserCardsCollection(userId).doc(cardNumber).set(CardsModel(
+            cardName: nameOfCard,
+            cardNumber: cardNumber,
+            cardPeriod: periodCard,
+            cardStatus: 'Expires',
+            sum: '100000.0',
+            typeCard: 'Visa',
+            gradientColor: {
+              'first_color':
+                  '0xff${NewPayConstants.selectedCardsGradient[0].substring(4, 10)}',
+              'second_color':
+                  '0xff${NewPayConstants.selectedCardsGradient[1].substring(4, 10)}',
+            },
+            expenses: '0.0',
+            income: '0.0',
+            transfers: [],
+            userName: NewPayConstants.user.displayName!,
+          ).toJson());
 
-  /// It takes two strings as arguments, one is the sum of money to be sent, the other is the card
-  /// number of the recipient
+  Future<bool> checkCardsLimit({
+    required String userId,
+  }) async {
+    await getUserCardsCollection(userId).get().then((value) {
+      if (value.docs.length > 5) return false;
+    });
+    return true;
+  }
 
-  Future<void> sendMoney({
+  sendMoneyToService({
+    required String sum,
+    required String senderId,
+    required String senderCard,
+    required String senderName,
+    required String time,
+    required bool toCard,
+  }) async {
+    var balance = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(senderId)
+        .collection('cards')
+        .doc(senderCard)
+        .get()
+        .then(
+          (value) => value.get('sum'),
+        );
+
+    var balanceCard = double.parse(balance);
+    balanceCard -= double.parse(sum);
+
+    var expenses = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(senderId)
+        .collection('cards')
+        .doc(senderCard)
+        .get()
+        .then(
+          (value) => value.get('expenses'),
+        );
+
+    var expensesCard = double.parse(expenses);
+    expensesCard += double.parse(sum);
+
+    List transfers = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(senderId)
+        .collection('cards')
+        .doc(senderCard)
+        .get()
+        .then(
+          (value) => value.get('transfers'),
+        );
+
+    transfers.add(
+      Transfers(
+        name: senderName,
+        desc: toCard ? 'to Friend' : 'to Services',
+        sum: sum,
+        time: time,
+      ).toJson(),
+    );
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(senderId)
+        .collection('cards')
+        .doc(senderCard)
+        .get()
+        .then(
+          (value) => value.reference.update(
+            {
+              'sum': balanceCard.toString(),
+              'expenses': expensesCard.toString(),
+              'transfers': transfers,
+            },
+          ),
+        );
+  }
+
+  Future<void> sendMoneyToCard({
     required String sum,
     required String reciverCard,
     required String senderId,
@@ -90,7 +190,7 @@ class CardsService {
           );
 
       var expensesCard = double.parse(expenses);
-      expensesCard -= double.parse(sum);
+      expensesCard += double.parse(sum);
 
       List transfers = await FirebaseFirestore.instance
           .collection('users')

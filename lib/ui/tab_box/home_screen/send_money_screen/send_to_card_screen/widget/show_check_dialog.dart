@@ -53,7 +53,7 @@ Future<dynamic> showCheckDialog(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.check_circle,
                       color: NewPayColors.C_4EFF8A,
                     ),

@@ -12,6 +12,7 @@ class CustomFields extends StatelessWidget {
   final TextInputType inputType;
   final String? suffixIcon;
   final String? prefixIcon;
+
   const CustomFields({
     Key? key,
     required this.onChanged,
@@ -43,8 +44,7 @@ class CustomFields extends StatelessWidget {
                     prefixIcon!,
                     height: 48.0.h,
                     width: 48.0.w,
-                  ),
-                )
+                  ))
               : const SizedBox(),
           SizedBox(
             width: 5.0.w,

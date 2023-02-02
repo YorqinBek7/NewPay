@@ -27,6 +27,8 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   image_picker: ^0.8.6+1
   top_snackbar_flutter: ^3.0.0+1
+  flutter_screenutil: ^5.6.1
+  lottie: ^2.2.0
 
   #FIREBASE
   firebase_auth: ^4.2.5
@@ -43,7 +45,8 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   connectivity_plus: ^3.0.2
   device_preview: ^1.1.0
-  flutter_screenutil: ^5.6.1
+  card_swiper: ^2.0.4
+  
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +59,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/lotties/
 
 fonts:
   - family: Manrope

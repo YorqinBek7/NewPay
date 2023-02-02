@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
@@ -38,10 +39,10 @@ class QrCodeScreen extends StatelessWidget {
             SizedBox(
               height: 20.0.h,
             ),
-            Image.asset(
-              NewPayIcons.scanner,
-              width: 250.0.w,
-              height: 250.0.h,
+            LottieBuilder.asset(
+              NewPayIcons.qrCodeScanner,
+              height: 316.0.h,
+              width: 316.0.w,
             )
           ],
         ),

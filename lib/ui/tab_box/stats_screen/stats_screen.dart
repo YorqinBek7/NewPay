@@ -77,6 +77,7 @@ class StatsScreen extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(10.0.h),
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0.r),
               color: NewPayColors.white,
@@ -112,32 +113,43 @@ class StatsScreen extends StatelessWidget {
                               SizedBox(
                                 width: 10.0.w,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    state.transfers[index].name,
-                                    style: NewPayStyles.w500,
-                                  ),
-                                  Text(
-                                    state.transfers[index].desc,
-                                    style: NewPayStyles.w400,
-                                  ),
-                                ],
+                              Expanded(
+                                flex: 4,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      state.transfers[index].name,
+                                      style: NewPayStyles.w500,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      state.transfers[index].desc,
+                                      style: NewPayStyles.w400,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
                               const Spacer(),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    state.transfers[index].sum,
-                                    style: NewPayStyles.w500,
-                                  ),
-                                  Text(
-                                    state.transfers[index].time,
-                                    style: NewPayStyles.w400,
-                                  ),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      state.transfers[index].sum,
+                                      style: NewPayStyles.w500,
+                                      maxLines: 1,
+                                    ),
+                                    Text(
+                                      state.transfers[index].time,
+                                      style: NewPayStyles.w400,
+                                      maxLines: 1,
+                                    ),
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -178,11 +190,15 @@ class StatsScreen extends StatelessWidget {
             style: NewPayStyles.w400
                 .copyWith(fontSize: 12.0.sp, color: NewPayColors.C_828282),
           ),
-          Text(
-            '$sum uzs',
-            style:
-                NewPayStyles.w700.copyWith(color: sumColor, fontSize: 15.0.sp),
-            textAlign: TextAlign.center,
+          Expanded(
+            child: Text(
+              '$sum uzs',
+              style: NewPayStyles.w700
+                  .copyWith(color: sumColor, fontSize: 15.0.sp),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.fade,
+              maxLines: 1,
+            ),
           )
         ],
       ),

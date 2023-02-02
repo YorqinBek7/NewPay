@@ -41,4 +41,9 @@ class NewPayIcons {
   static const String cards = 'assets/svg/cards.svg';
   static const String personalCard = 'assets/svg/personalcard.svg';
   static const String notification = 'assets/svg/notification.svg';
+  static const String uzFlag = 'assets/svg/UZ.svg';
+
+  // LOTTIES
+  static const String qrCodeScanner = 'assets/lotties/qr_code_scanner.json';
+  static const String nfc = 'assets/lotties/nfc.json';
 }

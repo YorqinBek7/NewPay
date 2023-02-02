@@ -77,11 +77,13 @@ class HomeScreen extends StatelessWidget {
         child: BlocBuilder<CardsBloc, CardsState>(
           builder: (context, state) {
             if (state is CardsSuccessState) {
-              NewPayConstants.miniCard = MiniCard(
-                number: state.cards[0].cardNumber,
-                sum: state.cards[0].sum,
-                image: NewPayIcons.humo,
-              );
+              if (state.cards.isNotEmpty) {
+                NewPayConstants.miniCard = MiniCard(
+                  number: state.cards[0].cardNumber,
+                  sum: state.cards[0].sum,
+                  image: NewPayIcons.humo,
+                );
+              }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -121,13 +123,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                       _optionButtons(
                         icon: NewPayIcons.pay,
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(
+                            context, NewPayConstants.payScreen),
                         text: 'Pay',
                       ),
                       _optionButtons(
                         icon: NewPayIcons.more,
-                        onTap: () {},
-                        text: 'More',
+                        onTap: () => Navigator.pushNamed(
+                            context, NewPayConstants.paymentScreen),
+                        text: 'Payment',
                       ),
                     ],
                   ),

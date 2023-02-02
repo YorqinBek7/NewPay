@@ -198,31 +198,27 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     return;
                   }
                   await service
-                      .addCardToServer(
-                        CardsModel(
-                          cardName: nameOfCardController.text,
-                          cardNumber: cardNumberController.text,
-                          cardPeriod: periodController.text,
-                          cardStatus: 'Expires',
-                          sum: '0.0',
-                          typeCard: 'Visa',
-                          gradientColor: {
-                            'first_color':
-                                '0xff${NewPayConstants.selectedCardsGradient[0].substring(4, 10)}',
-                            'second_color':
-                                '0xff${NewPayConstants.selectedCardsGradient[1].substring(4, 10)}',
-                          },
-                          expenses: '0.0',
-                          income: '0.0',
-                          transfers: [],
-                          userName: NewPayConstants.user.displayName!,
-                        ),
-                        cardNumberController.text,
-                        NewPayConstants.user.uid,
-                      )
-                      .then(
-                        (value) => Navigator.pop(context),
+                      .checkCardsLimit(userId: NewPayConstants.user.uid)
+                      .then((value) async {
+                    if (value) {
+                      await service
+                          .addCardToServer(
+                            cardNumber: cardNumberController.text,
+                            nameOfCard: nameOfCardController.text,
+                            periodCard: periodController.text,
+                            userId: NewPayConstants.user.uid,
+                          )
+                          .then(
+                            (value) => Navigator.pop(context),
+                          );
+                    } else {
+                      Helper.showTopErrorSnackbar(
+                        context: context,
+                        error: 'You can add only five cards',
                       );
+                      return;
+                    }
+                  });
                 }),
             SizedBox(
               height: 5.0.h,

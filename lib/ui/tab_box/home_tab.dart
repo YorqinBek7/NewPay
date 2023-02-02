@@ -7,6 +7,7 @@ import 'package:new_pay/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/cards_screen.dart';
 import 'package:new_pay/ui/tab_box/home_screen/home_screen.dart';
+import 'package:new_pay/ui/tab_box/payment_screen/payment_screen.dart';
 import 'package:new_pay/ui/tab_box/stats_screen/stats_screen.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
@@ -53,15 +54,14 @@ class _HomeTabState extends State<HomeTab> {
                   HomeScreen(),
                   CardsScreen(),
                   StatsScreen(),
+                  PaymentScreen()
                 ],
               ),
               bottomNavigationBar: AnimatedBottomNavigationBar.builder(
                 activeIndex: state,
                 gapLocation: GapLocation.center,
-                onTap: (index) {
-                  BlocProvider.of<BottomNavBloc>(context)
-                      .add(BottomNavManagerEvent(index: index));
-                },
+                onTap: (index) => BlocProvider.of<BottomNavBloc>(context)
+                    .add(BottomNavManagerEvent(index: index)),
                 itemCount: NewPayConstants.bottomNavModels.length,
                 tabBuilder: (int index, bool isActive) {
                   return Column(
@@ -113,7 +113,7 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Future _callback(int state) async {
-    if (state == 1) {
+    if (state == 1 || NewPayConstants.miniCard == null) {
       return Navigator.pushNamed(context, NewPayConstants.addCardScreen);
     }
     return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);

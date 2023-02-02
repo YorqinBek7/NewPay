@@ -1,17 +1,14 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:new_pay/blocs/select_cards_to_send/select_cards_to_send_bloc.dart';
 import 'package:new_pay/data/service.dart';
-import 'package:new_pay/models/mini_card_with_pic.dart';
 import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_to_card_screen/widget/show_cards_dialog.dart';
 import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_to_card_screen/widget/show_check_dialog.dart';
 import 'package:new_pay/utils/colors.dart';
@@ -98,62 +95,53 @@ class _SendToCardViewState extends State<SendToCardView> {
                               builder: (context, state) {
                                 return BlocBuilder<CardsBloc, CardsState>(
                                   builder: (context, state) {
-                                    return Row(
-                                      children: [
-                                        Image.asset(
-                                          NewPayConstants.miniCard!.image,
-                                          width: 48.0.w,
-                                          height: 48.0.h,
-                                        ),
-                                        SizedBox(
-                                          width: 10.0.w,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              NewPayConstants.miniCard!.number,
-                                              style: NewPayStyles.w400,
-                                            ),
-                                            Text(
-                                              Helper.currenyFormat(
-                                                  NewPayConstants
-                                                      .miniCard!.sum),
-                                              style: NewPayStyles.w500
-                                                  .copyWith(fontSize: 16.0.sp),
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                    return GestureDetector(
+                                      onTap: () async => BlocProvider.value(
+                                        value: SelectCardsBloc(),
+                                        child: await showCardsDialog(context),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            NewPayConstants.miniCard!.image,
+                                            width: 48.0.w,
+                                            height: 48.0.h,
+                                          ),
+                                          SizedBox(
+                                            width: 10.0.w,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                NewPayConstants
+                                                    .miniCard!.number,
+                                                style: NewPayStyles.w400,
+                                              ),
+                                              Text(
+                                                Helper.currenyFormat(
+                                                    NewPayConstants
+                                                        .miniCard!.sum),
+                                                style: NewPayStyles.w500
+                                                    .copyWith(
+                                                        fontSize: 16.0.sp),
+                                              )
+                                            ],
+                                          ),
+                                          const Expanded(child: Text(' ')),
+                                          const Icon(
+                                            Icons.arrow_downward_outlined,
+                                            color: NewPayColors.C_C1C1C1,
+                                          ),
+                                        ],
+                                      ),
                                     );
                                   },
                                 );
                               },
                             ),
                           ],
-                        ),
-                      ),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () async => BlocProvider.value(
-                            value: SelectCardsBloc(),
-                            child: await showCardsDialog(context),
-                          ),
-                          child: Container(
-                            height: 30.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10.0.r),
-                                bottomRight: Radius.circular(10.0.r),
-                              ),
-                              color: NewPayColors.white,
-                            ),
-                            child: const Icon(
-                              Icons.arrow_downward_outlined,
-                              color: NewPayColors.C_C1C1C1,
-                            ),
-                          ),
                         ),
                       ),
                       SizedBox(
@@ -250,7 +238,7 @@ class _SendToCardViewState extends State<SendToCardView> {
                       await service.checkCard(cardController.text.trim());
                   if (hasCard) {
                     if (isTapped) {
-                      await service.sendMoney(
+                      await service.sendMoneyToCard(
                         sum: amountController.text,
                         reciverCard: cardController.text,
                         senderId: NewPayConstants.user.uid,
