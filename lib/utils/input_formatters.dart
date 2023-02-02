@@ -78,3 +78,14 @@ class NameCardInputFormatter extends TextInputFormatter {
         selection: TextSelection.collapsed(offset: string.length));
   }
 }
+
+class EnterAmountFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    var text = newValue.text;
+    if (RegExp(r'^[- ,.]').hasMatch(text)) return oldValue;
+
+    return newValue;
+  }
+}

@@ -8,6 +8,11 @@ class NewPayIcons {
   static const String profilePhoto = 'assets/images/profile_photo.png';
   static const String scanner = 'assets/images/scanner.png';
   static const String noInternet = 'assets/images/no_internet.png';
+  static const String humo = 'assets/images/humo.png';
+  static const String unknownCard = 'assets/images/unknown_card.png';
+  static const String visa = 'assets/images/visa.png';
+  static const String uzcard = 'assets/images/uz_card.png';
+  static const String masterCard = 'assets/images/master_card.png';
 
   // SVG ICONS
   static const String language = 'assets/svg/language.svg';

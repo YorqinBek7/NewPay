@@ -127,7 +127,7 @@ class ProfileScreen extends StatelessWidget {
                   Navigator.pushNamed(context, NewPayConstants.appSettings),
               title: 'Application settings',
             ),
-            Divider(),
+            const Divider(),
             Container(
               margin: EdgeInsets.only(left: 16.0.w),
               child: Text(

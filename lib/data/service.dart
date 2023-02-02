@@ -33,7 +33,7 @@ class CardsService {
 
   Future<void> sendMoney({
     required String sum,
-    required String card,
+    required String reciverCard,
     required String senderId,
     required String senderCard,
     required String senderName,
@@ -42,32 +42,29 @@ class CardsService {
   }) async {
     String receiverName = '';
     try {
-      var allCards = FirebaseFirestore.instance.collectionGroup('cards').get();
-      await allCards.then(
-        (value) => value.docs.forEach(
-          (element) async {
-            if (element.get('card_number') == card) {
-              double initialSum = double.parse(element.get('sum'));
-              double initialIncome = double.parse(element.get('incomes'));
-              receiverName = element.get('user_name');
-              List<dynamic> transfers = element.get('transfers');
-              transfers.add(
-                Transfers(
-                  name: '$senderName & $receiverName',
-                  desc: toCard ? 'to Friend' : 'to Services',
-                  sum: sum,
-                  time: time,
-                ).toJson(),
-              );
-              await element.reference.update({
-                'sum': (initialSum + double.parse(sum)).toString(),
-                'incomes': (initialIncome + double.parse(sum)).toString(),
-                'transfers': transfers
-              });
-            }
-          },
-        ),
-      );
+      var allCards =
+          await FirebaseFirestore.instance.collectionGroup('cards').get();
+      allCards.docs.forEach((element) async {
+        if (element.get('card_number') == reciverCard) {
+          double initialSum = double.parse(element.get('sum'));
+          double initialIncome = double.parse(element.get('incomes'));
+          receiverName = element.get('user_name');
+          List<dynamic> transfers = element.get('transfers');
+          transfers.add(
+            Transfers(
+              name: '$senderName & $receiverName',
+              desc: toCard ? 'to Friend' : 'to Services',
+              sum: sum,
+              time: time,
+            ).toJson(),
+          );
+          await element.reference.update({
+            'sum': (initialSum + double.parse(sum)).toString(),
+            'incomes': (initialIncome + double.parse(sum)).toString(),
+            'transfers': transfers
+          });
+        }
+      });
 
       var balance = await FirebaseFirestore.instance
           .collection('users')
@@ -137,49 +134,81 @@ class CardsService {
   /// It gets all the sums from the cards collection and returns the sum of all the sums
 
   Future<double> getAllSumFromCards(String userId) async {
-    double initialSum = 0;
-    var allSums = await getUserCardsCollection(userId)
-        .get()
-        .then((value) => value.docs.map((e) => e.get('sum')));
-    for (var element in allSums) {
-      initialSum += double.parse(element);
+    try {
+      double initialSum = 0;
+      var allSums = await getUserCardsCollection(userId)
+          .get()
+          .then((value) => value.docs.map((e) => e.get('sum')));
+      for (var element in allSums) {
+        initialSum += double.parse(element);
+      }
+      return initialSum;
+    } catch (e) {
+      throw Exception(e);
     }
-    return initialSum;
   }
 
   Future<double> getExpenses(String userId) async {
-    double incomes = 0.0;
+    try {
+      double incomes = 0.0;
 
-    var incomesSum = await getUserCardsCollection(userId)
-        .get()
-        .then((value) => value.docs.map((e) => e.get('expenses')));
+      var incomesSum = await getUserCardsCollection(userId)
+          .get()
+          .then((value) => value.docs.map((e) => e.get('expenses')));
 
-    for (var element in incomesSum) {
-      incomes += double.parse(element);
+      for (var element in incomesSum) {
+        incomes += double.parse(element);
+      }
+      return incomes;
+    } catch (e) {
+      throw Exception(e);
     }
-    return incomes;
   }
 
   Future<double> getIncomes(String userId) async {
-    double expenses = 0.0;
+    try {
+      double expenses = 0.0;
 
-    var expensesSum = await getUserCardsCollection(userId)
-        .get()
-        .then((value) => value.docs.map((e) => e.get('incomes')));
+      var expensesSum = await getUserCardsCollection(userId)
+          .get()
+          .then((value) => value.docs.map((e) => e.get('incomes')));
 
-    for (var element in expensesSum) {
-      expenses += double.parse(element);
+      for (var element in expensesSum) {
+        expenses += double.parse(element);
+      }
+      return expenses;
+    } catch (e) {
+      throw Exception(e);
     }
-    return expenses;
   }
 
   Future getTransfers(String userId) async {
-    var userTransfers = await getUserCardsCollection(userId)
-        .get()
-        .then((value) => value.docs.map((e) => e.get('transfers')));
+    try {
+      var userTransfers = await getUserCardsCollection(userId)
+          .get()
+          .then((value) => value.docs.map((e) => e.get('transfers')));
+      return userTransfers
+          .map((json) => (json as List).map((e) => Transfers.fromJson(e)))
+          .toList();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
-    return userTransfers
-        .map((json) => (json as List).map((e) => Transfers.fromJson(e)))
-        .toList();
+  /// will check card is available or not
+  Future<bool> checkCard(String cardNumber) async {
+    try {
+      var allCards =
+          await FirebaseFirestore.instance.collectionGroup('cards').get();
+      bool checker = false;
+      allCards.docs.forEach((element) {
+        if (element.get('card_number') == cardNumber) {
+          checker = true;
+        }
+      });
+      return checker;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

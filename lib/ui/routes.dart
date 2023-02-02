@@ -47,7 +47,7 @@ class NewPayRoutes {
       case NewPayConstants.noInternetScreen:
         return navigateToScreen(screen: const NoInternetScreen());
       case NewPayConstants.sendToCardScreen:
-        return navigateToScreen(screen: const SendToCardScreen());
+        return navigateToScreen(screen: SendToCardScreen());
       case NewPayConstants.sendToPhoneScreen:
         return navigateToScreen(screen: const SendToPhoneScreen());
       default:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/data/service.dart';
@@ -16,42 +17,31 @@ class SendMoneyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Transfers'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 15.0.h,
-            ),
-            _optionTransfer(
-                name: 'Send to Card',
-                icon: NewPayIcons.cards,
-                onTap: () => Navigator.pushNamed(
-                    context, NewPayConstants.sendToCardScreen)),
-            _optionTransfer(
-                name: 'Send to phone number',
-                icon: NewPayIcons.personalCard,
-                onTap: () => Navigator.pushNamed(
-                    context, NewPayConstants.sendToPhoneScreen)),
-            // GestureDetector(
-            //   onTap: () async => {
-            //     await service.sendMoney(
-            //       sum: '5000',
-            //       card: '6588 9900 8855 5223',
-            //       senderId: NewPayConstants.user.uid,
-            //       senderCard: '8600 1568 0749 6523',
-            //       time: DateFormat.Hms().format(DateTime.now()),
-            //       senderName: NewPayConstants.user.displayName!,
-            //       toCard: true,
-            //     ),
-            //     BlocProvider.of<MonitoringBloc>(context).add(
-            //         MonitoringManagerEvent(userId: NewPayConstants.user.uid)),
-            //   },
-            //   child: Text('Change moeny'),
-            // )
-          ],
+        backgroundColor: NewPayColors.white,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarColor: NewPayColors.white,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: NewPayColors.white,
         ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 15.0.h,
+          ),
+          _optionTransfer(
+              name: 'Send to Card',
+              icon: NewPayIcons.cards,
+              onTap: () => Navigator.pushNamed(
+                  context, NewPayConstants.sendToCardScreen)),
+          _optionTransfer(
+              name: 'Send to phone number',
+              icon: NewPayIcons.personalCard,
+              onTap: () => Navigator.pushNamed(
+                  context, NewPayConstants.sendToPhoneScreen)),
+        ],
       ),
     );
   }

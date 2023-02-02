@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
+import 'package:new_pay/models/mini_card_with_pic.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
@@ -76,6 +77,11 @@ class HomeScreen extends StatelessWidget {
         child: BlocBuilder<CardsBloc, CardsState>(
           builder: (context, state) {
             if (state is CardsSuccessState) {
+              NewPayConstants.miniCard = MiniCard(
+                number: state.cards[0].cardNumber,
+                sum: state.cards[0].sum,
+                image: NewPayIcons.humo,
+              );
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

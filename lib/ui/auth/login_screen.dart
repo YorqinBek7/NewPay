@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 GlobalButton(
                   buttonText: 'Log in',
                   backgroundColor: NewPayColors.black,
