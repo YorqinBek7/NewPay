@@ -26,7 +26,10 @@ class StatsScreen extends StatelessWidget {
           ),
           Text(
             'Monitoring',
-            style: NewPayStyles.w600.copyWith(fontSize: 18.0.sp),
+            style: Theme.of(context)
+                .textTheme
+                .headline3!
+                .copyWith(fontSize: 18.0.sp),
           ),
           SizedBox(
             height: 10.0.h,

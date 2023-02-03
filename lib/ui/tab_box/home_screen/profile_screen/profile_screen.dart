@@ -107,22 +107,26 @@ class ProfileScreen extends StatelessWidget {
               height: 40.0.h,
             ),
             optionItems(
+              context: context,
               icon: NewPayIcons.verify,
               onTap: () {},
               title: 'Update NM Information',
             ),
             optionItems(
+              context: context,
               icon: NewPayIcons.shield,
               onTap: () {},
               title: 'Verify NewPay pay',
             ),
             const Divider(),
             optionItems(
+              context: context,
               icon: NewPayIcons.bank,
               onTap: () {},
               title: 'Connection with bank',
             ),
             optionItems(
+              context: context,
               icon: NewPayIcons.appSettings,
               onTap: () =>
                   Navigator.pushNamed(context, NewPayConstants.appSettings),
@@ -137,11 +141,13 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             optionItems(
+              context: context,
               icon: NewPayIcons.lockCircle,
               title: 'Change PIN',
               onTap: () {},
             ),
             optionItems(
+              context: context,
               icon: NewPayIcons.fingerScan,
               title: 'Touch ID',
               trailingIcon: Switch(
@@ -151,6 +157,7 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {},
             ),
             optionItems(
+              context: context,
               icon: NewPayIcons.headphone,
               title: 'Help & support',
               onTap: () {},

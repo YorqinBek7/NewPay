@@ -22,4 +22,7 @@ class NewPayColors {
   static const Color C_F1F2F6 = Color(0xffF1F2F6);
   static const Color C_00F0FF = Color(0xff00F0FF);
   static const Color C_203354 = Color(0xff203354);
+
+  // Dark theme colors
+  static const Color darkScaffoldColor = Color(0xff050012);
 }

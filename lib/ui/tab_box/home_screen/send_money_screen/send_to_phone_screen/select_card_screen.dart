@@ -72,12 +72,14 @@ class SelectCardScreenView extends StatelessWidget {
                             children: [
                               Text(
                                 NewPayConstants.miniCard!.number,
-                                style: NewPayStyles.w400,
+                                style: Theme.of(context).textTheme.headline5!,
                               ),
                               Text(
                                 Helper.currenyFormat(
                                     NewPayConstants.miniCard!.sum),
-                                style: NewPayStyles.w500
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4!
                                     .copyWith(fontSize: 16.0.sp),
                               )
                             ],

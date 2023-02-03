@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/utils/colors.dart';
-import 'package:new_pay/utils/styles.dart';
 
 ListTile optionItems({
   required String icon,
   required String title,
   required VoidCallback onTap,
+  required BuildContext context,
   Widget? trailingIcon,
 }) {
   return ListTile(
@@ -21,13 +21,14 @@ ListTile optionItems({
         child: SvgPicture.asset(icon)),
     title: Text(
       title,
-      style: NewPayStyles.w600.copyWith(fontSize: 14.0),
+      style: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 14.0.sp),
     ),
     trailing: GestureDetector(
       onTap: onTap,
       child: trailingIcon ??
-          const Icon(
+          Icon(
             Icons.keyboard_arrow_right_outlined,
+            color: Theme.of(context).cardColor,
           ),
     ),
   );

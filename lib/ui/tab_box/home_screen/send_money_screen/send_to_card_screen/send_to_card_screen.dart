@@ -53,12 +53,12 @@ class _SendToCardViewState extends State<SendToCardView> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Transfers'),
-          backgroundColor: NewPayColors.white,
-          systemOverlayStyle: const SystemUiOverlayStyle(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.light,
-            statusBarColor: NewPayColors.white,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: NewPayColors.white,
+            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,
           ),
         ),
         body: Padding(

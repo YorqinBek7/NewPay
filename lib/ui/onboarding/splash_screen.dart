@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
 
@@ -39,8 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
           child: LottieBuilder.asset(
         NewPayIcons.splash,
-        width: 150.0.w,
-        height: 150.0.h,
+        width: 350.0.w,
+        height: 350.0.h,
       )),
     );
   }

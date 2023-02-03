@@ -88,18 +88,29 @@ class NewPay extends StatelessWidget {
     return ThemeData(
       primarySwatch: Colors.purple,
       useMaterial3: true,
-      scaffoldBackgroundColor: NewPayColors.C_203354,
+      scaffoldBackgroundColor: NewPayColors.darkScaffoldColor,
       fontFamily: 'Manrope',
+      iconTheme: const IconThemeData(color: NewPayColors.white),
+      cardColor: NewPayColors.white,
+      textTheme: TextTheme(
+        headline1: NewPayStyles.w800.copyWith(color: NewPayColors.white),
+        headline2: NewPayStyles.w700.copyWith(color: NewPayColors.white),
+        headline3: NewPayStyles.w600.copyWith(color: NewPayColors.white),
+        headline4: NewPayStyles.w500.copyWith(color: NewPayColors.white),
+        headline5: NewPayStyles.w400.copyWith(color: NewPayColors.white),
+      ),
       appBarTheme: AppBarTheme(
         scrolledUnderElevation: 0.0,
-        backgroundColor: NewPayColors.C_203354,
+        iconTheme: const IconThemeData(color: NewPayColors.white),
+        backgroundColor: NewPayColors.darkScaffoldColor,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
-          statusBarColor: NewPayColors.C_203354,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: NewPayColors.C_203354,
+          statusBarColor: NewPayColors.darkScaffoldColor,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: NewPayColors.white,
         ),
-        titleTextStyle: NewPayStyles.w600.copyWith(fontSize: 18.0.sp),
+        titleTextStyle: NewPayStyles.w600
+            .copyWith(fontSize: 18.0.sp, color: NewPayColors.white),
         elevation: 0.0,
         toolbarHeight: 60.0.h,
         centerTitle: true,
@@ -107,6 +118,7 @@ class NewPay extends StatelessWidget {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: NewPayColors.C_7000FF,
         unselectedItemColor: NewPayColors.C_828282,
+        backgroundColor: NewPayColors.darkScaffoldColor,
       ),
     );
   }
@@ -117,6 +129,15 @@ class NewPay extends StatelessWidget {
       useMaterial3: true,
       scaffoldBackgroundColor: NewPayColors.C_F1F2F6,
       fontFamily: 'Manrope',
+      cardColor: NewPayColors.C_C1C1C1,
+      iconTheme: const IconThemeData(color: NewPayColors.C_C1C1C1),
+      textTheme: TextTheme(
+        headline1: NewPayStyles.w800,
+        headline2: NewPayStyles.w700,
+        headline3: NewPayStyles.w600,
+        headline4: NewPayStyles.w500,
+        headline5: NewPayStyles.w400,
+      ),
       appBarTheme: AppBarTheme(
         scrolledUnderElevation: 0.0,
         backgroundColor: NewPayColors.C_F1F2F6,

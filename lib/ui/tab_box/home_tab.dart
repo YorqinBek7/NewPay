@@ -58,6 +58,8 @@ class _HomeTabState extends State<HomeTab> {
                 ],
               ),
               bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+                backgroundColor:
+                    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
                 activeIndex: state,
                 gapLocation: GapLocation.center,
                 onTap: (index) => BlocProvider.of<BottomNavBloc>(context)

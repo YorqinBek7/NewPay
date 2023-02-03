@@ -26,7 +26,10 @@ class SendToPhoneScreen extends StatelessWidget {
           children: [
             Text(
               'Write your phone number',
-              style: NewPayStyles.w500.copyWith(fontSize: 11.0.sp),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(fontSize: 11.0.sp),
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 10.0.h),
@@ -55,7 +58,10 @@ class SendToPhoneScreen extends StatelessWidget {
                         hintText: '** *** ** **',
                         prefixIcon: Text(
                           '+998 ',
-                          style: NewPayStyles.w600.copyWith(fontSize: 16.0.sp),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(fontSize: 16.0.sp),
                         ),
                         prefixIconConstraints: const BoxConstraints(
                           minHeight: 0.0,

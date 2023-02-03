@@ -59,19 +59,24 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hi, ${FirebaseAuth.instance.currentUser!.displayName ?? ''}',
-                  style: NewPayStyles.w500.copyWith(fontSize: 14.0.sp),
-                ),
+                    'Hi, ${FirebaseAuth.instance.currentUser!.displayName ?? ''}',
+                    style: Theme.of(context).textTheme.headline4!),
                 Text(
                   "Let's save your money",
-                  style: NewPayStyles.w700.copyWith(fontSize: 14.0.sp),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2!
+                      .copyWith(fontSize: 14.0.sp),
                 ),
               ],
             ),
           ],
         ),
         actions: [
-          SvgPicture.asset(NewPayIcons.notification),
+          SvgPicture.asset(
+            NewPayIcons.notification,
+            color: Theme.of(context).cardColor,
+          ),
           SizedBox(
             width: 13.0.w,
           )
@@ -93,19 +98,16 @@ class HomeScreen extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Your balance',
-                    style: NewPayStyles.w500
-                        .copyWith(color: NewPayColors.C_828282),
-                  ),
+                  Text('Your balance',
+                      style: Theme.of(context).textTheme.headline4!),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
                       Helper.currenyFormat(state.allSum),
-                      style: NewPayStyles.w700.copyWith(
-                        fontSize: 32.0.sp,
-                        color: NewPayColors.C_171D33,
-                      ),
+                      style: Theme.of(context).textTheme.headline4!.copyWith(
+                            fontSize: 32.0.sp,
+                            color: NewPayColors.C_EEEEEE,
+                          ),
                       maxLines: 1,
                     ),
                   ),

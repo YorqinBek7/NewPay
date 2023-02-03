@@ -17,6 +17,7 @@ class AppSettingsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(children: [
           optionItems(
+            context: context,
             icon: NewPayIcons.language,
             title: 'Change Language',
             onTap: () {},
@@ -87,13 +88,16 @@ class AppSettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
+            context: context,
           ),
           optionItems(
+            context: context,
             icon: NewPayIcons.session,
             title: 'Sessions',
             onTap: () {},
           ),
           optionItems(
+            context: context,
             icon: NewPayIcons.public,
             title: 'Public offer',
             onTap: () {},
@@ -102,6 +106,7 @@ class AppSettingsScreen extends StatelessWidget {
             icon: NewPayIcons.aboutApp,
             title: 'About app',
             onTap: () {},
+            context: context,
           )
         ]),
       ),

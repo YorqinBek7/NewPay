@@ -7,9 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/utils/colors.dart';
-import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class PayScreen extends StatefulWidget {
   const PayScreen({super.key});
@@ -48,12 +46,15 @@ class _PayScreenState extends State<PayScreen> {
             ),
             Text(
               'Session finished in 30 seconds',
-              style: NewPayStyles.w500,
+              style: Theme.of(context).textTheme.headline4!,
             ),
             SizedBox(
               height: 20.0.h,
             ),
-            Text(timer > 10 ? '0:$timer' : '0:0$timer'),
+            Text(
+              timer > 10 ? '0:$timer' : '0:0$timer',
+              style: Theme.of(context).textTheme.headline4!,
+            ),
             SizedBox(
               height: 40.0.h,
             ),
@@ -71,15 +72,17 @@ class _PayScreenState extends State<PayScreen> {
                         tileColor: NewPayColors.C_203354,
                         title: Text(
                           state.cards[index].cardName,
-                          style: NewPayStyles.w500.copyWith(
-                            color: NewPayColors.white,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.headline4!.copyWith(
+                                    color: NewPayColors.white,
+                                  ),
                         ),
                         subtitle: Text(
                           state.cards[index].cardNumber,
-                          style: NewPayStyles.w400.copyWith(
-                            color: NewPayColors.white,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.headline5!.copyWith(
+                                    color: NewPayColors.white,
+                                  ),
                         ),
                       ),
                       viewportFraction: 0.8,

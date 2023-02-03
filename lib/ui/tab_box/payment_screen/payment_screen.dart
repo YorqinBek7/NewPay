@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
@@ -34,7 +33,10 @@ class PaymentScreen extends StatelessWidget {
               ),
               title: Text(
                 NewPayConstants.payments[index].title,
-                style: NewPayStyles.w400.copyWith(fontSize: 14.0.sp),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(fontSize: 14.0.sp),
               ),
             ),
           ),
