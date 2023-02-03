@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -241,15 +242,16 @@ class _SendToCardViewState extends State<SendToCardView> {
                       await service.sendMoneyToCard(
                         sum: amountController.text,
                         reciverCard: cardController.text,
-                        senderId: NewPayConstants.user.uid,
+                        senderId: FirebaseAuth.instance.currentUser!.uid,
                         senderCard: NewPayConstants.miniCard!.number,
                         time: DateFormat.Hms().format(DateTime.now()),
-                        senderName: NewPayConstants.user.displayName!,
+                        senderName:
+                            FirebaseAuth.instance.currentUser!.displayName!,
                         toCard: true,
                       );
                       BlocProvider.of<MonitoringBloc>(context).add(
                           MonitoringManagerEvent(
-                              userId: NewPayConstants.user.uid));
+                              userId: FirebaseAuth.instance.currentUser!.uid));
 
                       await _delayShowDialog(context);
                     }

@@ -97,9 +97,9 @@ class EnterPhoneNumberFormatter extends TextInputFormatter {
     String newV = newValue.text;
     String oldV = oldValue.text;
     StringBuffer buffer = StringBuffer();
-    if (newV.length > 9) return oldValue;
+    if (newV.length > 12) return oldValue;
     if (oldV.length < newV.length) {
-      if (newV.length == 3 || newV.length == 6) {
+      if (newV.length == 2 || newV.length == 6 || newV.length == 9) {
         for (int i = 0; i < newV.length; i++) {
           buffer.write(newV[i]);
         }

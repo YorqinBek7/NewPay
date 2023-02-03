@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:new_pay/utils/colors.dart';
@@ -90,73 +91,82 @@ class StatsScreen extends StatelessWidget {
                 } else if (state is MonitoringLoadingState) {
                   return const CircularProgressIndicator();
                 } else if (state is MonitoringSuccesState) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Transfers',
-                        style: NewPayStyles.w400.copyWith(
-                            fontSize: 12.0.sp, color: NewPayColors.C_828282),
-                      ),
-                      // All transactions
-                      ...List.generate(
-                        state.transfers.length,
-                        (index) => Padding(
-                          padding: EdgeInsets.all(5.0.r),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                NewPayIcons.paymentService,
-                                width: 48.0.w,
-                                height: 48.h,
-                              ),
-                              SizedBox(
-                                width: 10.0.w,
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                  return state.transfers.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Transfers',
+                              style: NewPayStyles.w400.copyWith(
+                                  fontSize: 12.0.sp,
+                                  color: NewPayColors.C_828282),
+                            ),
+                            // All transactions
+                            ...List.generate(
+                              state.transfers.length,
+                              (index) => Padding(
+                                padding: EdgeInsets.all(5.0.r),
+                                child: Row(
                                   children: [
-                                    Text(
-                                      state.transfers[index].name,
-                                      style: NewPayStyles.w500,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                    Image.asset(
+                                      NewPayIcons.paymentService,
+                                      width: 48.0.w,
+                                      height: 48.h,
                                     ),
-                                    Text(
-                                      state.transfers[index].desc,
-                                      style: NewPayStyles.w400,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                    SizedBox(
+                                      width: 10.0.w,
                                     ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            state.transfers[index].name,
+                                            style: NewPayStyles.w500,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                            state.transfers[index].desc,
+                                            style: NewPayStyles.w400,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            state.transfers[index].sum,
+                                            style: NewPayStyles.w500,
+                                            maxLines: 1,
+                                          ),
+                                          Text(
+                                            state.transfers[index].time,
+                                            style: NewPayStyles.w400,
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
-                              const Spacer(),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      state.transfers[index].sum,
-                                      style: NewPayStyles.w500,
-                                      maxLines: 1,
-                                    ),
-                                    Text(
-                                      state.transfers[index].time,
-                                      style: NewPayStyles.w400,
-                                      maxLines: 1,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
+                            ),
+                          ],
+                        )
+                      : LottieBuilder.asset(
+                          NewPayIcons.noTransaction,
+                          width: 250.0.w,
+                          height: 250.0.h,
+                        );
                 } else {
                   return const SizedBox();
                 }

@@ -1,5 +1,6 @@
 import 'package:authentication/auth/login/login_bloc.dart';
 import 'package:authentication/auth/sign_up/sign_up_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,15 +32,16 @@ void main() async {
       create: (context) => LoginBloc(),
     ),
     BlocProvider(
-      create: (context) =>
-          CardsBloc()..add(CardsGetEvent(userId: NewPayConstants.user.uid)),
+      create: (context) => CardsBloc()
+        ..add(CardsGetEvent(userId: FirebaseAuth.instance.currentUser!.uid)),
     ),
     BlocProvider(
       create: (context) => ThemeBloc(),
     ),
     BlocProvider(
       create: (context) => MonitoringBloc()
-        ..add(MonitoringManagerEvent(userId: NewPayConstants.user.uid)),
+        ..add(MonitoringManagerEvent(
+            userId: FirebaseAuth.instance.currentUser!.uid)),
     ),
     BlocProvider<UpdateImageBloc>(
       create: (context) => UpdateImageBloc(),

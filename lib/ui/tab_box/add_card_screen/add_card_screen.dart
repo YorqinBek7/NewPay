@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -198,7 +199,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     return;
                   }
                   await service
-                      .checkCardsLimit(userId: NewPayConstants.user.uid)
+                      .checkCardsLimit(
+                          userId: FirebaseAuth.instance.currentUser!.uid)
                       .then((value) async {
                     if (value) {
                       await service
@@ -206,7 +208,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             cardNumber: cardNumberController.text,
                             nameOfCard: nameOfCardController.text,
                             periodCard: periodController.text,
-                            userId: NewPayConstants.user.uid,
+                            userId: FirebaseAuth.instance.currentUser!.uid,
                           )
                           .then(
                             (value) => Navigator.pop(context),

@@ -52,7 +52,7 @@ class SendToPhoneScreen extends StatelessWidget {
                       controller: phoneController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        hintText: '*** ** **',
+                        hintText: '** *** ** **',
                         prefixIcon: Text(
                           '+998 ',
                           style: NewPayStyles.w600.copyWith(fontSize: 16.0.sp),

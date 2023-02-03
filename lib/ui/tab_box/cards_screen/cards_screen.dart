@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/charts.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
+import 'package:new_pay/ui/tab_box/home_screen/widget/no_cards_widget.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/styles.dart';
@@ -127,24 +128,28 @@ class CardsScreen extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 10.0.h,
+          ),
           BlocBuilder<CardsBloc, CardsState>(builder: (context, state) {
             if (state is CardsSuccessState) {
-              return Expanded(
-                child: CardStackWidget.builder(
-                  swipeOrientation: CardOrientation.down,
-                  count: state.cards.length,
-                  builder: (index) => plasticCards(
-                    context,
-                    cardName: state.cards[index].cardName,
-                    cardNumber: state.cards[index].cardNumber,
-                    cardPeriod: state.cards[index].cardPeriod,
-                    cardStatus: state.cards[index].cardStatus,
-                    cardType: state.cards[index].typeCard,
-                    cardsGradient: state.cards[index].gradientColor,
-                    sum: state.cards[index].sum,
-                  ),
-                ),
-              );
+              return state.cards.isNotEmpty
+                  ? Expanded(
+                      child: CardStackWidget.builder(
+                      swipeOrientation: CardOrientation.down,
+                      count: state.cards.length,
+                      builder: (index) => plasticCards(
+                        context,
+                        cardName: state.cards[index].cardName,
+                        cardNumber: state.cards[index].cardNumber,
+                        cardPeriod: state.cards[index].cardPeriod,
+                        cardStatus: state.cards[index].cardStatus,
+                        cardType: state.cards[index].typeCard,
+                        cardsGradient: state.cards[index].gradientColor,
+                        sum: state.cards[index].sum,
+                      ),
+                    ))
+                  : noCardsView(context);
             } else if (state is CardsErrorState) {
               return Center(
                 child: Text(state.error),

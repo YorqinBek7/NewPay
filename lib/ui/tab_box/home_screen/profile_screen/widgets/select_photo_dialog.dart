@@ -7,7 +7,7 @@ import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
+Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
       context: _,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -36,6 +36,8 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                       setting: Permission.camera)) {
                     BlocProvider.of<UpdateImageBloc>(_)
                         .add(UpdateImageManagerEvent(true));
+                    Helper.showCustomSuccessSnackbar(
+                        context, 'Please wait, profile photo is updating.');
                   } else {
                     Helper.showTopErrorSnackbar(
                         context: context,
@@ -56,6 +58,8 @@ selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                       setting: Permission.camera)) {
                     BlocProvider.of<UpdateImageBloc>(_)
                         .add(UpdateImageManagerEvent(false));
+                    Helper.showCustomSuccessSnackbar(
+                        context, 'Please wait, profile photo is updating.');
                   } else {
                     Helper.showTopErrorSnackbar(
                         context: context,

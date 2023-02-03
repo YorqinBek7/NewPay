@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -104,17 +105,23 @@ class SelectCardScreenView extends StatelessWidget {
               formatter: EnterAmountFormatter(),
             ),
             GlobalButton(
-              buttonText: 'Send',
-              backgroundColor: NewPayColors.black,
-              onTap: () => service.sendMoneyToService(
-                sum: amountController.text,
-                senderId: NewPayConstants.user.uid,
-                senderCard: NewPayConstants.miniCard!.number,
-                senderName: NewPayConstants.user.displayName!,
-                time: DateFormat.yMMMEd().format(DateTime.now()),
-                toCard: false,
-              ),
-            )
+                buttonText: 'Send',
+                backgroundColor: NewPayColors.black,
+                onTap: () {
+                  if (amountController.text.isEmpty) {
+                    Helper.showCustomErrorSnackbar(
+                        context, 'Please enter amount');
+                    return;
+                  }
+                  service.sendMoneyToService(
+                    sum: amountController.text,
+                    senderId: FirebaseAuth.instance.currentUser!.uid,
+                    senderCard: NewPayConstants.miniCard!.number,
+                    senderName: FirebaseAuth.instance.currentUser!.displayName!,
+                    time: DateFormat.yMMMEd().format(DateTime.now()),
+                    toCard: false,
+                  );
+                })
           ],
         ),
       ),

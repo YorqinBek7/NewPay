@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
@@ -21,9 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void _init() async => await Future.delayed(
         const Duration(seconds: 2),
         () {
-          if (NewPayStorage.instance.getBool('isLogged') == true) {
+          if (FirebaseAuth.instance.currentUser != null) {
             Navigator.pushReplacementNamed(context, NewPayConstants.homeTab);
-          } else {
+          } else if (FirebaseAuth.instance.currentUser == null) {
             Navigator.pushReplacementNamed(
                 context, NewPayConstants.onboardingScreen);
           }
@@ -35,12 +37,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Image.asset(
-          NewPayIcons.logo,
-          width: 150.0.w,
-          height: 150.0.h,
-        ),
-      ),
+          child: LottieBuilder.asset(
+        NewPayIcons.splash,
+        width: 150.0.w,
+        height: 150.0.h,
+      )),
     );
   }
 }

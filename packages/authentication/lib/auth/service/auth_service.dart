@@ -21,10 +21,6 @@ class AuthService {
 
   /// `logIn` is an asynchronous function that takes in an email and password, and then signs the user in
   /// with Firebase
-  ///
-  /// Args:
-  ///   email (String): The email address of the user.
-  ///   password (String): The user's password.
   Future<void> logIn({
     required String email,
     required String password,

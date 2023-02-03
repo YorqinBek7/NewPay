@@ -42,8 +42,16 @@ class NewPayIcons {
   static const String personalCard = 'assets/svg/personalcard.svg';
   static const String notification = 'assets/svg/notification.svg';
   static const String uzFlag = 'assets/svg/UZ.svg';
+  static const String game = 'assets/svg/game.svg';
+  static const String phone = 'assets/svg/phone.svg';
+  static const String internet = 'assets/svg/internet.svg';
+  static const String tv = 'assets/svg/TV.svg';
+  static const String restaurant = 'assets/svg/restaurant.svg';
+  static const String shop = 'assets/svg/shop.svg';
 
   // LOTTIES
   static const String qrCodeScanner = 'assets/lotties/qr_code_scanner.json';
+  static const String splash = 'assets/lotties/splash.json';
   static const String nfc = 'assets/lotties/nfc.json';
+  static const String noTransaction = 'assets/lotties/no_transaction.json';
 }

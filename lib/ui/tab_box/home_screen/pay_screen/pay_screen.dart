@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/utils/colors.dart';
+import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/styles.dart';
 

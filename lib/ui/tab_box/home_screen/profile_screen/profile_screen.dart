@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
+import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/option_items.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/select_photo_dialog.dart';
 import 'package:new_pay/utils/colors.dart';
@@ -43,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                   builder: (context, state) {
                     return Stack(
                       children: [
-                        NewPayConstants.user.photoURL == null
+                        FirebaseAuth.instance.currentUser!.photoURL == null
                             ? Image.asset(
                                 NewPayIcons.profilePhoto,
                                 width: 80.0.w,
@@ -98,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                'YorqinBek Yuldashev',
+                FirebaseAuth.instance.currentUser!.displayName!,
                 style: NewPayStyles.w600.copyWith(fontSize: 24.0.sp),
               ),
             ),
@@ -157,21 +158,29 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(
               height: 5.0.h,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 15.0.h),
-              margin: EdgeInsets.symmetric(horizontal: 15.0.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0.r),
-                border: Border.all(
-                  color: NewPayColors.white,
-                  width: 2.0.w,
+            GestureDetector(
+              onTap: () async {
+                NewPayStorage.instance.setBool('isLogged', false);
+                await FirebaseAuth.instance.signOut().then((value) =>
+                    Navigator.pushNamedAndRemoveUntil(context,
+                        NewPayConstants.loginScreen, (route) => false));
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15.0.h),
+                margin: EdgeInsets.symmetric(horizontal: 15.0.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0.r),
+                  border: Border.all(
+                    color: NewPayColors.white,
+                    width: 2.0.w,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Text(
-                  'Log Out',
-                  style: NewPayStyles.w600.copyWith(
-                      fontSize: 16.0.sp, color: NewPayColors.C_F90000),
+                child: Center(
+                  child: Text(
+                    'Log Out',
+                    style: NewPayStyles.w600.copyWith(
+                        fontSize: 16.0.sp, color: NewPayColors.C_F90000),
+                  ),
                 ),
               ),
             )

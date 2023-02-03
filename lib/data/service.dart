@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_pay/models/cards_model.dart';
 import 'package:new_pay/models/transfers.dart';
 import 'package:new_pay/utils/constants.dart';
@@ -49,7 +50,7 @@ class CardsService {
             expenses: '0.0',
             income: '0.0',
             transfers: [],
-            userName: NewPayConstants.user.displayName!,
+            userName: FirebaseAuth.instance.currentUser!.displayName!,
           ).toJson());
 
   Future<bool> checkCardsLimit({

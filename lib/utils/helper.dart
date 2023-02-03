@@ -12,6 +12,9 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class Helper {
+  static final Helper instance = Helper._();
+  factory Helper() => instance;
+  Helper._();
   ImagePicker imagePicker = ImagePicker();
 
   final _storage = FirebaseStorage.instance.ref('profile_storage/');

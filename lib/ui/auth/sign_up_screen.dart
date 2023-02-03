@@ -38,8 +38,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Helper.showWaitDialog(context);
             } else if (state is SignUpSuccessState) {
               NewPayStorage.instance.setBool('isLogged', true);
-              Navigator.pushReplacementNamed(
-                  context, NewPayConstants.verifiedScreen);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, NewPayConstants.verifiedScreen, (route) => false);
             } else if (state is SignUpErrorState) {
               Navigator.pop(context);
               Helper.showCustomErrorSnackbar(context, state.error);

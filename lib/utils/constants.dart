@@ -3,12 +3,10 @@ import 'package:new_pay/models/bottom_nav_models.dart';
 import 'package:new_pay/models/cards_gradient.dart';
 import 'package:new_pay/models/mini_card_with_pic.dart';
 import 'package:new_pay/models/onboarding_model.dart';
+import 'package:new_pay/models/payments.dart';
 import 'package:new_pay/utils/icons.dart';
 
 class NewPayConstants {
-  //CONSTANTS
-  static User user = FirebaseAuth.instance.currentUser!;
-
   // SCREENS
   static const String splashScreen = '/';
   static const String homeTab = '/home_tab';
@@ -84,6 +82,33 @@ class NewPayConstants {
   static final List<String> selectedCardsGradient = [
     NewPayConstants.cardsGradient[0].firstColor,
     NewPayConstants.cardsGradient[1].secondColor,
+  ];
+
+  static final List<Payments> payments = [
+    Payments(
+      icon: NewPayIcons.phone,
+      title: 'Phone',
+    ),
+    Payments(
+      icon: NewPayIcons.internet,
+      title: 'Internet Providers',
+    ),
+    Payments(
+      icon: NewPayIcons.game,
+      title: 'Game Services',
+    ),
+    Payments(
+      icon: NewPayIcons.shop,
+      title: 'Shop and Store ',
+    ),
+    Payments(
+      icon: NewPayIcons.tv,
+      title: 'TV Services',
+    ),
+    Payments(
+      icon: NewPayIcons.restaurant,
+      title: 'Restaurants',
+    ),
   ];
 
   static MiniCard? miniCard;

@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_stack_widget/card_stack_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:new_pay/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:new_pay/models/mini_card_with_pic.dart';
 import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
+import 'package:new_pay/ui/tab_box/home_screen/widget/no_cards_widget.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
@@ -27,15 +30,18 @@ class HomeScreen extends StatelessWidget {
                   Navigator.pushNamed(context, NewPayConstants.profileScreen),
               child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
                 builder: (context, state) {
-                  return NewPayConstants.user.photoURL == null
+                  return FirebaseAuth.instance.currentUser!.photoURL == null
                       ? Image.asset(
                           NewPayIcons.profilePhoto,
+                          width: 33.05.w,
+                          height: 33.05.h,
                           fit: BoxFit.cover,
                         )
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(30.0.r),
                           child: CachedNetworkImage(
-                            imageUrl: NewPayConstants.user.photoURL!,
+                            imageUrl:
+                                FirebaseAuth.instance.currentUser!.photoURL!,
                             width: 33.05.w,
                             height: 33.05.h,
                             fit: BoxFit.cover,
@@ -53,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hi, ${NewPayConstants.user.displayName ?? ''}',
+                  'Hi, ${FirebaseAuth.instance.currentUser!.displayName ?? ''}',
                   style: NewPayStyles.w500.copyWith(fontSize: 14.0.sp),
                 ),
                 Text(
@@ -111,26 +117,54 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       _optionButtons(
                         icon: NewPayIcons.send,
-                        onTap: () => Navigator.pushNamed(
-                            context, NewPayConstants.sendMoneyScreen),
+                        onTap: () {
+                          if (state.cards.isEmpty) {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.addCardScreen);
+                          } else {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.sendMoneyScreen);
+                          }
+                        },
                         text: 'Send',
                       ),
                       _optionButtons(
                         icon: NewPayIcons.scan,
-                        onTap: () => Navigator.pushNamed(
-                            context, NewPayConstants.scannerScreen),
+                        onTap: () {
+                          if (state.cards.isEmpty) {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.addCardScreen);
+                          } else {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.scannerScreen);
+                          }
+                        },
                         text: 'QR Code',
                       ),
                       _optionButtons(
                         icon: NewPayIcons.pay,
-                        onTap: () => Navigator.pushNamed(
-                            context, NewPayConstants.payScreen),
+                        onTap: () {
+                          if (state.cards.isEmpty) {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.addCardScreen);
+                          } else {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.payScreen);
+                          }
+                        },
                         text: 'Pay',
                       ),
                       _optionButtons(
                         icon: NewPayIcons.more,
-                        onTap: () => Navigator.pushNamed(
-                            context, NewPayConstants.paymentScreen),
+                        onTap: () {
+                          if (state.cards.isEmpty) {
+                            Navigator.pushNamed(
+                                context, NewPayConstants.addCardScreen);
+                          } else {
+                            BlocProvider.of<BottomNavBloc>(context)
+                                .add(BottomNavManagerEvent(index: 3));
+                          }
+                        },
                         text: 'Payment',
                       ),
                     ],
@@ -155,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         )
-                      : _noCardsView(context),
+                      : noCardsView(context),
                 ],
               );
             } else if (state is CardsErrorState) {
@@ -168,50 +202,6 @@ class HomeScreen extends StatelessWidget {
               );
             }
           },
-        ),
-      ),
-    );
-  }
-
-  GestureDetector _noCardsView(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, NewPayConstants.addCardScreen),
-      child: Container(
-        height: 188.0,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0.r),
-          color: NewPayColors.white,
-          boxShadow: [
-            BoxShadow(
-                color: NewPayColors.C_828282.withOpacity(.15),
-                blurRadius: 10.0.r)
-          ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                  NewPayColors.C_7000FF,
-                )),
-                onPressed: () =>
-                    Navigator.pushNamed(context, NewPayConstants.addCardScreen),
-                icon: const Icon(
-                  Icons.add,
-                  color: NewPayColors.white,
-                ),
-              ),
-              Text(
-                'Add bank card',
-                style: NewPayStyles.w400.copyWith(
-                  fontSize: 12.0.sp,
-                ),
-              )
-            ],
-          ),
         ),
       ),
     );
