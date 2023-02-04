@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class AuthFields extends StatelessWidget {
   AuthFields({
@@ -39,7 +38,9 @@ class AuthFields extends StatelessWidget {
           obscureText: obscure,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: NewPayStyles.w400
+            hintStyle: Theme.of(context)
+                .textTheme
+                .headline5!
                 .copyWith(color: NewPayColors.C_828282, fontSize: 16.0.sp),
             border: InputBorder.none,
             enabledBorder: InputBorder.none,

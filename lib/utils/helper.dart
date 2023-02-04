@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:new_pay/utils/colors.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -23,7 +22,10 @@ class Helper {
         SnackBar(
           content: Text(
             error,
-            style: NewPayStyles.w500.copyWith(color: NewPayColors.white),
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .copyWith(color: NewPayColors.white),
           ),
           duration: const Duration(seconds: 2),
           backgroundColor: NewPayColors.C_ff3333,
@@ -69,7 +71,10 @@ class Helper {
         SnackBar(
           content: Text(
             message,
-            style: NewPayStyles.w500.copyWith(color: NewPayColors.white),
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .copyWith(color: NewPayColors.white),
           ),
           duration: const Duration(seconds: 2),
           backgroundColor: NewPayColors.C_4BB543,
@@ -117,7 +122,10 @@ class Helper {
               ),
               child: Text(
                 'No',
-                style: NewPayStyles.w500.copyWith(color: NewPayColors.black),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: NewPayColors.black),
               ),
             ),
           ),
@@ -135,7 +143,10 @@ class Helper {
               ),
               child: Text(
                 'Yes',
-                style: NewPayStyles.w500.copyWith(color: NewPayColors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: NewPayColors.white),
               ),
             ),
           ),

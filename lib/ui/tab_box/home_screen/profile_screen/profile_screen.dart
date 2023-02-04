@@ -10,7 +10,6 @@ import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/select_pho
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class UpdateImage extends StatelessWidget {
   const UpdateImage({super.key});
@@ -100,7 +99,10 @@ class ProfileScreen extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 FirebaseAuth.instance.currentUser!.displayName!,
-                style: NewPayStyles.w600.copyWith(fontSize: 24.0.sp),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3!
+                    .copyWith(fontSize: 24.0.sp),
               ),
             ),
             SizedBox(
@@ -137,7 +139,10 @@ class ProfileScreen extends StatelessWidget {
               margin: EdgeInsets.only(left: 16.0.w),
               child: Text(
                 'SECURITY',
-                style: NewPayStyles.w500.copyWith(color: NewPayColors.C_828282),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: NewPayColors.C_828282),
               ),
             ),
             optionItems(
@@ -185,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Log Out',
-                    style: NewPayStyles.w600.copyWith(
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
                         fontSize: 16.0.sp, color: NewPayColors.C_F90000),
                   ),
                 ),

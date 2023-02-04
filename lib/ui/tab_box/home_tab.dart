@@ -13,7 +13,6 @@ import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class BottomNavBlocProvider extends StatelessWidget {
   const BottomNavBlocProvider({super.key});
@@ -79,12 +78,12 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                       Text(
                         NewPayConstants.bottomNavModels[index].label,
-                        style: NewPayStyles.w400.copyWith(
-                          color: isActive
-                              ? NewPayColors.C_7000FF
-                              : NewPayColors.C_828282,
-                          fontSize: 12.0.sp,
-                        ),
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                              color: isActive
+                                  ? NewPayColors.C_7000FF
+                                  : NewPayColors.C_828282,
+                              fontSize: 12.0.sp,
+                            ),
                       ),
                     ],
                   );
@@ -110,14 +109,21 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   String _iconChanger(int state) {
-    if (state == 1) return NewPayIcons.add;
+    if (state == 1) {
+      return NewPayIcons.add;
+    } else if (state == 2) {
+      return NewPayIcons.refresh;
+    }
     return NewPayIcons.sendWhite;
   }
 
   Future _callback(int state) async {
     if (state == 1 || NewPayConstants.miniCard == null) {
       return Navigator.pushNamed(context, NewPayConstants.addCardScreen);
+    } else if (state == 2) {
+      setState(() {});
+    } else {
+      return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);
     }
-    return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class NoInternetScreen extends StatefulWidget {
   const NoInternetScreen({super.key});
@@ -46,7 +45,10 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
                 ),
                 Text(
                   'No connect Internet',
-                  style: NewPayStyles.w800.copyWith(fontSize: 24.0.sp),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(fontSize: 24.0.sp),
                   textAlign: TextAlign.center,
                 ),
               ],

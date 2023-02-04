@@ -7,7 +7,6 @@ import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/input_formatters.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/custom_fields.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
@@ -70,15 +69,21 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             children: [
                               Text(
                                 nameOfCardController.text,
-                                style: NewPayStyles.w700.copyWith(
-                                    fontSize: 12.0.sp,
-                                    color: NewPayColors.white),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2!
+                                    .copyWith(
+                                        fontSize: 12.0.sp,
+                                        color: NewPayColors.white),
                               ),
                               Text(
                                 'VISA',
-                                style: NewPayStyles.w800.copyWith(
-                                    fontSize: 18.0.sp,
-                                    color: NewPayColors.white),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .copyWith(
+                                        fontSize: 18.0.sp,
+                                        color: NewPayColors.white),
                               )
                             ],
                           ),
@@ -87,14 +92,22 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             cardNumberController.text.isEmpty
                                 ? '#### #### #### ####'
                                 : cardNumberController.text,
-                            style: NewPayStyles.w500.copyWith(
-                                fontSize: 24.0.sp, color: NewPayColors.white),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4!
+                                .copyWith(
+                                    fontSize: 24.0.sp,
+                                    color: NewPayColors.white),
                           ),
                           const Spacer(),
                           Text(
                             'Expires',
-                            style: NewPayStyles.w400.copyWith(
-                                fontSize: 12.0.sp, color: NewPayColors.white),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(
+                                    fontSize: 12.0.sp,
+                                    color: NewPayColors.white),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,9 +116,12 @@ class _AddCardScreenState extends State<AddCardScreen> {
                                 periodController.text.isEmpty
                                     ? '##/##'
                                     : periodController.text,
-                                style: NewPayStyles.w700.copyWith(
-                                    fontSize: 12.0.sp,
-                                    color: NewPayColors.white),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2!
+                                    .copyWith(
+                                        fontSize: 12.0.sp,
+                                        color: NewPayColors.white),
                               ),
                             ],
                           ),

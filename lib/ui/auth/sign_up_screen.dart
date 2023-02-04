@@ -9,7 +9,6 @@ import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -56,7 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Text(
                           'Name',
-                          style: NewPayStyles.w500
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
@@ -76,7 +77,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Text(
                           'Email',
-                          style: NewPayStyles.w500
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
@@ -96,7 +99,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Text(
                           'Password',
-                          style: NewPayStyles.w500
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
@@ -118,10 +123,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Text(
                           'At least 8 characters with uppercase letters and numbers',
-                          style: NewPayStyles.w400.copyWith(
-                            fontSize: 14.0.sp,
-                            color: NewPayColors.C_787A8D,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.headline5!.copyWith(
+                                    fontSize: 14.0.sp,
+                                    color: NewPayColors.C_787A8D,
+                                  ),
                         ),
                         SizedBox(
                           height: 16.0.h,
@@ -137,10 +143,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         Icons.check_box_outline_blank)),
                             Text(
                               'Accept Terms of Use & Privacy Policy',
-                              style: NewPayStyles.w400.copyWith(
-                                fontSize: 14.0.sp,
-                                color: NewPayColors.C_787A8D,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                    fontSize: 14.0.sp,
+                                    color: NewPayColors.C_787A8D,
+                                  ),
                             )
                           ],
                         ),
@@ -181,7 +190,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: RichText(
                   text: TextSpan(
                     text: 'Already have an account?',
-                    style: NewPayStyles.w400.copyWith(fontSize: 16.0.sp),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontSize: 16.0.sp),
                     children: [
                       TextSpan(
                         text: ' Log in!',
@@ -190,7 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 context,
                                 NewPayConstants.loginScreen,
                               ),
-                        style: NewPayStyles.w500.copyWith(
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
                             color: NewPayColors.C_0057FF, fontSize: 16.0.sp),
                       )
                     ],

@@ -60,7 +60,7 @@ class CardsService {
     return true;
   }
 
-  sendMoneyToService({
+  Future sendMoneyToService({
     required String sum,
     required String senderId,
     required String senderCard,

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/helper.dart';
-import 'package:new_pay/utils/styles.dart';
 
 CardModel plasticCards(
   BuildContext context, {
@@ -35,12 +34,16 @@ CardModel plasticCards(
             children: [
               Text(
                 cardName,
-                style: NewPayStyles.w700
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
                     .copyWith(fontSize: 12.0.sp, color: NewPayColors.white),
               ),
               Text(
                 cardType,
-                style: NewPayStyles.w800
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1!
                     .copyWith(fontSize: 18.0.sp, color: NewPayColors.white),
               )
             ],
@@ -48,13 +51,17 @@ CardModel plasticCards(
           const Spacer(),
           Text(
             Helper.currenyFormat(sum),
-            style: NewPayStyles.w500
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
                 .copyWith(fontSize: 24.0.sp, color: NewPayColors.white),
           ),
           const Spacer(),
           Text(
             cardStatus,
-            style: NewPayStyles.w400
+            style: Theme.of(context)
+                .textTheme
+                .headline5!
                 .copyWith(fontSize: 12.0.sp, color: NewPayColors.white),
           ),
           Row(
@@ -62,14 +69,16 @@ CardModel plasticCards(
             children: [
               Text(
                 cardPeriod,
-                style: NewPayStyles.w700
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
                     .copyWith(fontSize: 12.0.sp, color: NewPayColors.white),
               ),
               Text(
                 "**** ${cardNumber.substring(14)}",
-                style: NewPayStyles.w400.copyWith(
-                  color: NewPayColors.white,
-                ),
+                style: Theme.of(context).textTheme.headline5!.copyWith(
+                      color: NewPayColors.white,
+                    ),
               )
             ],
           ),

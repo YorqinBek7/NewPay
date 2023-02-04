@@ -6,7 +6,6 @@ import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/input_formatters.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
 class SendToPhoneScreen extends StatelessWidget {
@@ -18,6 +17,10 @@ class SendToPhoneScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Phone '),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0.h),
@@ -50,7 +53,8 @@ class SendToPhoneScreen extends StatelessWidget {
                   ),
                   Flexible(
                     child: TextField(
-                      style: NewPayStyles.w600.copyWith(fontSize: 16.0.sp),
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                          fontSize: 16.0.sp, color: NewPayColors.black),
                       inputFormatters: [EnterPhoneNumberFormatter()],
                       controller: phoneController,
                       keyboardType: TextInputType.number,
@@ -61,16 +65,18 @@ class SendToPhoneScreen extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
-                              .copyWith(fontSize: 16.0.sp),
+                              .copyWith(
+                                  fontSize: 16.0.sp, color: NewPayColors.black),
                         ),
                         prefixIconConstraints: const BoxConstraints(
                           minHeight: 0.0,
                           maxHeight: 20.0,
                         ),
-                        labelStyle: NewPayStyles.w500.copyWith(
-                          color: NewPayColors.C_C1C1C1,
-                          fontSize: 14.0.sp,
-                        ),
+                        labelStyle:
+                            Theme.of(context).textTheme.headline4!.copyWith(
+                                  color: NewPayColors.C_C1C1C1,
+                                  fontSize: 14.0.sp,
+                                ),
                         border: InputBorder.none,
                       ),
                     ),

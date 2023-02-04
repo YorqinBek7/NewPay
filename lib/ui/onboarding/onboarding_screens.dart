@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_pay/utils/styles.dart';
 
-Widget onBoardingScreen(String image, String text) => Padding(
+Widget onBoardingScreen(String image, String text, BuildContext context) =>
+    Padding(
       padding: EdgeInsets.symmetric(horizontal: 26.0.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -17,7 +17,7 @@ Widget onBoardingScreen(String image, String text) => Padding(
           ),
           Text(
             text,
-            style: NewPayStyles.w400,
+            style: Theme.of(context).textTheme.headline5!,
           ),
         ],
       ),

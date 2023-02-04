@@ -4,7 +4,6 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:new_pay/ui/auth/widgets/auth_fields.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -25,13 +24,18 @@ class ForgotPasswordScreen extends StatelessWidget {
               children: [
                 Text(
                   'Reset your password',
-                  style: NewPayStyles.w600.copyWith(fontSize: 20.0.sp),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3!
+                      .copyWith(fontSize: 20.0.sp),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   'Please enter the your email address. Reset message will send to your email address.',
-                  style:
-                      NewPayStyles.w500.copyWith(color: NewPayColors.C_828282),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline4!
+                      .copyWith(color: NewPayColors.C_828282),
                   textAlign: TextAlign.left,
                 ),
                 SizedBox(

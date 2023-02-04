@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,6 @@ import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
 import 'package:new_pay/utils/input_formatters.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/custom_fields.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
@@ -45,7 +43,7 @@ class _SendToCardViewState extends State<SendToCardView> {
   final TextEditingController amountController = TextEditingController();
   String cardType = 'Unknown';
   CardsService service = CardsService();
-  bool isTapped = true;
+  bool isTapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +51,10 @@ class _SendToCardViewState extends State<SendToCardView> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Transfers'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
+            onPressed: () => Navigator.pop(context),
+          ),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.light,
@@ -87,7 +89,7 @@ class _SendToCardViewState extends State<SendToCardView> {
                           children: [
                             Text(
                               'Sender',
-                              style: NewPayStyles.w400,
+                              style: Theme.of(context).textTheme.headline5!,
                             ),
                             SizedBox(
                               height: 7.0.h,
@@ -118,15 +120,24 @@ class _SendToCardViewState extends State<SendToCardView> {
                                               Text(
                                                 NewPayConstants
                                                     .miniCard!.number,
-                                                style: NewPayStyles.w400,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline5!
+                                                    .copyWith(
+                                                        color:
+                                                            NewPayColors.black),
                                               ),
                                               Text(
                                                 Helper.currenyFormat(
                                                     NewPayConstants
                                                         .miniCard!.sum),
-                                                style: NewPayStyles.w500
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline4!
                                                     .copyWith(
-                                                        fontSize: 16.0.sp),
+                                                        fontSize: 16.0.sp,
+                                                        color:
+                                                            NewPayColors.black),
                                               )
                                             ],
                                           ),
@@ -161,7 +172,10 @@ class _SendToCardViewState extends State<SendToCardView> {
                           children: [
                             Text(
                               'Receiver',
-                              style: NewPayStyles.w400,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(color: NewPayColors.black),
                             ),
                             SizedBox(
                               height: 7.0.h,
@@ -206,7 +220,7 @@ class _SendToCardViewState extends State<SendToCardView> {
                       ),
                       Text(
                         'Transfer Amount',
-                        style: NewPayStyles.w400,
+                        style: Theme.of(context).textTheme.headline5!,
                       ),
                       CustomFields(
                         onChanged: (v) {},
@@ -238,23 +252,28 @@ class _SendToCardViewState extends State<SendToCardView> {
                   bool hasCard =
                       await service.checkCard(cardController.text.trim());
                   if (hasCard) {
-                    if (isTapped) {
-                      await service.sendMoneyToCard(
-                        sum: amountController.text,
-                        reciverCard: cardController.text,
-                        senderId: FirebaseAuth.instance.currentUser!.uid,
-                        senderCard: NewPayConstants.miniCard!.number,
-                        time: DateFormat.Hms().format(DateTime.now()),
-                        senderName:
-                            FirebaseAuth.instance.currentUser!.displayName!,
-                        toCard: true,
-                      );
+                    if (isTapped) return;
+                    isTapped = true;
+                    await service
+                        .sendMoneyToService(
+                      sum: amountController.text,
+                      senderId: FirebaseAuth.instance.currentUser!.uid,
+                      senderCard: NewPayConstants.miniCard!.number,
+                      senderName:
+                          FirebaseAuth.instance.currentUser!.displayName!,
+                      time: DateFormat.yMMMEd().format(DateTime.now()),
+                      toCard: false,
+                    )
+                        .then((value) async {
                       BlocProvider.of<MonitoringBloc>(context).add(
-                          MonitoringManagerEvent(
-                              userId: FirebaseAuth.instance.currentUser!.uid));
-
-                      await _delayShowDialog(context);
-                    }
+                        MonitoringManagerEvent(
+                          userId: FirebaseAuth.instance.currentUser!.uid,
+                        ),
+                      );
+                      await showCheckDialog(context, cardController.text.trim(),
+                              amountController.text.trim())
+                          .then((value) => isTapped = false);
+                    });
                   } else {
                     Helper.showTopErrorSnackbar(
                         context: context, error: 'The card not found');
@@ -269,18 +288,6 @@ class _SendToCardViewState extends State<SendToCardView> {
         ),
       ),
     );
-  }
-
-  Future<void> _delayShowDialog(BuildContext context) async {
-    isTapped = false;
-    await showCheckDialog(
-        context, cardController.text.trim(), amountController.text.trim());
-    Timer.periodic(const Duration(seconds: 1), (v) {
-      if (v.tick == 3) {
-        isTapped = true;
-        v.cancel();
-      }
-    });
   }
 
   String getCardImage() {

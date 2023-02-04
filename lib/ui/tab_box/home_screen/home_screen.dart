@@ -15,7 +15,6 @@ import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -104,10 +103,10 @@ class HomeScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Text(
                       Helper.currenyFormat(state.allSum),
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
-                            fontSize: 32.0.sp,
-                            color: NewPayColors.C_EEEEEE,
-                          ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(fontSize: 32.0.sp),
                       maxLines: 1,
                     ),
                   ),
@@ -129,6 +128,7 @@ class HomeScreen extends StatelessWidget {
                           }
                         },
                         text: 'Send',
+                        context: context,
                       ),
                       _optionButtons(
                         icon: NewPayIcons.scan,
@@ -142,6 +142,7 @@ class HomeScreen extends StatelessWidget {
                           }
                         },
                         text: 'QR Code',
+                        context: context,
                       ),
                       _optionButtons(
                         icon: NewPayIcons.pay,
@@ -155,6 +156,7 @@ class HomeScreen extends StatelessWidget {
                           }
                         },
                         text: 'Pay',
+                        context: context,
                       ),
                       _optionButtons(
                         icon: NewPayIcons.more,
@@ -168,6 +170,7 @@ class HomeScreen extends StatelessWidget {
                           }
                         },
                         text: 'Payment',
+                        context: context,
                       ),
                     ],
                   ),
@@ -209,11 +212,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  GestureDetector _optionButtons({
-    required VoidCallback onTap,
-    required String icon,
-    required String text,
-  }) {
+  GestureDetector _optionButtons(
+      {required VoidCallback onTap,
+      required String icon,
+      required String text,
+      required BuildContext context}) {
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -241,10 +244,10 @@ class HomeScreen extends StatelessWidget {
           ),
           Text(
             text,
-            style: NewPayStyles.w700.copyWith(
-              fontSize: 14.0.sp,
-              color: NewPayColors.C_7000FF,
-            ),
+            style: Theme.of(context).textTheme.headline2!.copyWith(
+                  fontSize: 14.0.sp,
+                  color: NewPayColors.C_7000FF,
+                ),
           )
         ],
       ),

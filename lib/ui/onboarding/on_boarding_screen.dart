@@ -29,6 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               itemBuilder: (context, index) => onBoardingScreen(
                 NewPayConstants.onBoardingModels[index].image,
                 NewPayConstants.onBoardingModels[index].text,
+                context,
               ),
             ),
           ),

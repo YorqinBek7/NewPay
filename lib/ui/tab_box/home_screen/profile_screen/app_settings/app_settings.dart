@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:new_pay/blocs/theme/theme_bloc.dart';
+import 'package:new_pay/data/storage.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/widgets/option_items.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class AppSettingsScreen extends StatelessWidget {
   const AppSettingsScreen({super.key});
@@ -41,12 +41,15 @@ class AppSettingsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ListTile(
-                          onTap: () => BlocProvider.of<ThemeBloc>(context)
-                              .add(ThemeManagerEvent(themeState: 0)),
+                          onTap: () {
+                            NewPayStorage.instance.setInt('themeState', 0);
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(ThemeManagerEvent(themeState: 0));
+                          },
                           leading: const Icon(Icons.edit_note_sharp),
                           title: Text(
                             'Auto mode',
-                            style: NewPayStyles.w600,
+                            style: Theme.of(context).textTheme.headline3!,
                           ),
                           trailing: Icon(
                             state is ThemeAutoState
@@ -55,13 +58,14 @@ class AppSettingsScreen extends StatelessWidget {
                           ),
                         ),
                         ListTile(
-                          onTap: () => BlocProvider.of<ThemeBloc>(context)
-                              .add(ThemeManagerEvent(themeState: 1)),
+                          onTap: () {
+                            NewPayStorage.instance.setInt('themeState', 1);
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(ThemeManagerEvent(themeState: 1));
+                          },
                           leading: const Icon(Icons.dark_mode),
-                          title: Text(
-                            'Dark',
-                            style: NewPayStyles.w600,
-                          ),
+                          title: Text('Dark',
+                              style: Theme.of(context).textTheme.headline3!),
                           trailing: Icon(
                             state is ThemeDarkState
                                 ? Icons.circle
@@ -69,13 +73,14 @@ class AppSettingsScreen extends StatelessWidget {
                           ),
                         ),
                         ListTile(
-                          onTap: () => BlocProvider.of<ThemeBloc>(context)
-                              .add(ThemeManagerEvent(themeState: 2)),
+                          onTap: () {
+                            NewPayStorage.instance.setInt('themeState', 2);
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(ThemeManagerEvent(themeState: 2));
+                          },
                           leading: const Icon(Icons.light_mode),
-                          title: Text(
-                            'Light mode',
-                            style: NewPayStyles.w600,
-                          ),
+                          title: Text('Light mode',
+                              style: Theme.of(context).textTheme.headline3!),
                           trailing: Icon(
                             state is ThemeLightState
                                 ? Icons.circle

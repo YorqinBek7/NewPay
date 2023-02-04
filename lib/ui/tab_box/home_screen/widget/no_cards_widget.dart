@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
-import 'package:new_pay/utils/styles.dart';
 
 GestureDetector noCardsView(BuildContext context) {
   return GestureDetector(
@@ -36,9 +35,10 @@ GestureDetector noCardsView(BuildContext context) {
             ),
             Text(
               'Add bank card',
-              style: NewPayStyles.w400.copyWith(
-                fontSize: 12.0.sp,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(fontSize: 12.0.sp, color: NewPayColors.black),
             )
           ],
         ),

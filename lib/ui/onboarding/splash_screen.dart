@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,17 +21,16 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  void _init() async => await Future.delayed(
-        const Duration(seconds: 2),
-        () {
-          if (FirebaseAuth.instance.currentUser != null) {
-            Navigator.pushReplacementNamed(context, NewPayConstants.homeTab);
-          } else if (FirebaseAuth.instance.currentUser == null) {
-            Navigator.pushReplacementNamed(
-                context, NewPayConstants.onboardingScreen);
-          }
-        },
-      );
+  void _init() async {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (FirebaseAuth.instance.currentUser != null) {
+        Navigator.pushReplacementNamed(context, NewPayConstants.homeTab);
+      } else if (FirebaseAuth.instance.currentUser == null) {
+        Navigator.pushReplacementNamed(
+            context, NewPayConstants.onboardingScreen);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,6 @@ import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -63,7 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Text(
                           'Email',
-                          style: NewPayStyles.w500
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
@@ -83,7 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Text(
                           'Password',
-                          style: NewPayStyles.w500
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
@@ -133,7 +136,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: RichText(
                     text: TextSpan(
                       text: 'New to Newpay?',
-                      style: NewPayStyles.w400.copyWith(fontSize: 16.0.sp),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(fontSize: 16.0.sp),
                       children: [
                         TextSpan(
                           text: ' Create an account',
@@ -142,8 +148,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context,
                                   NewPayConstants.signUpScreen,
                                 ),
-                          style: NewPayStyles.w500.copyWith(
-                              color: NewPayColors.C_0057FF, fontSize: 16.0.sp),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(
+                                  color: NewPayColors.C_0057FF,
+                                  fontSize: 16.0.sp),
                         )
                       ],
                     ),

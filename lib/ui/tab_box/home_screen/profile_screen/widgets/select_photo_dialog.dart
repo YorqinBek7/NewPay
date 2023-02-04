@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:new_pay/utils/helper.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
@@ -25,7 +24,10 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
               ),
               Text(
                 'Select a photo to profile',
-                style: NewPayStyles.w800.copyWith(fontSize: 17.0.sp),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1!
+                    .copyWith(fontSize: 17.0.sp),
               ),
               SizedBox(
                 height: 10.0.h,

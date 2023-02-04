@@ -36,7 +36,9 @@ void main() async {
         ..add(CardsGetEvent(userId: FirebaseAuth.instance.currentUser!.uid)),
     ),
     BlocProvider(
-      create: (context) => ThemeBloc(),
+      create: (context) => ThemeBloc()
+        ..add(ThemeManagerEvent(
+            themeState: NewPayStorage.instance.getInt('themeState'))),
     ),
     BlocProvider(
       create: (context) => MonitoringBloc()
@@ -100,14 +102,15 @@ class NewPay extends StatelessWidget {
         headline5: NewPayStyles.w400.copyWith(color: NewPayColors.white),
       ),
       appBarTheme: AppBarTheme(
+        color: NewPayColors.darkScaffoldColor,
         scrolledUnderElevation: 0.0,
         iconTheme: const IconThemeData(color: NewPayColors.white),
-        backgroundColor: NewPayColors.darkScaffoldColor,
+        // backgroundColor: NewPayColors.darkScaffoldColor,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           statusBarColor: NewPayColors.darkScaffoldColor,
           statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: NewPayColors.white,
+          systemNavigationBarColor: NewPayColors.darkScaffoldColor,
         ),
         titleTextStyle: NewPayStyles.w600
             .copyWith(fontSize: 18.0.sp, color: NewPayColors.white),
@@ -129,7 +132,7 @@ class NewPay extends StatelessWidget {
       useMaterial3: true,
       scaffoldBackgroundColor: NewPayColors.C_F1F2F6,
       fontFamily: 'Manrope',
-      cardColor: NewPayColors.C_C1C1C1,
+      cardColor: NewPayColors.black,
       iconTheme: const IconThemeData(color: NewPayColors.C_C1C1C1),
       textTheme: TextTheme(
         headline1: NewPayStyles.w800,

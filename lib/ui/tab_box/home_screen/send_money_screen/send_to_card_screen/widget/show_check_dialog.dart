@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 Future<dynamic> showCheckDialog(
   BuildContext context,
@@ -41,14 +40,17 @@ Future<dynamic> showCheckDialog(
                 ),
                 Text(
                   "- $amount so'm",
-                  style: NewPayStyles.w600.copyWith(fontSize: 24.0.sp),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3!
+                      .copyWith(fontSize: 24.0.sp, color: NewPayColors.black),
                 ),
                 Text(
                   DateFormat.yMMMEd().format(DateTime.now()),
-                  style: NewPayStyles.w400.copyWith(
-                    fontSize: 14.0.sp,
-                    color: NewPayColors.C_828282,
-                  ),
+                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                        fontSize: 14.0.sp,
+                        color: NewPayColors.C_828282,
+                      ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +64,7 @@ Future<dynamic> showCheckDialog(
                     ),
                     Text(
                       'Completed successfully',
-                      style: NewPayStyles.w400.copyWith(
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
                           fontSize: 14.0.sp, color: NewPayColors.C_4EFF8A),
                     ),
                   ],
@@ -82,31 +84,37 @@ Future<dynamic> showCheckDialog(
               children: [
                 Text(
                   'Payment details',
-                  style: NewPayStyles.w600,
+                  style: Theme.of(context).textTheme.headline3!,
                 ),
                 _checkInfo(
                   desc: 'New Pay',
                   name: 'Service',
+                  context: context,
                 ),
                 _checkInfo(
                   desc: 'Reciver name',
                   name: 'Yorqin',
+                  context: context,
                 ),
                 _checkInfo(
                   desc: cardNumber,
                   name: 'Card',
+                  context: context,
                 ),
                 _checkInfo(
                   desc: "- $amount so'm",
                   name: 'Sum',
+                  context: context,
                 ),
                 _checkInfo(
                   desc: '0',
                   name: 'Comission',
+                  context: context,
                 ),
                 _checkInfo(
                   desc: DateFormat.yMMMEd().format(DateTime.now()),
                   name: 'Date and Time',
+                  context: context,
                 ),
               ],
             ),
@@ -120,6 +128,7 @@ Future<dynamic> showCheckDialog(
 Container _checkInfo({
   required String name,
   required String desc,
+  required BuildContext context,
 }) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 8.0.h),
@@ -128,12 +137,16 @@ Container _checkInfo({
       children: [
         Text(
           name,
-          style: NewPayStyles.w400
+          style: Theme.of(context)
+              .textTheme
+              .headline5!
               .copyWith(fontSize: 14.0.sp, color: NewPayColors.C_828282),
         ),
         Text(
           desc,
-          style: NewPayStyles.w400
+          style: Theme.of(context)
+              .textTheme
+              .headline5!
               .copyWith(fontSize: 14.0.sp, color: NewPayColors.black),
         ),
       ],

@@ -9,7 +9,6 @@ import 'package:new_pay/ui/tab_box/cards_screen/widgets/plastic_cards.dart';
 import 'package:new_pay/ui/tab_box/home_screen/widget/no_cards_widget.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/helper.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class CardsScreen extends StatelessWidget {
   const CardsScreen({super.key});
@@ -43,18 +42,24 @@ class CardsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Income',
-                                style: NewPayStyles.w500.copyWith(
-                                    color:
-                                        NewPayColors.C_367B72.withOpacity(.5))),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4!
+                                    .copyWith(
+                                        color: NewPayColors.C_367B72
+                                            .withOpacity(.5))),
                             BlocBuilder<CardsBloc, CardsState>(
                               builder: (context, state) {
                                 if (state is CardsSuccessState) {
                                   return Text(
                                     Helper.currenyFormat(state.incomes),
-                                    style: NewPayStyles.w500.copyWith(
-                                      fontSize: 16.0.sp,
-                                      color: NewPayColors.C_00F0FF,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .copyWith(
+                                          fontSize: 16.0.sp,
+                                          color: NewPayColors.C_00F0FF,
+                                        ),
                                   );
                                 } else if (state is CardsLoadingState) {
                                   return const CircularProgressIndicator();
@@ -86,17 +91,23 @@ class CardsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Expenses',
-                                style: NewPayStyles.w500.copyWith(
-                                    color:
-                                        NewPayColors.C_360C4A.withOpacity(.5))),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4!
+                                    .copyWith(
+                                        color: NewPayColors.C_360C4A
+                                            .withOpacity(.5))),
                             BlocBuilder<CardsBloc, CardsState>(
                               builder: (context, state) {
                                 if (state is CardsSuccessState) {
                                   return Text(
                                       Helper.currenyFormat(state.expenses),
-                                      style: NewPayStyles.w500.copyWith(
-                                          fontSize: 16.0.sp,
-                                          color: NewPayColors.C_FF6770));
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4!
+                                          .copyWith(
+                                              fontSize: 16.0.sp,
+                                              color: NewPayColors.C_FF6770));
                                 } else if (state is CardsLoadingState) {
                                   return const CircularProgressIndicator();
                                 } else if (state is CardsErrorState) {
@@ -122,10 +133,10 @@ class CardsScreen extends StatelessWidget {
             margin: EdgeInsets.only(left: 15.0.w),
             child: Text(
               'My Cards',
-              style: NewPayStyles.w400.copyWith(
-                fontSize: 14.0.sp,
-                color: NewPayColors.C_828282,
-              ),
+              style: Theme.of(context).textTheme.headline5!.copyWith(
+                    fontSize: 14.0.sp,
+                    color: NewPayColors.C_828282,
+                  ),
             ),
           ),
           SizedBox(

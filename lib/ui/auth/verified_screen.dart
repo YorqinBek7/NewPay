@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
 class VerifiedScreen extends StatefulWidget {
@@ -66,12 +65,18 @@ class _VerifiedScreenState extends State<VerifiedScreen> {
           ),
           Text(
             'Your account created',
-            style: NewPayStyles.w500.copyWith(fontSize: 24.0.sp),
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .copyWith(fontSize: 24.0.sp),
             textAlign: TextAlign.center,
           ),
           Text(
             'Now you can use all the features. Welcome on board',
-            style: NewPayStyles.w500.copyWith(fontSize: 14.0.sp),
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .copyWith(fontSize: 14.0.sp),
             textAlign: TextAlign.center,
           ),
           const Spacer(),

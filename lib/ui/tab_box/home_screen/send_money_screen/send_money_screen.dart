@@ -6,7 +6,6 @@ import 'package:new_pay/data/service.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/icons.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class SendMoneyScreen extends StatelessWidget {
   SendMoneyScreen({super.key});
@@ -17,6 +16,10 @@ class SendMoneyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Transfers'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
+          onPressed: () => Navigator.pop(context),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
@@ -35,12 +38,14 @@ class SendMoneyScreen extends StatelessWidget {
               name: 'Send to Card',
               icon: NewPayIcons.cards,
               onTap: () => Navigator.pushNamed(
-                  context, NewPayConstants.sendToCardScreen)),
+                  context, NewPayConstants.sendToCardScreen),
+              context: context),
           _optionTransfer(
               name: 'Send to phone number',
               icon: NewPayIcons.personalCard,
               onTap: () => Navigator.pushNamed(
-                  context, NewPayConstants.sendToPhoneScreen)),
+                  context, NewPayConstants.sendToPhoneScreen),
+              context: context),
         ],
       ),
     );
@@ -50,6 +55,7 @@ class SendMoneyScreen extends StatelessWidget {
     required String name,
     required String icon,
     required VoidCallback onTap,
+    required BuildContext context,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -68,7 +74,10 @@ class SendMoneyScreen extends StatelessWidget {
             ),
             Text(
               name,
-              style: NewPayStyles.w600,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline3!
+                  .copyWith(color: NewPayColors.black),
             ),
           ],
         ),

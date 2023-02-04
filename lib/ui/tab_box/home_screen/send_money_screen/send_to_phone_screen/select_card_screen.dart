@@ -4,14 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
+import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:new_pay/blocs/select_cards_to_send/select_cards_to_send_bloc.dart';
 import 'package:new_pay/data/service.dart';
 import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_to_card_screen/widget/show_cards_dialog.dart';
+import 'package:new_pay/ui/tab_box/home_screen/send_money_screen/send_to_card_screen/widget/show_check_dialog.dart';
 import 'package:new_pay/utils/colors.dart';
 import 'package:new_pay/utils/constants.dart';
 import 'package:new_pay/utils/helper.dart';
 import 'package:new_pay/utils/input_formatters.dart';
-import 'package:new_pay/utils/styles.dart';
 import 'package:new_pay/widgets/custom_fields.dart';
 import 'package:new_pay/widgets/global_button.dart';
 
@@ -31,11 +32,18 @@ class SelectCardScreenView extends StatelessWidget {
   SelectCardScreenView({super.key});
   final TextEditingController amountController = TextEditingController();
   final CardsService service = CardsService();
+  bool isTapped = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text('Transfers'),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0.h),
         child: Column(
@@ -43,7 +51,10 @@ class SelectCardScreenView extends StatelessWidget {
           children: [
             Text(
               'Select card',
-              style: NewPayStyles.w500.copyWith(fontSize: 11.0.sp),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(fontSize: 11.0.sp),
             ),
             SizedBox(
               height: 10.0.h,
@@ -109,20 +120,35 @@ class SelectCardScreenView extends StatelessWidget {
             GlobalButton(
                 buttonText: 'Send',
                 backgroundColor: NewPayColors.black,
-                onTap: () {
+                onTap: () async {
                   if (amountController.text.isEmpty) {
                     Helper.showCustomErrorSnackbar(
                         context, 'Please enter amount');
                     return;
                   }
-                  service.sendMoneyToService(
+                  if (isTapped) return;
+                  isTapped = true;
+                  await service
+                      .sendMoneyToService(
                     sum: amountController.text,
                     senderId: FirebaseAuth.instance.currentUser!.uid,
                     senderCard: NewPayConstants.miniCard!.number,
                     senderName: FirebaseAuth.instance.currentUser!.displayName!,
                     time: DateFormat.yMMMEd().format(DateTime.now()),
                     toCard: false,
-                  );
+                  )
+                      .then((value) async {
+                    BlocProvider.of<MonitoringBloc>(context).add(
+                      MonitoringManagerEvent(
+                        userId: FirebaseAuth.instance.currentUser!.uid,
+                      ),
+                    );
+                    await showCheckDialog(
+                            context,
+                            NewPayConstants.miniCard!.number,
+                            amountController.text.trim())
+                        .then((value) => isTapped = false);
+                  });
                 })
           ],
         ),

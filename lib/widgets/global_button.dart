@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/utils/colors.dart';
-import 'package:new_pay/utils/styles.dart';
 
 class GlobalButton extends StatelessWidget {
   const GlobalButton({
@@ -26,18 +25,18 @@ class GlobalButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0.r),
           color: backgroundColor,
           border: backgroundColor == null
-              ? Border.all(color: NewPayColors.black)
+              ? Border.all(color: NewPayColors.C_7000FF)
               : null,
         ),
         child: Center(
           child: Text(
             buttonText,
-            style: NewPayStyles.w500.copyWith(
-              fontSize: 20.0.sp,
-              color: backgroundColor != null
-                  ? NewPayColors.white
-                  : NewPayColors.black,
-            ),
+            style: Theme.of(context).textTheme.headline4!.copyWith(
+                  fontSize: 20.0.sp,
+                  color: backgroundColor != null
+                      ? NewPayColors.white
+                      : NewPayColors.C_7000FF,
+                ),
           ),
         ),
       ),
