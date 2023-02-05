@@ -25,6 +25,7 @@ class NewPayConstants {
   static const String sendToPhoneScreen = '/send_to_phone_screen';
   static const String noInternetScreen = '/no_internet_screen';
   static const String payScreen = '/pay_screen';
+  static const String notifScreen = '/notif_screen';
   static const String selectCardToPhoneNumberScreen =
       '/select_card_to_phone_number';
   static const String paymentScreen = '/payment_screen';

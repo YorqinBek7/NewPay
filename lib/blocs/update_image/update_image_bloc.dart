@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:new_pay/utils/helper.dart';
@@ -21,6 +22,7 @@ class UpdateImageBloc extends Bloc<UpdateImageEvent, UpdateImageState> {
 
         await Helper.instance.saveToServer(
             FirebaseAuth.instance.currentUser!.displayName!, imagePath);
+
         var imageUrl = await Helper.instance
             .getImageUrl(FirebaseAuth.instance.currentUser!.displayName!);
 

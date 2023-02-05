@@ -8,6 +8,7 @@ import 'package:new_pay/ui/no_route_screen.dart';
 import 'package:new_pay/ui/onboarding/on_boarding_screen.dart';
 import 'package:new_pay/ui/onboarding/splash_screen.dart';
 import 'package:new_pay/ui/tab_box/add_card_screen/add_card_screen.dart';
+import 'package:new_pay/ui/tab_box/home_screen/notification_screen/notification_screen.dart';
 import 'package:new_pay/ui/tab_box/home_screen/pay_screen/pay_screen.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/app_settings/app_settings.dart';
 import 'package:new_pay/ui/tab_box/home_screen/profile_screen/profile_screen.dart';
@@ -59,6 +60,8 @@ class NewPayRoutes {
         return navigateToScreen(screen: const SelectCardScreen());
       case NewPayConstants.paymentScreen:
         return navigateToScreen(screen: const PaymentScreen());
+      case NewPayConstants.notifScreen:
+        return navigateToScreen(screen: const NotificationScreen());
       default:
         return navigateToScreen(screen: const NoRouteScreen());
     }

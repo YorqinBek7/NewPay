@@ -39,6 +39,7 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                       setting: Permission.camera)) {
                     BlocProvider.of<UpdateImageBloc>(_)
                         .add(UpdateImageManagerEvent(true));
+                    Navigator.pop(context);
                     Helper.showCustomSuccessSnackbar(
                         context, tr('wait_updating_photo'));
                   } else {
@@ -64,6 +65,7 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                       setting: Permission.camera)) {
                     BlocProvider.of<UpdateImageBloc>(_)
                         .add(UpdateImageManagerEvent(false));
+                    Navigator.pop(context);
                     Helper.showCustomSuccessSnackbar(
                         context, tr('wait_updating_photo'));
                   } else {

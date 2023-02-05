@@ -12,6 +12,7 @@ class NewPayIcons {
   static const String unknownCard = 'assets/images/unknown_card.png';
   static const String visa = 'assets/images/visa.png';
   static const String uzcard = 'assets/images/uz_card.png';
+  static const String notif = 'assets/images/notif.png';
   static const String masterCard = 'assets/images/master_card.png';
 
   // SVG ICONS

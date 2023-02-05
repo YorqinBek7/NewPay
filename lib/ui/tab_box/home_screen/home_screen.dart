@@ -76,9 +76,13 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             actions: [
-              SvgPicture.asset(
-                NewPayIcons.notification,
-                color: Theme.of(context).cardColor,
+              GestureDetector(
+                onTap: () =>
+                    Navigator.pushNamed(context, NewPayConstants.notifScreen),
+                child: SvgPicture.asset(
+                  NewPayIcons.notification,
+                  color: Theme.of(context).cardColor,
+                ),
               ),
               SizedBox(
                 width: 13.0.w,
