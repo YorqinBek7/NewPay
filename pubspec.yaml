@@ -62,6 +62,7 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/lotties/
+    - assets/translations/
 
 fonts:
   - family: Manrope

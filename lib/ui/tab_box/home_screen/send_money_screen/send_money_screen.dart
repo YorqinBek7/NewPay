@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,13 +36,13 @@ class SendMoneyScreen extends StatelessWidget {
             height: 15.0.h,
           ),
           _optionTransfer(
-              name: 'Send to Card',
+              name: tr('send_to_card'),
               icon: NewPayIcons.cards,
               onTap: () => Navigator.pushNamed(
                   context, NewPayConstants.sendToCardScreen),
               context: context),
           _optionTransfer(
-              name: 'Send to phone number',
+              name: tr('send_to_phone'),
               icon: NewPayIcons.personalCard,
               onTap: () => Navigator.pushNamed(
                   context, NewPayConstants.sendToPhoneScreen),

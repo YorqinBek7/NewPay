@@ -1,4 +1,5 @@
 import 'package:authentication/auth/login/login_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return KeyboardDismisser(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Log in'),
+          title: Text(tr('log_in')),
         ),
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
@@ -68,39 +69,39 @@ class _LoginScreenState extends State<LoginScreen> {
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
-                          hintText: 'Enter your email',
+                          hintText: tr('enter_your_email'),
                           isPassword: false,
                           obscure: false,
                           controller: emailController,
                           validator: (String? v) {
                             if (v!.isEmpty) {
-                              return 'Please enter your email address';
+                              return tr('please_enter_your_name');
                             }
                             if (Helper.emailChecker(v)) {
-                              return 'Please enter correct email address';
+                              return tr('please_enter_correct_email');
                             }
                             return '';
                           },
                         ),
                         Text(
-                          'Password',
+                          tr('password'),
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
-                          hintText: 'Enter your password',
+                          hintText: tr('enter_your_password'),
                           isPassword: true,
                           obscure: obscure,
                           controller: passwordController,
                           iconOnTap: () => setState(() => obscure = !obscure),
                           validator: (String? v) {
                             if (v!.isEmpty) {
-                              return 'Please enter your password';
+                              return tr('enter_your_password');
                             }
                             if (v.length < 6) {
-                              return 'Password should be at least 6 characters long';
+                              return tr('least_6');
                             }
                             return '';
                           },
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextButton(
                             onPressed: () => Navigator.pushNamed(
                                 context, NewPayConstants.forgotPassScreen),
-                            child: const Text('Forgot password?')),
+                            child: Text(tr('forgot_password'))),
                       ],
                     ),
                   ),

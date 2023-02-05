@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -23,7 +24,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Reset your password',
+                  tr('reset_password'),
                   style: Theme.of(context)
                       .textTheme
                       .headline3!
@@ -31,7 +32,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Please enter the your email address. Reset message will send to your email address.',
+                  tr('enter_email_to_reset'),
                   style: Theme.of(context)
                       .textTheme
                       .headline4!
@@ -42,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   height: 35.0.h,
                 ),
                 AuthFields(
-                  hintText: 'Enter your email',
+                  hintText: tr('enter_your_email'),
                   isPassword: false,
                   obscure: false,
                   controller: emailController,
@@ -54,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   height: 42.0.h,
                 ),
                 GlobalButton(
-                  buttonText: 'Next',
+                  buttonText: tr('next'),
                   backgroundColor: NewPayColors.black,
                   onTap: () => Navigator.pushReplacementNamed(
                       context, NewPayConstants.loginScreen),

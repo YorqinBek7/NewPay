@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -15,7 +16,7 @@ class QrCodeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Place the QR code inside the area',
+              tr('qr_code_place'),
               style: Theme.of(context)
                   .textTheme
                   .headline4!
@@ -25,7 +26,7 @@ class QrCodeScreen extends StatelessWidget {
               height: 20.0.h,
             ),
             Text(
-              'Scanning will start automatically',
+              tr('scan_will_start'),
               style: Theme.of(context)
                   .textTheme
                   .headline4!

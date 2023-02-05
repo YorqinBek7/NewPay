@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -63,7 +64,7 @@ Future<dynamic> showCheckDialog(
                       width: 4.0.w,
                     ),
                     Text(
-                      'Completed successfully',
+                      tr('completed_succ'),
                       style: Theme.of(context).textTheme.headline5!.copyWith(
                           fontSize: 14.0.sp, color: NewPayColors.C_4EFF8A),
                     ),
@@ -83,7 +84,7 @@ Future<dynamic> showCheckDialog(
             child: Column(
               children: [
                 Text(
-                  'Payment details',
+                  tr('payment_details'),
                   style: Theme.of(context).textTheme.headline3!,
                 ),
                 _checkInfo(
@@ -92,13 +93,13 @@ Future<dynamic> showCheckDialog(
                   context: context,
                 ),
                 _checkInfo(
-                  desc: 'Reciver name',
-                  name: 'Yorqin',
+                  desc: 'Yorqin',
+                  name: tr('receiver_name'),
                   context: context,
                 ),
                 _checkInfo(
                   desc: cardNumber,
-                  name: 'Card',
+                  name: tr('card'),
                   context: context,
                 ),
                 _checkInfo(
@@ -108,12 +109,12 @@ Future<dynamic> showCheckDialog(
                 ),
                 _checkInfo(
                   desc: '0',
-                  name: 'Comission',
+                  name: tr('comission'),
                   context: context,
                 ),
                 _checkInfo(
                   desc: DateFormat.yMMMEd().format(DateTime.now()),
-                  name: 'Date and Time',
+                  name: tr('date_time'),
                   context: context,
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
 
   @override
   void initState() {
-    nameOfCardController.text = 'My Card';
+    nameOfCardController.text = tr('my_cards');
     super.initState();
   }
 
@@ -101,7 +102,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                           ),
                           const Spacer(),
                           Text(
-                            'Expires',
+                            tr('expires'),
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5!
@@ -177,14 +178,14 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         children: [
                           CustomFields(
                             controller: cardNumberController,
-                            labelText: 'Card Number',
+                            labelText: tr('card_number'),
                             onChanged: (value) => setState(() => {}),
                             formatter: CardNumberInputFormatter(),
                             inputType: TextInputType.number,
                           ),
                           CustomFields(
                             controller: periodController,
-                            labelText: 'Period Card',
+                            labelText: tr('period_card'),
                             inputType: TextInputType.number,
                             onChanged: (value) => setState(() => {}),
                             formatter: PeriodCardInputFormatter(),
@@ -193,7 +194,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             onChanged: (value) => setState(() => {}),
                             controller: nameOfCardController,
                             inputType: TextInputType.text,
-                            labelText: 'Name Card',
+                            labelText: tr('name_card'),
                             formatter: NameCardInputFormatter(),
                           ),
                         ],
@@ -205,7 +206,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
             ),
             const Spacer(),
             GlobalButton(
-                buttonText: 'Save',
+                buttonText: tr('save'),
                 backgroundColor: NewPayColors.black,
                 onTap: () async {
                   if (cardNumberController.text.isEmpty ||
@@ -231,7 +232,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     } else {
                       Helper.showTopErrorSnackbar(
                         context: context,
-                        error: 'You can add only five cards',
+                        error: tr('limit_card'),
                       );
                       return;
                     }

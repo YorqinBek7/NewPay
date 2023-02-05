@@ -1,4 +1,5 @@
 import 'package:authentication/auth/sign_up/sign_up_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return KeyboardDismisser(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Sign up'),
+          title: Text(tr('sign_up')),
         ),
         body: BlocListener<SignUpBloc, SignUpState>(
           listener: (context, state) {
@@ -54,23 +55,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Name',
+                          tr('name'),
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
-                          hintText: 'Enter your name',
+                          hintText: tr('enter_your_name'),
                           isPassword: false,
                           obscure: false,
                           controller: nameController,
                           validator: (String? v) {
                             if (v!.isEmpty) {
-                              return 'Please enter your name';
+                              return tr('please_enter_your_name');
                             }
                             if (v.length < 3) {
-                              return 'Length of name must be at least 3 characters';
+                              return tr('least_3');
                             }
                             return '';
                           },
@@ -83,54 +84,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
-                          hintText: 'Enter your email',
+                          hintText: tr('enter_email'),
                           isPassword: false,
                           obscure: false,
                           controller: emailController,
                           validator: (String? v) {
                             if (v!.isEmpty) {
-                              return 'Please enter your email address';
+                              return tr('enter_your_email');
                             }
                             if (Helper.emailChecker(v)) {
-                              return 'Please enter correct email address';
+                              return tr('please_enter_correct_email');
                             }
                             return '';
                           },
                         ),
                         Text(
-                          'Password',
+                          tr('password'),
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
                               .copyWith(color: NewPayColors.C_C1C1C1),
                         ),
                         AuthFields(
-                          hintText: 'Enter your password',
+                          hintText: tr('enter_your_password'),
                           isPassword: true,
                           obscure: obscure,
                           controller: passwordController,
                           iconOnTap: () => setState(() => obscure = !obscure),
                           validator: (String? v) {
-                            if (v!.isEmpty) return 'Please enter your password';
+                            if (v!.isEmpty) return tr('please_enter_password');
                             if (v.length < 6) {
-                              return 'Password should be at least 6 characters long';
+                              return tr('least_6');
                             }
                             return '';
                           },
                         ),
                         SizedBox(
-                          height: 13.0.h,
-                        ),
-                        Text(
-                          'At least 8 characters with uppercase letters and numbers',
-                          style:
-                              Theme.of(context).textTheme.headline5!.copyWith(
-                                    fontSize: 14.0.sp,
-                                    color: NewPayColors.C_787A8D,
-                                  ),
-                        ),
-                        SizedBox(
-                          height: 16.0.h,
+                          height: 20.0.h,
                         ),
                         Row(
                           children: [
@@ -142,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     : const Icon(
                                         Icons.check_box_outline_blank)),
                             Text(
-                              'Accept Terms of Use & Privacy Policy',
+                              tr('accept_terms'),
                               style: Theme.of(context)
                                   .textTheme
                                   .headline5!
@@ -159,19 +149,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               GlobalButton(
-                buttonText: 'Sign up',
+                buttonText: tr('sign_up'),
                 backgroundColor: NewPayColors.black,
                 onTap: () async {
                   if (emailController.text.isEmpty ||
                       passwordController.text.isEmpty ||
                       nameController.text.isEmpty) {
                     Helper.showCustomErrorSnackbar(
-                        context, 'Please fill all fields.');
+                        context, tr('please_fill_all_fields'));
                     return;
                   }
                   if (!isChecked) {
-                    Helper.showCustomErrorSnackbar(context,
-                        'You did not accept the terms of use and privacy policy.');
+                    Helper.showCustomErrorSnackbar(
+                        context, tr('didnt_accept_terms'));
                     return;
                   }
                   BlocProvider.of<SignUpBloc>(context).add(
@@ -189,14 +179,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Center(
                 child: RichText(
                   text: TextSpan(
-                    text: 'Already have an account?',
+                    text: tr('have_account'),
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
                         .copyWith(fontSize: 16.0.sp),
                     children: [
                       TextSpan(
-                        text: ' Log in!',
+                        text: ' ${tr('login')}!',
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => Navigator.pushNamed(
                                 context,

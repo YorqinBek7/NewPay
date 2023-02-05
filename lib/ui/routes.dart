@@ -3,7 +3,7 @@ import 'package:new_pay/ui/auth/forgot_pass_screeen.dart';
 import 'package:new_pay/ui/auth/login_screen.dart';
 import 'package:new_pay/ui/auth/sign_up_screen.dart';
 import 'package:new_pay/ui/auth/verified_screen.dart';
-import 'package:new_pay/ui/no_internet_screen/no_intetnet_screen.dart';
+import 'package:new_pay/ui/no_internet_screen/no_internet_screen.dart';
 import 'package:new_pay/ui/no_route_screen.dart';
 import 'package:new_pay/ui/onboarding/on_boarding_screen.dart';
 import 'package:new_pay/ui/onboarding/splash_screen.dart';

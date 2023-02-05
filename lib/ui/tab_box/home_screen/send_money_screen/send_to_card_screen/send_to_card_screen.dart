@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +51,7 @@ class _SendToCardViewState extends State<SendToCardView> {
     return KeyboardDismisser(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Transfers'),
+          title: Text(tr('transfers')),
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
             onPressed: () => Navigator.pop(context),
@@ -88,7 +89,7 @@ class _SendToCardViewState extends State<SendToCardView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Sender',
+                              tr('sender'),
                               style: Theme.of(context).textTheme.headline5!,
                             ),
                             SizedBox(
@@ -206,7 +207,7 @@ class _SendToCardViewState extends State<SendToCardView> {
                                 });
                               },
                               controller: cardController,
-                              labelText: 'Enter card number',
+                              labelText: tr('enter_card_number'),
                               inputType: TextInputType.number,
                               formatter: CardNumberInputFormatter(),
                               prefixIcon: getCardImage(),
@@ -219,13 +220,13 @@ class _SendToCardViewState extends State<SendToCardView> {
                         height: 15.0.h,
                       ),
                       Text(
-                        'Transfer Amount',
+                        tr('transfer_amount'),
                         style: Theme.of(context).textTheme.headline5!,
                       ),
                       CustomFields(
                         onChanged: (v) {},
                         controller: amountController,
-                        labelText: 'Enter amount',
+                        labelText: tr('enter_amount'),
                         inputType: TextInputType.number,
                         formatter: EnterAmountFormatter(),
                       ),
@@ -235,18 +236,18 @@ class _SendToCardViewState extends State<SendToCardView> {
               ),
               const Spacer(),
               GlobalButton(
-                buttonText: 'Send',
+                buttonText: tr('send'),
                 backgroundColor: NewPayColors.black,
                 onTap: () async {
                   if (cardController.text.isEmpty ||
                       amountController.text.isEmpty) {
                     Helper.showCustomErrorSnackbar(
-                        context, 'Please fill in all fields.');
+                        context, tr('please_fill_all_fields'));
                     return;
                   }
                   if (double.parse(amountController.text) >
                       double.parse(NewPayConstants.miniCard!.sum)) {
-                    Helper.showCustomErrorSnackbar(context, 'Not enough money');
+                    Helper.showCustomErrorSnackbar(context, tr('not_money'));
                     return;
                   }
                   bool hasCard =
@@ -276,7 +277,7 @@ class _SendToCardViewState extends State<SendToCardView> {
                     });
                   } else {
                     Helper.showTopErrorSnackbar(
-                        context: context, error: 'The card not found');
+                        context: context, error: tr('card_not_found'));
                   }
                 },
               ),

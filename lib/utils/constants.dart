@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:new_pay/models/bottom_nav_models.dart';
 import 'package:new_pay/models/cards_gradient.dart';
 import 'package:new_pay/models/mini_card_with_pic.dart';
@@ -32,31 +33,31 @@ class NewPayConstants {
   static final List<OnBoardingModel> onBoardingModels = [
     OnBoardingModel(
         image: NewPayIcons.onBoardingScreen_1,
-        text: 'Перемещайте свои деньги свободно и без границ'),
+        text: tr('on_boarding_first_screen')),
     OnBoardingModel(
         image: NewPayIcons.onBoardingScreen_2,
-        text: 'Перемещайте свои деньги свободно и без границ'),
+        text: tr('on_boarding_second_screen')),
     OnBoardingModel(
         image: NewPayIcons.onBoardingScreen_3,
-        text: 'Простой и безопасный способ управлять своими деньгами.'),
+        text: tr('on_boarding_third_screen')),
   ];
 
   static final List<BottomNavModels> bottomNavModels = [
     BottomNavModels(
       icon: NewPayIcons.home,
-      label: 'Home',
+      label: tr('home'),
     ),
     BottomNavModels(
       icon: NewPayIcons.card,
-      label: 'Card',
+      label: tr('card'),
     ),
     BottomNavModels(
       icon: NewPayIcons.activity,
-      label: 'Stats',
+      label: tr('stats'),
     ),
     BottomNavModels(
       icon: NewPayIcons.more,
-      label: 'Payment',
+      label: tr('payments'),
     )
   ];
   static final List<CardsGradient> cardsGradient = [
@@ -86,27 +87,27 @@ class NewPayConstants {
   static final List<Payments> payments = [
     Payments(
       icon: NewPayIcons.phone,
-      title: 'Phone',
+      title: tr('phone'),
     ),
     Payments(
       icon: NewPayIcons.internet,
-      title: 'Internet Providers',
+      title: tr('internet_provider'),
     ),
     Payments(
       icon: NewPayIcons.game,
-      title: 'Game Services',
+      title: tr('game_service'),
     ),
     Payments(
       icon: NewPayIcons.shop,
-      title: 'Shop and Store ',
+      title: tr('shop_store'),
     ),
     Payments(
       icon: NewPayIcons.tv,
-      title: 'TV Services',
+      title: tr('tv_service'),
     ),
     Payments(
       icon: NewPayIcons.restaurant,
-      title: 'Restaurants',
+      title: tr('restaurants'),
     ),
   ];
 

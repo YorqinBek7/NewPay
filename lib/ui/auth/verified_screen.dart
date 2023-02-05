@@ -81,8 +81,20 @@ class _VerifiedScreenState extends State<VerifiedScreen> {
           ),
           const Spacer(),
           ListTile(
-            title: const Text('Allow touch ID'),
-            subtitle: const Text('Use Touch ID to entr into the app'),
+            title: Text(
+              'Allow touch ID',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(fontSize: 14.0.sp),
+            ),
+            subtitle: Text(
+              'Use Touch ID to entr into the app',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(fontSize: 12.0.sp),
+            ),
             trailing: Switch(
               onChanged: (value) => setState(() => istouchIdOn = !istouchIdOn),
               value: istouchIdOn,

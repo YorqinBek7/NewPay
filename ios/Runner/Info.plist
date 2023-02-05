@@ -36,6 +36,7 @@
 		</array>
 		<key>UISupportedInterfaceOrientations~ipad</key>
 		<array>
+		
 			<string>UIInterfaceOrientationPortrait</string>
 			<string>UIInterfaceOrientationPortraitUpsideDown</string>
 			<string>UIInterfaceOrientationLandscapeLeft</string>
@@ -49,5 +50,10 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>CFBundleLocalizations</key>
+		<array>
+		<string>en</string>
+		<string>nb</string>
+		</array>
 	</dict>
 </plist>

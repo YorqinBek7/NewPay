@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,7 +17,7 @@ class SendToPhoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Phone '),
+        title: Text(tr('phone')),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
           onPressed: () => Navigator.pop(context),
@@ -28,7 +29,7 @@ class SendToPhoneScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Write your phone number',
+              tr('write_your_number'),
               style: Theme.of(context)
                   .textTheme
                   .headline4!
@@ -86,13 +87,13 @@ class SendToPhoneScreen extends StatelessWidget {
             ),
             const Spacer(),
             GlobalButton(
-                buttonText: 'Next',
+                buttonText: tr('next'),
                 backgroundColor: NewPayColors.black,
                 onTap: () {
                   if (phoneController.text.isEmpty ||
                       phoneController.text.length < 9) {
                     Helper.showCustomErrorSnackbar(
-                        context, 'Please fill in your phone number');
+                        context, tr('pls_fill_phone_field'));
                     return;
                   }
                   Navigator.pushNamed(

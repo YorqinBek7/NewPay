@@ -1,5 +1,6 @@
 import 'package:authentication/auth/login/login_bloc.dart';
 import 'package:authentication/auth/sign_up/sign_up_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
+import 'package:new_pay/blocs/language/language_bloc.dart';
 import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,38 +23,54 @@ import 'package:new_pay/utils/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   NewPayStorage.instance.sharedPref = await SharedPreferences.getInstance();
   Bloc.observer = GlobalBlocObserver();
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-      create: (context) => SignUpBloc(),
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => SignUpBloc(),
+      ),
+      BlocProvider(
+        create: (context) => LoginBloc(),
+      ),
+      BlocProvider(
+        create: (context) => LanguageBloc(),
+      ),
+      BlocProvider(
+        create: (context) => CardsBloc()
+          ..add(CardsGetEvent(userId: FirebaseAuth.instance.currentUser!.uid)),
+      ),
+      BlocProvider(
+        create: (context) => ThemeBloc()
+          ..add(ThemeManagerEvent(
+              themeState: NewPayStorage.instance.getInt('themeState'))),
+      ),
+      BlocProvider(
+        create: (context) => MonitoringBloc()
+          ..add(MonitoringManagerEvent(
+              userId: FirebaseAuth.instance.currentUser!.uid)),
+      ),
+      BlocProvider<UpdateImageBloc>(
+        create: (context) => UpdateImageBloc(),
+      ),
+      BlocProvider(
+        create: (context) =>
+            InternetCheckerBloc()..add(InternetCheckerManagerEvent()),
+      )
+    ],
+    child: EasyLocalization(
+      supportedLocales: const [
+        Locale('en', 'EN'),
+        Locale('uz', 'UZ'),
+      ],
+      startLocale: Locale(NewPayStorage.instance.getString('lan')),
+      fallbackLocale: const Locale('en', 'EN'),
+      path: 'assets/translations',
+      child: const NewPay(),
     ),
-    BlocProvider(
-      create: (context) => LoginBloc(),
-    ),
-    BlocProvider(
-      create: (context) => CardsBloc()
-        ..add(CardsGetEvent(userId: FirebaseAuth.instance.currentUser!.uid)),
-    ),
-    BlocProvider(
-      create: (context) => ThemeBloc()
-        ..add(ThemeManagerEvent(
-            themeState: NewPayStorage.instance.getInt('themeState'))),
-    ),
-    BlocProvider(
-      create: (context) => MonitoringBloc()
-        ..add(MonitoringManagerEvent(
-            userId: FirebaseAuth.instance.currentUser!.uid)),
-    ),
-    BlocProvider<UpdateImageBloc>(
-      create: (context) => UpdateImageBloc(),
-    ),
-    BlocProvider(
-      create: (context) =>
-          InternetCheckerBloc()..add(InternetCheckerManagerEvent()),
-    )
-  ], child: const NewPay()));
+  ));
 }
 
 class NewPay extends StatelessWidget {
@@ -69,7 +87,10 @@ class NewPay extends StatelessWidget {
           builder: (BuildContext context, Widget? child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              title: 'New Pay',
               themeMode: BlocProvider.of<ThemeBloc>(context).theme == 0
                   ? ThemeMode.system
                   : BlocProvider.of<ThemeBloc>(context).theme == 1
@@ -105,7 +126,6 @@ class NewPay extends StatelessWidget {
         color: NewPayColors.darkScaffoldColor,
         scrolledUnderElevation: 0.0,
         iconTheme: const IconThemeData(color: NewPayColors.white),
-        // backgroundColor: NewPayColors.darkScaffoldColor,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           statusBarColor: NewPayColors.darkScaffoldColor,

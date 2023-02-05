@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,33 +113,33 @@ class ProfileScreen extends StatelessWidget {
               context: context,
               icon: NewPayIcons.verify,
               onTap: () {},
-              title: 'Update NM Information',
+              title: tr('update_info'),
             ),
             optionItems(
               context: context,
               icon: NewPayIcons.shield,
               onTap: () {},
-              title: 'Verify NewPay pay',
+              title: tr('verify_pay'),
             ),
             const Divider(),
             optionItems(
               context: context,
               icon: NewPayIcons.bank,
               onTap: () {},
-              title: 'Connection with bank',
+              title: tr('connection_bank'),
             ),
             optionItems(
               context: context,
               icon: NewPayIcons.appSettings,
               onTap: () =>
                   Navigator.pushNamed(context, NewPayConstants.appSettings),
-              title: 'Application settings',
+              title: tr('app_settings'),
             ),
             const Divider(),
             Container(
               margin: EdgeInsets.only(left: 16.0.w),
               child: Text(
-                'SECURITY',
+                tr('SECURITY'),
                 style: Theme.of(context)
                     .textTheme
                     .headline4!
@@ -148,13 +149,13 @@ class ProfileScreen extends StatelessWidget {
             optionItems(
               context: context,
               icon: NewPayIcons.lockCircle,
-              title: 'Change PIN',
+              title: tr('change_pin'),
               onTap: () {},
             ),
             optionItems(
               context: context,
               icon: NewPayIcons.fingerScan,
-              title: 'Touch ID',
+              title: tr('touch_id'),
               trailingIcon: Switch(
                 value: false,
                 onChanged: (value) => {},
@@ -164,7 +165,7 @@ class ProfileScreen extends StatelessWidget {
             optionItems(
               context: context,
               icon: NewPayIcons.headphone,
-              title: 'Help & support',
+              title: tr('help_and_support'),
               onTap: () {},
             ),
             SizedBox(
@@ -189,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    'Log Out',
+                    tr('log_out'),
                     style: Theme.of(context).textTheme.headline3!.copyWith(
                         fontSize: 16.0.sp, color: NewPayColors.C_F90000),
                   ),

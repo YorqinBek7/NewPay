@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                 height: 10.0.h,
               ),
               Text(
-                'Select a photo to profile',
+                tr('select_photo'),
                 style: Theme.of(context)
                     .textTheme
                     .headline1!
@@ -39,11 +40,11 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                     BlocProvider.of<UpdateImageBloc>(_)
                         .add(UpdateImageManagerEvent(true));
                     Helper.showCustomSuccessSnackbar(
-                        context, 'Please wait, profile photo is updating.');
+                        context, tr('wait_updating_photo'));
                   } else {
                     Helper.showTopErrorSnackbar(
                         context: context,
-                        error: 'Permission is denied, allow from settings');
+                        error: tr('perm_denied_allow_setting'));
                     await Future.delayed(const Duration(milliseconds: 1500));
                     if (await Helper.requestPermission(
                         setting: Permission.location)) {
@@ -52,7 +53,10 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                   }
                 },
                 leading: const Icon(Icons.camera_alt_outlined),
-                title: const Text('Take from camera'),
+                title: Text(
+                  tr('take_cam'),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
               ),
               ListTile(
                 onTap: () async {
@@ -61,11 +65,11 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                     BlocProvider.of<UpdateImageBloc>(_)
                         .add(UpdateImageManagerEvent(false));
                     Helper.showCustomSuccessSnackbar(
-                        context, 'Please wait, profile photo is updating.');
+                        context, tr('wait_updating_photo'));
                   } else {
                     Helper.showTopErrorSnackbar(
                         context: context,
-                        error: 'Permission is denied, allow from settings');
+                        error: tr('perm_denied_allow_setting'));
                     await Future.delayed(const Duration(seconds: 2));
                     if (await Helper.requestPermission(
                         setting: Permission.location)) {
@@ -74,7 +78,10 @@ Future selectPhotoDialog(BuildContext _) async => showMaterialModalBottomSheet(
                   }
                 },
                 leading: const Icon(Icons.image_outlined),
-                title: const Text('Choose from gallery'),
+                title: Text(
+                  tr('choose_gallery'),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
               ),
             ],
           ),

@@ -126,6 +126,11 @@ class SelectCardScreenView extends StatelessWidget {
                         context, 'Please enter amount');
                     return;
                   }
+                  if (double.parse(amountController.text) >
+                      double.parse(NewPayConstants.miniCard!.sum)) {
+                    Helper.showCustomErrorSnackbar(context, 'Not enough money');
+                    return;
+                  }
                   if (isTapped) return;
                   isTapped = true;
                   await service

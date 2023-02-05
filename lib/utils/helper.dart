@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:new_pay/utils/colors.dart';
+import 'package:new_pay/utils/styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -105,8 +106,14 @@ class Helper {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Exit App'),
-        content: const Text('Are you sure?'),
+        title: Text(
+          'Exit App',
+          style: NewPayStyles.w600,
+        ),
+        content: Text(
+          'Are you sure?',
+          style: NewPayStyles.w500,
+        ),
         actions: <Widget>[
           GestureDetector(
             onTap: () {

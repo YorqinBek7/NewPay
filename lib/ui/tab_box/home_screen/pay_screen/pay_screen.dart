@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:card_swiper/card_swiper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +33,7 @@ class _PayScreenState extends State<PayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pay with NFC'),
+        title: Text(tr('nfc_pay')),
       ),
       body: Center(
         child: Column(
@@ -45,7 +45,7 @@ class _PayScreenState extends State<PayScreen> {
               height: 230.0.h,
             ),
             Text(
-              'Session finished in 30 seconds',
+              tr('session_limit'),
               style: Theme.of(context).textTheme.headline4!,
             ),
             SizedBox(
