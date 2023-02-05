@@ -109,19 +109,13 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   String _iconChanger(int state) {
-    if (state == 1) {
-      return NewPayIcons.add;
-    } else if (state == 2) {
-      return NewPayIcons.refresh;
-    }
+    if (state == 1) return NewPayIcons.add;
     return NewPayIcons.sendWhite;
   }
 
   Future _callback(int state) async {
     if (state == 1 || NewPayConstants.miniCard == null) {
       return Navigator.pushNamed(context, NewPayConstants.addCardScreen);
-    } else if (state == 2) {
-      setState(() {});
     } else {
       return Navigator.pushNamed(context, NewPayConstants.sendMoneyScreen);
     }

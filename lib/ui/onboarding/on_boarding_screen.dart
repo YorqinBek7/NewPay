@@ -59,7 +59,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Expanded(
                         child: GlobalButton(
                           buttonText: tr('login'),
-                          backgroundColor: NewPayColors.black,
+                          backgroundColor: Theme.of(context).cardColor,
                           onTap: () => Navigator.pushReplacementNamed(
                               context, NewPayConstants.loginScreen),
                         ),

@@ -56,7 +56,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 GlobalButton(
                   buttonText: tr('next'),
-                  backgroundColor: NewPayColors.black,
+                  backgroundColor: Theme.of(context).cardColor,
                   onTap: () => Navigator.pushReplacementNamed(
                       context, NewPayConstants.loginScreen),
                 ),

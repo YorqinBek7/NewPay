@@ -119,7 +119,7 @@ class SelectCardScreenView extends StatelessWidget {
             ),
             GlobalButton(
                 buttonText: 'Send',
-                backgroundColor: NewPayColors.black,
+                backgroundColor: Theme.of(context).cardColor,
                 onTap: () async {
                   if (amountController.text.isEmpty) {
                     Helper.showCustomErrorSnackbar(

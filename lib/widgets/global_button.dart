@@ -23,7 +23,7 @@ class GlobalButton extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 10.0.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0.r),
-          color: backgroundColor,
+          color: Theme.of(context).backgroundColor,
           border: backgroundColor == null
               ? Border.all(color: NewPayColors.C_7000FF)
               : null,
@@ -34,7 +34,7 @@ class GlobalButton extends StatelessWidget {
             style: Theme.of(context).textTheme.headline4!.copyWith(
                   fontSize: 20.0.sp,
                   color: backgroundColor != null
-                      ? NewPayColors.white
+                      ? Theme.of(context).textTheme.headline6!.color
                       : NewPayColors.C_7000FF,
                 ),
           ),

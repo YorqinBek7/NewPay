@@ -36,7 +36,12 @@ class _AddCardScreenState extends State<AddCardScreen> {
   Widget build(BuildContext context) {
     return KeyboardDismisser(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
         body: Column(
           children: [
             Expanded(
@@ -207,7 +212,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
             const Spacer(),
             GlobalButton(
                 buttonText: tr('save'),
-                backgroundColor: NewPayColors.black,
+                backgroundColor: Theme.of(context).cardColor,
                 onTap: () async {
                   if (cardNumberController.text.isEmpty ||
                       periodController.text.isEmpty ||

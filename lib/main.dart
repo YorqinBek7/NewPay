@@ -65,7 +65,6 @@ void main() async {
         Locale('en', 'EN'),
         Locale('uz', 'UZ'),
       ],
-      startLocale: Locale(NewPayStorage.instance.getString('lan')),
       fallbackLocale: const Locale('en', 'EN'),
       path: 'assets/translations',
       child: const NewPay(),
@@ -115,12 +114,14 @@ class NewPay extends StatelessWidget {
       fontFamily: 'Manrope',
       iconTheme: const IconThemeData(color: NewPayColors.white),
       cardColor: NewPayColors.white,
+      backgroundColor: NewPayColors.white,
       textTheme: TextTheme(
         headline1: NewPayStyles.w800.copyWith(color: NewPayColors.white),
         headline2: NewPayStyles.w700.copyWith(color: NewPayColors.white),
         headline3: NewPayStyles.w600.copyWith(color: NewPayColors.white),
         headline4: NewPayStyles.w500.copyWith(color: NewPayColors.white),
         headline5: NewPayStyles.w400.copyWith(color: NewPayColors.white),
+        headline6: NewPayStyles.w600.copyWith(color: NewPayColors.black),
       ),
       appBarTheme: AppBarTheme(
         color: NewPayColors.darkScaffoldColor,
@@ -154,12 +155,14 @@ class NewPay extends StatelessWidget {
       fontFamily: 'Manrope',
       cardColor: NewPayColors.black,
       iconTheme: const IconThemeData(color: NewPayColors.C_C1C1C1),
+      backgroundColor: NewPayColors.black,
       textTheme: TextTheme(
         headline1: NewPayStyles.w800,
         headline2: NewPayStyles.w700,
         headline3: NewPayStyles.w600,
         headline4: NewPayStyles.w500,
         headline5: NewPayStyles.w400,
+        headline6: NewPayStyles.w600.copyWith(color: NewPayColors.white),
       ),
       appBarTheme: AppBarTheme(
         scrolledUnderElevation: 0.0,

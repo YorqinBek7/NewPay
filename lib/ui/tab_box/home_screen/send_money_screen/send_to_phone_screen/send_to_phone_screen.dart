@@ -88,7 +88,7 @@ class SendToPhoneScreen extends StatelessWidget {
             const Spacer(),
             GlobalButton(
                 buttonText: tr('next'),
-                backgroundColor: NewPayColors.black,
+                backgroundColor: Theme.of(context).cardColor,
                 onTap: () {
                   if (phoneController.text.isEmpty ||
                       phoneController.text.length < 9) {

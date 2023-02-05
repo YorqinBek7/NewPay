@@ -237,7 +237,7 @@ class _SendToCardViewState extends State<SendToCardView> {
               const Spacer(),
               GlobalButton(
                 buttonText: tr('send'),
-                backgroundColor: NewPayColors.black,
+                backgroundColor: Theme.of(context).cardColor,
                 onTap: () async {
                   if (cardController.text.isEmpty ||
                       amountController.text.isEmpty) {

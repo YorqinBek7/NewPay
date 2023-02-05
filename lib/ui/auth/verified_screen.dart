@@ -102,7 +102,7 @@ class _VerifiedScreenState extends State<VerifiedScreen> {
           ),
           GlobalButton(
             buttonText: 'Start',
-            backgroundColor: NewPayColors.black,
+            backgroundColor: Theme.of(context).cardColor,
             onTap: () => Navigator.pushReplacementNamed(
                 context, NewPayConstants.homeTab),
           ),
