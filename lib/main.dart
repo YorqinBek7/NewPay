@@ -3,6 +3,7 @@ import 'package:authentication/auth/sign_up/sign_up_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:new_pay/blocs/internet_checker/internet_checker_bloc.dart';
 import 'package:new_pay/blocs/language/language_bloc.dart';
 import 'package:new_pay/blocs/monitoring/monitoring_bloc.dart';
 import 'package:new_pay/blocs/update_image/update_image_bloc.dart';
+import 'package:new_pay/data/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:new_pay/blocs/bloc_observer.dart';
 import 'package:new_pay/blocs/cards/cards_bloc.dart';
@@ -25,6 +27,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
+  await FirebaseMessaging.instance.getInitialMessage();
+  // FirebaseMessaging.onBackgroundMessage(
+  //     NotificationService.instance.backGroundhandler);
+  NotificationService.instance.permissoinNotif();
+  NotificationService.instance.getToken();
+  NotificationService.instance.init();
   NewPayStorage.instance.sharedPref = await SharedPreferences.getInstance();
   Bloc.observer = GlobalBlocObserver();
   runApp(MultiBlocProvider(

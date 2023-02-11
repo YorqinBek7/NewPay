@@ -217,6 +217,17 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   if (cardNumberController.text.isEmpty ||
                       periodController.text.isEmpty ||
                       nameOfCardController.text.isEmpty) {
+                    Helper.showTopErrorSnackbar(
+                      context: context,
+                      error: 'Please enter a valid card number',
+                    );
+                    return;
+                  }
+                  if (cardNumberController.text.length < 19) {
+                    Helper.showTopErrorSnackbar(
+                      context: context,
+                      error: 'Please enter a valid card number',
+                    );
                     return;
                   }
                   await service

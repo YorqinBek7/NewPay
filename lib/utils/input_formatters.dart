@@ -6,6 +6,7 @@ class CardNumberInputFormatter extends TextInputFormatter {
       TextEditingValue oldValue, TextEditingValue newValue) {
     var text = newValue.text;
     if (text.length > 19) return oldValue;
+    if (RegExp(r'^[- ,.]').hasMatch(text)) return oldValue;
     var buffer = StringBuffer();
     if (oldValue.text.length < newValue.text.length) {
       if ((text.length + 1) % 5 == 0 && text.length + 1 < 19) {
@@ -35,6 +36,7 @@ class PeriodCardInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     var text = newValue.text;
+    if (RegExp(r'^[- ,.]').hasMatch(text)) return oldValue;
     if (text.length > 5) return oldValue;
     var buffer = StringBuffer();
     if (oldValue.text.length < newValue.text.length) {

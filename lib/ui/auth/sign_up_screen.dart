@@ -114,8 +114,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: passwordController,
                             iconOnTap: () => setState(() => obscure = !obscure),
                             validator: (String? v) {
-                              if (v!.isEmpty)
+                              if (v!.isEmpty) {
                                 return tr('please_enter_password');
+                              }
                               if (v.length < 6) {
                                 return tr('least_6');
                               }
